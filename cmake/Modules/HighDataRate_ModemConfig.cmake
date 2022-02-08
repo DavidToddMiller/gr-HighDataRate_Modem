@@ -1,0 +1,32 @@
+find_package(PkgConfig)
+
+PKG_CHECK_MODULES(PC_HIGHDATARATE_MODEM HighDataRate_Modem)
+
+FIND_PATH(
+    HIGHDATARATE_MODEM_INCLUDE_DIRS
+    NAMES HighDataRate_Modem/api.h
+    HINTS $ENV{HIGHDATARATE_MODEM_DIR}/include
+        ${PC_HIGHDATARATE_MODEM_INCLUDEDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/include
+          /usr/local/include
+          /usr/include
+)
+
+FIND_LIBRARY(
+    HIGHDATARATE_MODEM_LIBRARIES
+    NAMES gnuradio-HighDataRate_Modem
+    HINTS $ENV{HIGHDATARATE_MODEM_DIR}/lib
+        ${PC_HIGHDATARATE_MODEM_LIBDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/lib64
+          /usr/local/lib
+          /usr/local/lib64
+          /usr/lib
+          /usr/lib64
+          )
+
+include("${CMAKE_CURRENT_LIST_DIR}/HighDataRate_ModemTarget.cmake")
+
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(HIGHDATARATE_MODEM DEFAULT_MSG HIGHDATARATE_MODEM_LIBRARIES HIGHDATARATE_MODEM_INCLUDE_DIRS)
+MARK_AS_ADVANCED(HIGHDATARATE_MODEM_LIBRARIES HIGHDATARATE_MODEM_INCLUDE_DIRS)
