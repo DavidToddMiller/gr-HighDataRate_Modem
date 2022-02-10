@@ -29,7 +29,12 @@ include(GrPybind)
 ########################################################################
 
 list(APPEND HighDataRate_Modem_python_files
-    python_bindings.cc)
+    TAG_CHUNKpreamble_python.cc
+    Chunk_ExtractQPSK_python.cc
+    Tag_FrameASM_python.cc
+    Extract_Frame_python.cc
+    Resolve_Phase_python.cc
+    Chunk_ExtractBPSK_python.cc python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(HighDataRate_Modem
    ../..

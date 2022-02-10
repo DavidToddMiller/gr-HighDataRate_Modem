@@ -21,6 +21,12 @@ namespace py = pybind11;
 // Please do not delete
 /**************************************/
 // BINDING_FUNCTION_PROTOTYPES(
+    void bind_TAG_CHUNKpreamble(py::module& m);
+    void bind_Chunk_ExtractQPSK(py::module& m);
+    void bind_Tag_FrameASM(py::module& m);
+    void bind_Extract_Frame(py::module& m);
+    void bind_Resolve_Phase(py::module& m);
+    void bind_Chunk_ExtractBPSK(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -49,5 +55,11 @@ PYBIND11_MODULE(HighDataRate_Modem_python, m)
     // Please do not delete
     /**************************************/
     // BINDING_FUNCTION_CALLS(
+    bind_TAG_CHUNKpreamble(m);
+    bind_Chunk_ExtractQPSK(m);
+    bind_Tag_FrameASM(m);
+    bind_Extract_Frame(m);
+    bind_Resolve_Phase(m);
+    bind_Chunk_ExtractBPSK(m);
     // ) END BINDING_FUNCTION_CALLS
 }

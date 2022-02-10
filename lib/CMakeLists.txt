@@ -12,6 +12,12 @@
 include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND HighDataRate_Modem_sources
+    TAG_CHUNKpreamble_impl.cc
+    Chunk_ExtractQPSK_impl.cc
+    Tag_FrameASM_impl.cc
+    Extract_Frame_impl.cc
+    Resolve_Phase_impl.cc
+    Chunk_ExtractBPSK_impl.cc
 )
 
 set(HighDataRate_Modem_sources "${HighDataRate_Modem_sources}" PARENT_SCOPE)

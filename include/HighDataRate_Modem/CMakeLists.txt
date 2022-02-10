@@ -11,5 +11,10 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/HighDataRate_Modem
+    TAG_CHUNKpreamble.h
+    Chunk_ExtractQPSK.h
+    Tag_FrameASM.h
+    Extract_Frame.h
+    Resolve_Phase.h
+    Chunk_ExtractBPSK.h DESTINATION include/HighDataRate_Modem
 )
