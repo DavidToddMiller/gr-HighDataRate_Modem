@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: Encoded_ASM_DUALchain
+    id: QPSK_15Mbps_TRIchain
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -23,27 +23,16 @@ options:
     sizing_mode: fixed
     thread_safe_setters: ''
     title: Not titled yet
+    window_size: (1000,1000)
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 8]
+    coordinate: [16, 4.0]
     rotation: 0
     state: enabled
 
 blocks:
-- name: access_code
-  id: variable
-  parameters:
-    comment: ''
-    value: '''''.join([str(i) for i in (syncword+1)//2])'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [688, 12.0]
-    rotation: 0
-    state: true
 - name: freq
   id: variable
   parameters:
@@ -53,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [968, 12.0]
+    coordinate: [8, 100.0]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -65,33 +54,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 12]
+    coordinate: [88, 100.0]
     rotation: 0
     state: enabled
-- name: syncword
-  id: variable
-  parameters:
-    comment: ''
-    value: 2*np.unpackbits(np.frombuffer(bytes.fromhex(syncword_hex), dtype = 'uint8')).astype('int')-1
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [424, 12.0]
-    rotation: 0
-    state: true
-- name: syncword_hex
-  id: variable
-  parameters:
-    comment: ''
-    value: '''1ACFFC1D'''
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 12.0]
-    rotation: 0
-    state: true
 - name: HighDataRate_Modem_Chunk_ExtractQPSK_0
   id: HighDataRate_Modem_Chunk_ExtractQPSK
   parameters:
@@ -104,8 +69,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 1004.0]
-    rotation: 180
+    coordinate: [432, 1356.0]
+    rotation: 0
     state: enabled
 - name: HighDataRate_Modem_Chunk_ExtractQPSK_0_0
   id: HighDataRate_Modem_Chunk_ExtractQPSK
@@ -119,8 +84,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 1068.0]
-    rotation: 180
+    coordinate: [432, 1404.0]
+    rotation: 0
     state: enabled
 - name: HighDataRate_Modem_Chunk_ExtractQPSK_0_1
   id: HighDataRate_Modem_Chunk_ExtractQPSK
@@ -134,13 +99,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1240, 1132.0]
-    rotation: 180
+    coordinate: [432, 1460.0]
+    rotation: 0
     state: enabled
 - name: HighDataRate_Modem_Extract_Frame_0
   id: HighDataRate_Modem_Extract_Frame
   parameters:
-    affinity: ''
+    affinity: '3'
     alias: ''
     comment: ''
     maxoutbuf: '0'
@@ -149,13 +114,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [160, 1068.0]
+    coordinate: [624, 1572.0]
     rotation: 180
     state: true
 - name: HighDataRate_Modem_Resolve_Phase_0
   id: HighDataRate_Modem_Resolve_Phase
   parameters:
-    affinity: ''
+    affinity: '3'
     alias: ''
     comment: ''
     maxoutbuf: '0'
@@ -164,8 +129,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [168, 916.0]
-    rotation: 0
+    coordinate: [320, 1572.0]
+    rotation: 180
     state: true
 - name: HighDataRate_Modem_TAG_CHUNKpreamble_0
   id: HighDataRate_Modem_TAG_CHUNKpreamble
@@ -179,8 +144,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 1004.0]
-    rotation: 180
+    coordinate: [176, 1356.0]
+    rotation: 0
     state: true
 - name: HighDataRate_Modem_TAG_CHUNKpreamble_0_0
   id: HighDataRate_Modem_TAG_CHUNKpreamble
@@ -194,8 +159,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 1068.0]
-    rotation: 180
+    coordinate: [176, 1404.0]
+    rotation: 0
     state: true
 - name: HighDataRate_Modem_TAG_CHUNKpreamble_0_1
   id: HighDataRate_Modem_TAG_CHUNKpreamble
@@ -209,13 +174,13 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 1132.0]
-    rotation: 180
+    coordinate: [176, 1460.0]
+    rotation: 0
     state: true
 - name: HighDataRate_Modem_Tag_FrameASM_0
   id: HighDataRate_Modem_Tag_FrameASM
   parameters:
-    affinity: ''
+    affinity: '3'
     alias: ''
     comment: ''
     maxoutbuf: '0'
@@ -224,7 +189,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 1068.0]
+    coordinate: [912, 1572.0]
     rotation: 180
     state: true
 - name: blocks_complex_to_float_0
@@ -240,8 +205,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1576, 232.0]
-    rotation: 0
+    coordinate: [462, 798]
+    rotation: 180
     state: enabled
 - name: blocks_complex_to_float_0_0
   id: blocks_complex_to_float
@@ -256,8 +221,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1536, 456.0]
-    rotation: 0
+    coordinate: [463, 901]
+    rotation: 180
     state: enabled
 - name: blocks_complex_to_float_0_0_0
   id: blocks_complex_to_float
@@ -272,8 +237,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1536, 664.0]
-    rotation: 0
+    coordinate: [477, 1104]
+    rotation: 180
     state: enabled
 - name: blocks_file_sink_0_0
   id: blocks_file_sink
@@ -282,7 +247,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/FINAL_RS_FRAMES_ONLY
+    file: /home/davem/gr-HighDataRate_Modem/examples/FINAL_OUTPUT_FRAMES_ONLY
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -290,8 +255,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [440, 892.0]
-    rotation: 0
+    coordinate: [32, 1524.0]
+    rotation: 180
     state: enabled
 - name: blocks_file_source_0_0_0
   id: blocks_file_source
@@ -300,7 +265,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/BBFileModQPSK_UNCODED_ONLY_with32ASM
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/4192BBFileModQPSK_inCOMPLEX_with32ASM
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -312,7 +277,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 100.0]
+    coordinate: [840, 60.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0_0_0_0
@@ -334,7 +299,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 308.0]
+    coordinate: [592, 252.0]
     rotation: 0
     state: enabled
 - name: blocks_interleave_0
@@ -353,8 +318,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1792, 160.0]
-    rotation: 0
+    coordinate: [256, 798]
+    rotation: 180
     state: enabled
 - name: blocks_interleave_0_0
   id: blocks_interleave
@@ -372,8 +337,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1752, 528.0]
-    rotation: 0
+    coordinate: [256, 901]
+    rotation: 180
     state: enabled
 - name: blocks_interleave_0_0_0
   id: blocks_interleave
@@ -391,8 +356,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1640, 752.0]
-    rotation: 0
+    coordinate: [256, 1104.0]
+    rotation: 180
     state: enabled
 - name: blocks_keep_m_in_n_0
   id: blocks_keep_m_in_n
@@ -410,7 +375,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 460.0]
+    coordinate: [616, 380.0]
     rotation: 0
     state: enabled
 - name: blocks_keep_m_in_n_0_0
@@ -429,7 +394,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 604.0]
+    coordinate: [616, 476.0]
     rotation: 0
     state: enabled
 - name: blocks_keep_m_in_n_0_0_0
@@ -448,7 +413,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 708.0]
+    coordinate: [600, 572.0]
     rotation: 0
     state: enabled
 - name: blocks_keep_m_in_n_0_1
@@ -467,8 +432,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [696, 1052.0]
-    rotation: 180
+    coordinate: [1008, 1364.0]
+    rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
@@ -485,25 +450,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 276.0]
-    rotation: 0
-    state: enabled
-- name: blocks_multiply_const_vxx_1
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: '4'
-    alias: ''
-    comment: ''
-    const: 1j
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1440, 148.0]
+    coordinate: [216, 324.0]
     rotation: 0
     state: enabled
 - name: blocks_skiphead_0
@@ -521,7 +468,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 620.0]
+    coordinate: [376, 492.0]
     rotation: 0
     state: enabled
 - name: blocks_skiphead_0_0
@@ -539,7 +486,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [168, 724.0]
+    coordinate: [216, 588.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_mux_0
@@ -558,7 +505,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 488.0]
+    coordinate: [1067, 415]
     rotation: 0
     state: enabled
 - name: blocks_stream_mux_0_0
@@ -577,7 +524,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 328.0]
+    coordinate: [1067, 300]
     rotation: 0
     state: enabled
 - name: blocks_stream_mux_0_1
@@ -596,7 +543,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 656.0]
+    coordinate: [1075, 582]
     rotation: 0
     state: enabled
 - name: blocks_stream_mux_2
@@ -605,7 +552,7 @@ blocks:
     affinity: '7'
     alias: ''
     comment: ''
-    lengths: (82510, 82510,82510)
+    lengths: (82510,82510,82510)
     maxoutbuf: '0'
     minoutbuf: '0'
     num_inputs: '3'
@@ -615,28 +562,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [984, 1040.0]
-    rotation: 180
-    state: enabled
-- name: blocks_throttle_0_0_0
-  id: blocks_throttle
-  parameters:
-    affinity: '1'
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [232, 204.0]
+    coordinate: [768, 1360.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: digital_binary_slicer_fb_0_0
   id: digital_binary_slicer_fb
   parameters:
@@ -649,8 +577,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1904, 260.0]
-    rotation: 0
+    coordinate: [46, 810]
+    rotation: 180
     state: enabled
 - name: digital_binary_slicer_fb_0_0_0
   id: digital_binary_slicer_fb
@@ -664,8 +592,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1904, 452.0]
-    rotation: 0
+    coordinate: [45, 913]
+    rotation: 180
     state: enabled
 - name: digital_binary_slicer_fb_0_0_0_0
   id: digital_binary_slicer_fb
@@ -679,8 +607,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1832, 684.0]
-    rotation: 0
+    coordinate: [46, 1116]
+    rotation: 180
     state: enabled
 - name: digital_costas_loop_cc_0
   id: digital_costas_loop_cc
@@ -697,8 +625,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1280, 256.0]
-    rotation: 0
+    coordinate: [724, 725]
+    rotation: 180
     state: enabled
 - name: digital_costas_loop_cc_0_0
   id: digital_costas_loop_cc
@@ -715,8 +643,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1272, 472.0]
-    rotation: 0
+    coordinate: [720, 917]
+    rotation: 180
     state: enabled
 - name: digital_costas_loop_cc_0_0_0
   id: digital_costas_loop_cc
@@ -733,8 +661,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1272, 680.0]
-    rotation: 0
+    coordinate: [730, 1120]
+    rotation: 180
     state: enabled
 - name: digital_symbol_sync_xx_0
   id: digital_symbol_sync_xx
@@ -760,8 +688,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 260.0]
-    rotation: 0
+    coordinate: [977, 729]
+    rotation: 180
     state: enabled
 - name: digital_symbol_sync_xx_0_0
   id: digital_symbol_sync_xx
@@ -787,8 +715,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 468.0]
-    rotation: 0
+    coordinate: [987, 921]
+    rotation: 180
     state: enabled
 - name: digital_symbol_sync_xx_0_0_0
   id: digital_symbol_sync_xx
@@ -814,35 +742,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 684.0]
-    rotation: 0
+    coordinate: [984, 1124.0]
+    rotation: 180
     state: enabled
-- name: import_0
-  id: import
-  parameters:
-    alias: ''
-    comment: ''
-    imports: from math import pi
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [872, 12.0]
-    rotation: 0
-    state: true
-- name: import_1
-  id: import
-  parameters:
-    alias: ''
-    comment: ''
-    imports: import numpy as np
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [600, 12.0]
-    rotation: 0
-    state: true
 - name: limesdr_sink_0
   id: limesdr_sink
   parameters:
@@ -874,7 +776,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 76.0]
+    coordinate: [1192, 4.0]
     rotation: 0
     state: enabled
 - name: limesdr_source_0
@@ -909,7 +811,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 276.0]
+    coordinate: [0, 244.0]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0
@@ -1001,106 +903,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1552, 324.0]
-    rotation: 0
+    coordinate: [80, 724.0]
+    rotation: 180
     state: true
-- name: qtgui_time_sink_x_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: '""'
-    nconnections: '1'
-    size: '256'
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: complex
-    update_time: '1.0'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '1'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [128, 516.0]
-    rotation: 0
-    state: disabled
 
 connections:
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0, '0', blocks_stream_mux_2, '0']
@@ -1121,7 +926,6 @@ connections:
 - [blocks_complex_to_float_0_0, '1', blocks_interleave_0_0, '1']
 - [blocks_complex_to_float_0_0_0, '0', blocks_interleave_0_0_0, '0']
 - [blocks_complex_to_float_0_0_0, '1', blocks_interleave_0_0_0, '1']
-- [blocks_file_source_0_0_0, '0', blocks_throttle_0_0_0, '0']
 - [blocks_file_source_0_0_0, '0', limesdr_sink_0, '0']
 - [blocks_file_source_0_0_0_0, '0', blocks_stream_mux_0, '0']
 - [blocks_file_source_0_0_0_0, '0', blocks_stream_mux_0_0, '0']
@@ -1136,23 +940,18 @@ connections:
 - [blocks_multiply_const_vxx_0, '0', blocks_keep_m_in_n_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0_0, '0']
-- [blocks_multiply_const_vxx_0, '0', qtgui_time_sink_x_0, '0']
-- [blocks_multiply_const_vxx_1, '0', blocks_complex_to_float_0, '0']
 - [blocks_skiphead_0, '0', blocks_keep_m_in_n_0_0, '0']
 - [blocks_skiphead_0_0, '0', blocks_keep_m_in_n_0_0_0, '0']
 - [blocks_stream_mux_0, '0', digital_symbol_sync_xx_0_0, '0']
 - [blocks_stream_mux_0_0, '0', digital_symbol_sync_xx_0, '0']
 - [blocks_stream_mux_0_1, '0', digital_symbol_sync_xx_0_0_0, '0']
 - [blocks_stream_mux_2, '0', blocks_keep_m_in_n_0_1, '0']
-- [blocks_throttle_0_0_0, '0', blocks_keep_m_in_n_0, '0']
-- [blocks_throttle_0_0_0, '0', blocks_skiphead_0, '0']
-- [blocks_throttle_0_0_0, '0', blocks_skiphead_0_0, '0']
 - [digital_binary_slicer_fb_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0, '0']
 - [digital_binary_slicer_fb_0_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0_0,
   '0']
 - [digital_binary_slicer_fb_0_0_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0_1,
   '0']
-- [digital_costas_loop_cc_0, '0', blocks_multiply_const_vxx_1, '0']
+- [digital_costas_loop_cc_0, '0', blocks_complex_to_float_0, '0']
 - [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_0, '0']
 - [digital_costas_loop_cc_0_0, '0', blocks_complex_to_float_0_0, '0']
 - [digital_costas_loop_cc_0_0_0, '0', blocks_complex_to_float_0_0_0, '0']

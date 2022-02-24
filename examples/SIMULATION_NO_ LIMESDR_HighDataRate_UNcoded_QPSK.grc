@@ -1,0 +1,895 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: QPSK_15Mbps_TRIchain
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Not titled yet
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 4.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: freq
+  id: variable
+  parameters:
+    comment: ''
+    value: '80000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 100.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '15000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [88, 100.0]
+    rotation: 0
+    state: enabled
+- name: HighDataRate_Modem_Chunk_ExtractQPSK_0
+  id: HighDataRate_Modem_Chunk_ExtractQPSK
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 1356.0]
+    rotation: 0
+    state: enabled
+- name: HighDataRate_Modem_Chunk_ExtractQPSK_0_0
+  id: HighDataRate_Modem_Chunk_ExtractQPSK
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 1404.0]
+    rotation: 0
+    state: enabled
+- name: HighDataRate_Modem_Chunk_ExtractQPSK_0_1
+  id: HighDataRate_Modem_Chunk_ExtractQPSK
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 1460.0]
+    rotation: 0
+    state: enabled
+- name: HighDataRate_Modem_Extract_Frame_0
+  id: HighDataRate_Modem_Extract_Frame
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 1572.0]
+    rotation: 180
+    state: true
+- name: HighDataRate_Modem_Resolve_Phase_0
+  id: HighDataRate_Modem_Resolve_Phase
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 1572.0]
+    rotation: 180
+    state: true
+- name: HighDataRate_Modem_TAG_CHUNKpreamble_0
+  id: HighDataRate_Modem_TAG_CHUNKpreamble
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1356.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_TAG_CHUNKpreamble_0_0
+  id: HighDataRate_Modem_TAG_CHUNKpreamble
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1404.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_TAG_CHUNKpreamble_0_1
+  id: HighDataRate_Modem_TAG_CHUNKpreamble
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1460.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Tag_FrameASM_0
+  id: HighDataRate_Modem_Tag_FrameASM
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 1572.0]
+    rotation: 180
+    state: true
+- name: blocks_complex_to_float_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [462, 798]
+    rotation: 180
+    state: enabled
+- name: blocks_complex_to_float_0_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [463, 901]
+    rotation: 180
+    state: enabled
+- name: blocks_complex_to_float_0_0_0
+  id: blocks_complex_to_float
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [477, 1104]
+    rotation: 180
+    state: enabled
+- name: blocks_file_sink_0_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '3'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/FINAL_OUTPUT_FRAMES_ONLY
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [32, 1524.0]
+    rotation: 180
+    state: enabled
+- name: blocks_file_source_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '1'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/4192BBFileModQPSK_inCOMPLEX_with32ASM
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 164.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '2'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/3048QPSK_PREamble_COMPLEX
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 252.0]
+    rotation: 0
+    state: enabled
+- name: blocks_interleave_0
+  id: blocks_interleave
+  parameters:
+    affinity: '4'
+    alias: ''
+    blocksize: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 798]
+    rotation: 180
+    state: enabled
+- name: blocks_interleave_0_0
+  id: blocks_interleave
+  parameters:
+    affinity: '4'
+    alias: ''
+    blocksize: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 901]
+    rotation: 180
+    state: enabled
+- name: blocks_interleave_0_0_0
+  id: blocks_interleave
+  parameters:
+    affinity: '4'
+    alias: ''
+    blocksize: '1'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 1104.0]
+    rotation: 180
+    state: enabled
+- name: blocks_keep_m_in_n_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    m: '82000'
+    maxoutbuf: '0'
+    minoutbuf: 82000*2
+    n: '210000'
+    offset: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 380.0]
+    rotation: 0
+    state: enabled
+- name: blocks_keep_m_in_n_0_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    m: '82000'
+    maxoutbuf: '0'
+    minoutbuf: 82000*2
+    n: '210000'
+    offset: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 476.0]
+    rotation: 0
+    state: enabled
+- name: blocks_keep_m_in_n_0_0_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    m: '82000'
+    maxoutbuf: '0'
+    minoutbuf: 82000*2
+    n: '210000'
+    offset: '0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 572.0]
+    rotation: 0
+    state: enabled
+- name: blocks_keep_m_in_n_0_1
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    m: '74270'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '82510'
+    offset: '8240'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1008, 1364.0]
+    rotation: 0
+    state: enabled
+- name: blocks_skiphead_0
+  id: blocks_skiphead
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: 140000*2
+    num_items: '70000'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 492.0]
+    rotation: 0
+    state: enabled
+- name: blocks_skiphead_0_0
+  id: blocks_skiphead
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: 140000*2
+    num_items: '140000'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [216, 588.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    lengths: (1524, 82000)
+    maxoutbuf: '0'
+    minoutbuf: '85048'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1067, 415]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_mux_0_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    lengths: (1524, 82000)
+    maxoutbuf: '0'
+    minoutbuf: '85048'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1067, 300]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_mux_0_1
+  id: blocks_stream_mux
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    lengths: (1524, 82000)
+    maxoutbuf: '0'
+    minoutbuf: '85048'
+    num_inputs: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1075, 582]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_mux_2
+  id: blocks_stream_mux
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    lengths: (82510,82510,82510)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '3'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 1360.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: '1'
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 316.0]
+    rotation: 0
+    state: enabled
+- name: digital_binary_slicer_fb_0_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [46, 810]
+    rotation: 180
+    state: enabled
+- name: digital_binary_slicer_fb_0_0_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [45, 913]
+    rotation: 180
+    state: enabled
+- name: digital_binary_slicer_fb_0_0_0_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [46, 1116]
+    rotation: 180
+    state: enabled
+- name: digital_costas_loop_cc_0
+  id: digital_costas_loop_cc
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '4'
+    use_snr: 'False'
+    w: 3.14159/40
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [724, 725]
+    rotation: 180
+    state: enabled
+- name: digital_costas_loop_cc_0_0
+  id: digital_costas_loop_cc
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '4'
+    use_snr: 'False'
+    w: 3.14159/40
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 917]
+    rotation: 180
+    state: enabled
+- name: digital_costas_loop_cc_0_0_0
+  id: digital_costas_loop_cc
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    order: '4'
+    use_snr: 'False'
+    w: 3.14159/40
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [730, 1120]
+    rotation: 180
+    state: enabled
+- name: digital_symbol_sync_xx_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: 6.28/50
+    max_dev: '1.5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: firdes.root_raised_cosine(32,64,1.0,1.0,704)
+    resamp_type: digital.IR_PFB_NO_MF
+    sps: '2.000000'
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: cc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [977, 729]
+    rotation: 180
+    state: enabled
+- name: digital_symbol_sync_xx_0_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: 6.28/50
+    max_dev: '1.5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: firdes.root_raised_cosine(32,64,1.0,1.0,704)
+    resamp_type: digital.IR_PFB_NO_MF
+    sps: '2.00000'
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: cc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [987, 921]
+    rotation: 180
+    state: enabled
+- name: digital_symbol_sync_xx_0_0_0
+  id: digital_symbol_sync_xx
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    constellation: digital.constellation_bpsk().base()
+    damping: '1.0'
+    loop_bw: 6.28/50
+    max_dev: '1.5'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    nfilters: '128'
+    osps: '1'
+    pfb_mf_taps: firdes.root_raised_cosine(32,64,1.0,1.0,704)
+    resamp_type: digital.IR_PFB_NO_MF
+    sps: '2.00000'
+    ted_gain: '1.0'
+    ted_type: digital.TED_GARDNER
+    type: cc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [984, 1124.0]
+    rotation: 180
+    state: enabled
+- name: qtgui_const_sink_x_0
+  id: qtgui_const_sink_x
+  parameters:
+    affinity: '7'
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: '"blue"'
+    color10: '"red"'
+    color2: '"red"'
+    color3: '"red"'
+    color4: '"red"'
+    color5: '"red"'
+    color6: '"red"'
+    color7: '"red"'
+    color8: '"red"'
+    color9: '"red"'
+    comment: ''
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '0'
+    marker10: '0'
+    marker2: '0'
+    marker3: '0'
+    marker4: '0'
+    marker5: '0'
+    marker6: '0'
+    marker7: '0'
+    marker8: '0'
+    marker9: '0'
+    name: '""'
+    nconnections: '1'
+    size: '256'
+    style1: '0'
+    style10: '0'
+    style2: '0'
+    style3: '0'
+    style4: '0'
+    style5: '0'
+    style6: '0'
+    style7: '0'
+    style8: '0'
+    style9: '0'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: complex
+    update_time: '1.5'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    xmax: '2'
+    xmin: '-2'
+    ymax: '2'
+    ymin: '-2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 724.0]
+    rotation: 180
+    state: true
+
+connections:
+- [HighDataRate_Modem_Chunk_ExtractQPSK_0, '0', blocks_stream_mux_2, '0']
+- [HighDataRate_Modem_Chunk_ExtractQPSK_0_0, '0', blocks_stream_mux_2, '1']
+- [HighDataRate_Modem_Chunk_ExtractQPSK_0_1, '0', blocks_stream_mux_2, '2']
+- [HighDataRate_Modem_Extract_Frame_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
+- [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_file_sink_0_0, '0']
+- [HighDataRate_Modem_TAG_CHUNKpreamble_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0,
+  '0']
+- [HighDataRate_Modem_TAG_CHUNKpreamble_0_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_0,
+  '0']
+- [HighDataRate_Modem_TAG_CHUNKpreamble_0_1, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_1,
+  '0']
+- [HighDataRate_Modem_Tag_FrameASM_0, '0', HighDataRate_Modem_Extract_Frame_0, '0']
+- [blocks_complex_to_float_0, '0', blocks_interleave_0, '0']
+- [blocks_complex_to_float_0, '1', blocks_interleave_0, '1']
+- [blocks_complex_to_float_0_0, '0', blocks_interleave_0_0, '0']
+- [blocks_complex_to_float_0_0, '1', blocks_interleave_0_0, '1']
+- [blocks_complex_to_float_0_0_0, '0', blocks_interleave_0_0_0, '0']
+- [blocks_complex_to_float_0_0_0, '1', blocks_interleave_0_0_0, '1']
+- [blocks_file_source_0_0_0, '0', blocks_throttle_0_0_0, '0']
+- [blocks_file_source_0_0_0_0, '0', blocks_stream_mux_0, '0']
+- [blocks_file_source_0_0_0_0, '0', blocks_stream_mux_0_0, '0']
+- [blocks_file_source_0_0_0_0, '0', blocks_stream_mux_0_1, '0']
+- [blocks_interleave_0, '0', digital_binary_slicer_fb_0_0, '0']
+- [blocks_interleave_0_0, '0', digital_binary_slicer_fb_0_0_0, '0']
+- [blocks_interleave_0_0_0, '0', digital_binary_slicer_fb_0_0_0_0, '0']
+- [blocks_keep_m_in_n_0, '0', blocks_stream_mux_0_0, '1']
+- [blocks_keep_m_in_n_0_0, '0', blocks_stream_mux_0, '1']
+- [blocks_keep_m_in_n_0_0_0, '0', blocks_stream_mux_0_1, '1']
+- [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_0, '0']
+- [blocks_skiphead_0, '0', blocks_keep_m_in_n_0_0, '0']
+- [blocks_skiphead_0_0, '0', blocks_keep_m_in_n_0_0_0, '0']
+- [blocks_stream_mux_0, '0', digital_symbol_sync_xx_0_0, '0']
+- [blocks_stream_mux_0_0, '0', digital_symbol_sync_xx_0, '0']
+- [blocks_stream_mux_0_1, '0', digital_symbol_sync_xx_0_0_0, '0']
+- [blocks_stream_mux_2, '0', blocks_keep_m_in_n_0_1, '0']
+- [blocks_throttle_0_0_0, '0', blocks_keep_m_in_n_0, '0']
+- [blocks_throttle_0_0_0, '0', blocks_skiphead_0, '0']
+- [blocks_throttle_0_0_0, '0', blocks_skiphead_0_0, '0']
+- [digital_binary_slicer_fb_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0, '0']
+- [digital_binary_slicer_fb_0_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0_0,
+  '0']
+- [digital_binary_slicer_fb_0_0_0_0, '0', HighDataRate_Modem_TAG_CHUNKpreamble_0_1,
+  '0']
+- [digital_costas_loop_cc_0, '0', blocks_complex_to_float_0, '0']
+- [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_0, '0']
+- [digital_costas_loop_cc_0_0, '0', blocks_complex_to_float_0_0, '0']
+- [digital_costas_loop_cc_0_0_0, '0', blocks_complex_to_float_0_0_0, '0']
+- [digital_symbol_sync_xx_0, '0', digital_costas_loop_cc_0, '0']
+- [digital_symbol_sync_xx_0_0, '0', digital_costas_loop_cc_0_0, '0']
+- [digital_symbol_sync_xx_0_0_0, '0', digital_costas_loop_cc_0_0_0, '0']
+
+metadata:
+  file_format: 1

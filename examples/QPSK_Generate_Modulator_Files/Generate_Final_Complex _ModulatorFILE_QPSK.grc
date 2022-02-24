@@ -1,0 +1,469 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: BB_COMPLEX
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: BB_COMPLEX
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 4.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '5000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 4.0]
+    rotation: 0
+    state: enabled
+- name: blocks_add_const_vxx_0_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [928, 476.0]
+    rotation: 0
+    state: disabled
+- name: blocks_char_to_float_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [456, 468.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_sink_0_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '7'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/BBFileModQPSK_NO_ASM
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1016, 116.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_sink_0_0_0_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '7'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/BBFileModQPSK__CCSDS_32ASM
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 276.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_sink_0_0_0_0_0_1
+  id: blocks_file_sink
+  parameters:
+    affinity: '7'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/4192BBFileModQPSK_inCOMPLEX_with32ASM
+    type: complex
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 588.0]
+    rotation: 180
+    state: disabled
+- name: blocks_file_source_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '0'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/BBFileModQPSK_64ASM
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 100.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_source_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '0'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/BBFileModQPSK_NO_ASM
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 276.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_source_0_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '1'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/32bitASMonly
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 220.0]
+    rotation: 0
+    state: disabled
+- name: blocks_file_source_0_0_0_0_1
+  id: blocks_file_source
+  parameters:
+    affinity: '0'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/BBFileModQPSK__CCSDS_32ASM
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [0, 436.0]
+    rotation: 0
+    state: disabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [392, 600.0]
+    rotation: 180
+    state: disabled
+- name: blocks_keep_m_in_n_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    m: '4160'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '4224'
+    offset: '64'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 116.0]
+    rotation: 0
+    state: disabled
+- name: blocks_keep_m_in_n_0_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    m: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '2'
+    offset: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [880, 540.0]
+    rotation: 180
+    state: disabled
+- name: blocks_keep_m_in_n_0_0_0
+  id: blocks_keep_m_in_n
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    m: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    n: '2'
+    offset: '1'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 636.0]
+    rotation: 180
+    state: disabled
+- name: blocks_multiply_const_vxx_1_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [672, 468.0]
+    rotation: 0
+    state: disabled
+- name: blocks_repeat_0_0
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 556.0]
+    rotation: 180
+    state: disabled
+- name: blocks_repeat_0_0_1
+  id: blocks_repeat
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 652.0]
+    rotation: 180
+    state: disabled
+- name: blocks_skiphead_0
+  id: blocks_skiphead
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '4096'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [472, 132.0]
+    rotation: 0
+    state: disabled
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    lengths: (32, 4160)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [616, 288.0]
+    rotation: 0
+    state: disabled
+- name: blocks_throttle_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [256, 132.0]
+    rotation: 0
+    state: disabled
+- name: blocks_throttle_0_0_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 348.0]
+    rotation: 0
+    state: disabled
+- name: blocks_throttle_0_0_0_1
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 468.0]
+    rotation: 0
+    state: disabled
+
+connections:
+- [blocks_add_const_vxx_0_0, '0', blocks_keep_m_in_n_0_0, '0']
+- [blocks_add_const_vxx_0_0, '0', blocks_keep_m_in_n_0_0_0, '0']
+- [blocks_char_to_float_0, '0', blocks_multiply_const_vxx_1_0, '0']
+- [blocks_file_source_0_0, '0', blocks_throttle_0_0, '0']
+- [blocks_file_source_0_0_0_0, '0', blocks_throttle_0_0_0_0, '0']
+- [blocks_file_source_0_0_0_0_0, '0', blocks_stream_mux_0, '0']
+- [blocks_file_source_0_0_0_0_1, '0', blocks_throttle_0_0_0_1, '0']
+- [blocks_float_to_complex_0, '0', blocks_file_sink_0_0_0_0_0_1, '0']
+- [blocks_keep_m_in_n_0, '0', blocks_file_sink_0_0, '0']
+- [blocks_keep_m_in_n_0_0, '0', blocks_repeat_0_0, '0']
+- [blocks_keep_m_in_n_0_0_0, '0', blocks_repeat_0_0_1, '0']
+- [blocks_multiply_const_vxx_1_0, '0', blocks_add_const_vxx_0_0, '0']
+- [blocks_repeat_0_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_repeat_0_0_1, '0', blocks_float_to_complex_0, '1']
+- [blocks_skiphead_0, '0', blocks_keep_m_in_n_0, '0']
+- [blocks_stream_mux_0, '0', blocks_file_sink_0_0_0_0, '0']
+- [blocks_throttle_0_0, '0', blocks_skiphead_0, '0']
+- [blocks_throttle_0_0_0_0, '0', blocks_stream_mux_0, '1']
+- [blocks_throttle_0_0_0_1, '0', blocks_char_to_float_0, '0']
+
+metadata:
+  file_format: 1

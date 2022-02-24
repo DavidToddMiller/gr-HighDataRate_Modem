@@ -747,6 +747,9 @@ int Extract_Frame_impl::general_work(int noutput_items,
       n_digested = tags[0].offset-nitems_read(0)-32;  // -32 for Extract Frame at beginning of ASM not at end of ASM
       int tags_length = int(tags.size()-2);  // changed to -2 from -1 for concatenated
 
+      // int d_start = 0;
+      // if(n_digested < 32){d_start = 1;}  // throw out very first frame in frame stream if ASM starts between 0 and 32 
+
       for(int i=0; i<tags_length; i++) {
          int offset = int(tags[i].offset);
 
