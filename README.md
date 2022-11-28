@@ -10,21 +10,31 @@ The 2022 conference paper is also provided in the “docs” folder of this gith
 The approach with blocks in gr-HighDataRate_Modem does not require a frame counter that the 2021 Conference design required, just knowledge about the frame ASM and frame length. The details on the approach and blocks are provided in the design document in the "docs" folder.
 
 Also, example flowgraphs are provided in the “examples” folder of this github site:
-    - Sample Modulator Files in .zip format are available in the folder also to quickly run the transmit Modulator in Flowgraphs
-      (up to about 40000 frames for about a 10-12 second run at 15 Mbps)
-    - The original frame stream in baseband real bits before modulation is provided that can be compared to the received stream for verification that no bits or frames had errors or were lost. The first 2 frames are deleted for comparison to the received frame stream that may have the first 0-2 frames missing when running the flowgraph. 
-    - The provided flowgraphs run with a frame length of 4192 bits that includes the 32 bit CCSDS ASM.  See the Design Document in the "doc" folder for all the details.  Other frame length options will be available in the future.
-    - For simulation, a separate "simulation" .grc file for QPSK is in the "examples" folder and has a "throttle" block available for those that do not have a LimeSDR-Mini in order to try out gr-HighDataRate_Modem without the LimeSDR-Mini with QPSK.
-    - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
-   
-NOVEMBER 2022 NOTE: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding and frame scrambling (includes handling Doppler also via FFTs) that is used extensively by many space agencies:
-    - Flowgraphs located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site
-    - Separate flowgraphs for Transmit and Receive when using dongles
-    - A couple of the encoder and decoder blocks are OOT blocks from gr-satellites otherwise all blocks are in the standard GNU Radio In-Tree library. 
-    - Runs at 16 kilosymbols/second with the coding included. 64 kHz subcarrier used.
-    - With the Doppler FFT functions, the flowgraphs could be used operationally in real-time for an actual Low Earth Orbit (LEO) spacecraft that uses typical CCSDS low rate TT&C links at S-band.
-    - A detailed paper on the TT&C flowgraphs design with Doppler will be provided soon in the "docs" folder (expect early 2023)
 
+  - Sample Modulator Files in .zip format are available in the folder also to quickly run the transmit Modulator in Flowgraphs (up to about 40000 frames for about a 10-12 second run at 15 Mbps).
+
+  - The original frame stream in baseband real bits before modulation is provided that can be compared to the received stream for verification that no bits or frames had errors or were lost. The first 2 frames are deleted for comparison to the received frame stream that may have the first 0-2 frames missing when running the flowgraph.
+
+  - The provided flowgraphs run with a frame length of 4192 bits that includes the 32 bit CCSDS ASM.  See the Design Document in the "doc" folder for all the details.
+
+  - For simulation, a separate "simulation" .grc file for QPSK is in the "examples" folder and has a "throttle" block available for those that do not have a LimeSDR-Mini in order to try out gr-HighDataRate_Modem without the LimeSDR-Mini with QPSK.
+
+  - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
+   
+NOVEMBER 2022 NOTE on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding and frame scrambling (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+
+  - Flowgraphs located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
+
+  - Separate flowgraphs for Transmit and Receive when using dongles.
+
+  - A couple of the encoder and decoder blocks are OOT blocks from gr-satellites otherwise all blocks are in the standard GNU Radio In-Tree library. 
+
+  - Runs at 16 kilosymbols/second with the coding included. 64 kHz subcarrier used.
+
+  - With the Doppler FFT functions included, the flowgraphs could be used operationally in real-time for an actual Low Earth Orbit (LEO) spacecraft link that uses typical CCSDS low rate TT&C links at S-band.
+
+  - A detailed paper on the TT&C flowgraphs design with Doppler will be provided soon in the "docs" folder (expect early 2023).
+ 
                                INSTALLATION FROM SOURCE
 
 The installation procedure of gr-HighDataRate_Modem source code is the usual procedure for a GNU Radio out-of-tree (OOT) module. The detailed instructions are as follows for building from source in a system where GNU Radio 3.10 (should work with GNU Radio version 3.9 also) has already been installed with Ubuntu 20.04 or Ubuntu 22.04:
