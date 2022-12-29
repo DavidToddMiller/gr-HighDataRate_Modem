@@ -675,117 +675,41 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#include "Extract_Frame_impl.h"
-#include <gnuradio/io_signature.h>
+#ifndef INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_IMPL_H
+#define INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_IMPL_H
 
-#include <volk/volk.h>
-#include <boost/format.hpp>
-#include <cstdio>
-#include <iostream>
-#include <stdexcept>
+#include <HighDataRate_Modem/Encode_RS.h>
+
+#include <cstdint>
+#include <functional>
+#include <vector>
 
 namespace gr {
 namespace HighDataRate_Modem {
 
-using input_type = char;
-using output_type = char;
-Extract_Frame::sptr Extract_Frame::make()
+class Encode_RS_impl : public Encode_RS
 {
-    return gnuradio::make_block_sptr<Extract_Frame_impl>();
-}
+private:
+    // Nothing to declare in this block.
 
-/*
- * The private constructor
- */
-Extract_Frame_impl::Extract_Frame_impl()
-    : gr::block("Extract_Frame",
-                gr::io_signature::make(
-                    1 /* min inputs */, 1 /* max inputs */, sizeof(input_type)),
-                gr::io_signature::make(
-                    1 /* min outputs */, 1 /*max outputs */, sizeof(output_type)))
-    {
-        set_tag_propagation_policy(TPP_DONT); 
-        set_output_multiple(30000); 
-        n_dropped_times = 0;
-    }
+    unsigned char* d_data;
+    // std::function<void(unsigned char*)> d_encode_rs;
+    void encode(const unsigned char* in, unsigned char* out);
 
-/*
- * Our virtual destructor.
- */
-Extract_Frame_impl::~Extract_Frame_impl() {}
+public:
+    Encode_RS_impl(int interleave, int dual_basis);
+    ~Encode_RS_impl() override;
 
-void Extract_Frame_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
-{
-ninput_items_required[0] = noutput_items;
-}
+    // Where all the action really happens
+    void forecast(int noutput_items, gr_vector_int& ninput_items_required) override;
 
-int Extract_Frame_impl::general_work(int noutput_items,
-                                     gr_vector_int& ninput_items,
-                                     gr_vector_const_void_star& input_items,
-                                     gr_vector_void_star& output_items)
-    {
-      //Remove tags from frames not 4224 bits in length that come from chunk chain discontinuities
-      uint64_t n_digested = 0; // New for concatenated
-      uint64_t n_produced = 0;
-      
-      uint8_t* out = (uint8_t*)output_items[0];
-      const uint8_t* in = (const uint8_t*)input_items[0];
+    int general_work(int noutput_items,
+                     gr_vector_int& ninput_items,
+                     gr_vector_const_void_star& input_items,
+                     gr_vector_void_star& output_items);
+};
 
-      std::vector<tag_t> tags;
-      get_tags_in_range(tags, 0, nitems_read(0), nitems_read(0) + noutput_items);
-      GR_LOG_DEBUG(d_logger, boost::format("writing tag size %llu") % (tags.size()));
+} // namespace HighDataRate_Modem
+} // namespace gr
 
-      if (int(tags.size())<3)  // STOP and move on to next 30000 bits
-      {
-      n_digested = 10000;
-      n_produced = 10000;
-      }
-
-      if (int(tags.size())>2)  // Extract frames in WORK Call via ASM and maintain ASM
-      {
-
-      n_digested = tags[0].offset-nitems_read(0)-32;  // -32 for Extract Frame at beginning of ASM not at end of ASM
-      int tags_length = int(tags.size()-2);  // changed to -2 from -1 for concatenated
-
-      // int d_start = 0;
-      // if(n_digested < 32){d_start = 1;}  // throw out very first frame in frame stream if ASM starts between 0 and 32 
-
-      for(int i=0; i<tags_length; i++) {
-         int offset = int(tags[i].offset);
-
-         int offset_start = int(tags[i].offset);
-         int offset_end = int(tags[i+1].offset);
-         int delta = offset_end - offset_start;
-      
-         GR_LOG_DEBUG(d_logger, boost::format("DELTA %llu") % (delta));
-
-         if (delta == 4192)  //4192 includes ASM
-         {
-             memcpy((void*)(out+n_produced), (const void*)(in+n_digested), 4192); //New to Concatenated
-             n_digested += delta;  //4144; PUT last 48 bits of next frame ASM later
-             n_produced += delta; //4144;  PUT last 48 bits of next ASM later later
-         }  
-         if (delta != 4192)
-         {
-             // Drop Duplicate chunk chain discontinuity bits
-             n_digested += delta;
-         }
-         if (delta < 90)
-         {
-                i = i + 1;
-                n_digested += 4192;
-                n_dropped_times = n_dropped_times + 1;
-         }  
-
-      }  // End of FOR loop
-
-      }   // End of IF Statement
-
-      GR_LOG_DEBUG(d_logger, boost::format("DROPPED incrementer value %llu") % (n_dropped_times));
-
-      consume_each (n_digested);   //tell scheduler runtime the amount of input items consum     
-      return n_produced;    //tell scheduler runtime output items
-    }
-
-} /* namespace HighDataRate_Modem */
-} /* namespace gr */
+#endif /* INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_IMPL_H */

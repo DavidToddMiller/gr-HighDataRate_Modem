@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(Resolve_Phase.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(257c6bc9357a05bab4b378ba5b7a848e)                     */
+/* BINDTOOL_HEADER_FILE(Encode_RS.h)                                        */
+/* BINDTOOL_HEADER_FILE_HASH(3300dbebb313fa7f023f02b22d1ff86e)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,21 +23,21 @@
 
 namespace py = pybind11;
 
-#include <HighDataRate_Modem/Resolve_Phase.h>
+#include <HighDataRate_Modem/Encode_RS.h>
 // pydoc.h is automatically generated in the build directory
-#include <Resolve_Phase_pydoc.h>
+#include <Encode_RS_pydoc.h>
 
-void bind_Resolve_Phase(py::module& m)
+void bind_Encode_RS(py::module& m)
 {
 
-    using Resolve_Phase    = gr::HighDataRate_Modem::Resolve_Phase;
+    using Encode_RS    = gr::HighDataRate_Modem::Encode_RS;
 
 
-    py::class_<Resolve_Phase, gr::block, gr::basic_block,
-        std::shared_ptr<Resolve_Phase>>(m, "Resolve_Phase", D(Resolve_Phase))
+    py::class_<Encode_RS, gr::block, gr::basic_block,
+        std::shared_ptr<Encode_RS>>(m, "Encode_RS", D(Encode_RS))
 
-        .def(py::init(&Resolve_Phase::make),
-           D(Resolve_Phase,make)
+        .def(py::init(&Encode_RS::make),
+           D(Encode_RS,make)
         )
         
 

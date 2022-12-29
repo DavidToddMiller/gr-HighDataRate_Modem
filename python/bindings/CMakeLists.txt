@@ -27,14 +27,15 @@ include(GrPybind)
 ########################################################################
 # Python Bindings
 ########################################################################
-
 list(APPEND HighDataRate_Modem_python_files
     TAG_CHUNKpreamble_python.cc
     Chunk_ExtractQPSK_python.cc
     Tag_FrameASM_python.cc
-    Extract_Frame_python.cc
+    Chunk_ExtractBPSK_python.cc
+    Frame_Extract_python.cc
     Resolve_Phase_python.cc
-    Chunk_ExtractBPSK_python.cc python_bindings.cc)
+    Encode_RS_python.cc
+    Decode_RS_python.cc python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(HighDataRate_Modem
    ../..

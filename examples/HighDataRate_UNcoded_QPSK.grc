@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: QPSK_15Mbps_TRIchain
+    id: QPSK_15Mbps_3chain
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -102,34 +102,38 @@ blocks:
     coordinate: [432, 1460.0]
     rotation: 0
     state: enabled
-- name: HighDataRate_Modem_Extract_Frame_0
-  id: HighDataRate_Modem_Extract_Frame
+- name: HighDataRate_Modem_Frame_Extract_0
+  id: HighDataRate_Modem_Frame_Extract
   parameters:
     affinity: '3'
     alias: ''
+    buffer_length: '30000'
     comment: ''
+    frame_length: '4192'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [624, 1572.0]
+    coordinate: [664, 1556.0]
     rotation: 180
     state: true
-- name: HighDataRate_Modem_Resolve_Phase_0
+- name: HighDataRate_Modem_Resolve_Phase_1
   id: HighDataRate_Modem_Resolve_Phase
   parameters:
     affinity: '3'
     alias: ''
+    buffer_length: '1200000'
     comment: ''
+    frame_length: '4192'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [320, 1572.0]
+    coordinate: [312, 1556.0]
     rotation: 180
     state: true
 - name: HighDataRate_Modem_TAG_CHUNKpreamble_0
@@ -177,7 +181,7 @@ blocks:
     coordinate: [176, 1460.0]
     rotation: 0
     state: true
-- name: HighDataRate_Modem_Tag_FrameASM_0
+- name: HighDataRate_Modem_Tag_FrameASM_1
   id: HighDataRate_Modem_Tag_FrameASM
   parameters:
     affinity: '3'
@@ -189,7 +193,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 1572.0]
+    coordinate: [1008, 1572.0]
     rotation: 180
     state: true
 - name: blocks_complex_to_float_0
@@ -255,7 +259,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 1524.0]
+    coordinate: [32, 1540.0]
     rotation: 180
     state: enabled
 - name: blocks_file_source_0_0_0
@@ -903,7 +907,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 724.0]
+    coordinate: [112, 708.0]
     rotation: 180
     state: true
 
@@ -911,15 +915,15 @@ connections:
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0, '0', blocks_stream_mux_2, '0']
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0_0, '0', blocks_stream_mux_2, '1']
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0_1, '0', blocks_stream_mux_2, '2']
-- [HighDataRate_Modem_Extract_Frame_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
-- [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_file_sink_0_0, '0']
+- [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_1, '0']
+- [HighDataRate_Modem_Resolve_Phase_1, '0', blocks_file_sink_0_0, '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0,
   '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_0,
   '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0_1, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_1,
   '0']
-- [HighDataRate_Modem_Tag_FrameASM_0, '0', HighDataRate_Modem_Extract_Frame_0, '0']
+- [HighDataRate_Modem_Tag_FrameASM_1, '0', HighDataRate_Modem_Frame_Extract_0, '0']
 - [blocks_complex_to_float_0, '0', blocks_interleave_0, '0']
 - [blocks_complex_to_float_0, '1', blocks_interleave_0, '1']
 - [blocks_complex_to_float_0_0, '0', blocks_interleave_0_0, '0']
@@ -936,7 +940,7 @@ connections:
 - [blocks_keep_m_in_n_0, '0', blocks_stream_mux_0_0, '1']
 - [blocks_keep_m_in_n_0_0, '0', blocks_stream_mux_0, '1']
 - [blocks_keep_m_in_n_0_0_0, '0', blocks_stream_mux_0_1, '1']
-- [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_0, '0']
+- [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_1, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_keep_m_in_n_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0_0, '0']
@@ -962,3 +966,4 @@ connections:
 
 metadata:
   file_format: 1
+  grc_version: 3.10.4.0

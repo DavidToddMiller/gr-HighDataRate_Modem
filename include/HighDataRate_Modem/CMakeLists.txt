@@ -14,7 +14,9 @@ install(FILES
     TAG_CHUNKpreamble.h
     Chunk_ExtractQPSK.h
     Tag_FrameASM.h
-    Extract_Frame.h
+    Chunk_ExtractBPSK.h
+    Frame_Extract.h
     Resolve_Phase.h
-    Chunk_ExtractBPSK.h DESTINATION include/HighDataRate_Modem
+    Encode_RS.h
+    Decode_RS.h DESTINATION include/HighDataRate_Modem
 )

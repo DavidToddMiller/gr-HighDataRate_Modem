@@ -675,37 +675,40 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
-#define INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
+#ifndef INCLUDED_HIGHDATARATE_MODEM_DECODE_RS_IMPL_H
+#define INCLUDED_HIGHDATARATE_MODEM_DECODE_RS_IMPL_H
 
-#include <gnuradio/block.h>
-#include <HighDataRate_Modem/api.h>
+#include <HighDataRate_Modem/Decode_RS.h>
+
+#include <cstdint>
+#include <functional>
+#include <vector>
 
 namespace gr {
 namespace HighDataRate_Modem {
 
-/*!
- * \brief <+description of block+>
- * \ingroup HighDataRate_Modem
- *
- */
-class HIGHDATARATE_MODEM_API Resolve_Phase : virtual public gr::block
+class Decode_RS_impl : public Decode_RS
 {
-public:
-    typedef std::shared_ptr<Resolve_Phase> sptr;
+private:
+    // Nothing to declare in this block.
+    unsigned char* d_data;
+    //std::function<void(unsigned char*)> d_encode_rs;
+    int decode(const unsigned char* in, unsigned char* out);
 
-    /*!
-     * \brief Return a shared_ptr to a new instance of HighDataRate_Modem::Resolve_Phase.
-     *
-     * To avoid accidental use of raw pointers, HighDataRate_Modem::Resolve_Phase's
-     * constructor is in a private implementation
-     * class. HighDataRate_Modem::Resolve_Phase::make is the public interface for
-     * creating new instances.
-     */
-    static sptr make(int frame_length, int buffer_length);
+public:
+    Decode_RS_impl(int dual_basis, int interleave);
+    ~Decode_RS_impl() override;
+
+    // Where all the action really happens
+    void forecast(int noutput_items, gr_vector_int& ninput_items_required) override;
+
+    int general_work(int noutput_items,
+                     gr_vector_int& ninput_items,
+                     gr_vector_const_void_star& input_items,
+                     gr_vector_void_star& output_items);
 };
 
 } // namespace HighDataRate_Modem
 } // namespace gr
 
-#endif /* INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H */
+#endif /* INCLUDED_HIGHDATARATE_MODEM_DECODE_RS_IMPL_H */

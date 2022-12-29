@@ -681,29 +681,30 @@
 namespace gr {
 namespace HighDataRate_Modem {
 
-
 using input_type = char;
 using output_type = char;
-Resolve_Phase::sptr Resolve_Phase::make()
+Resolve_Phase::sptr Resolve_Phase::make(int frame_length, int buffer_length)
 {
-    return gnuradio::make_block_sptr<Resolve_Phase_impl>();
+    return gnuradio::make_block_sptr<Resolve_Phase_impl>(frame_length, buffer_length);
 }
+
 
 /*
  * The private constructor
  */
-Resolve_Phase_impl::Resolve_Phase_impl()
+Resolve_Phase_impl::Resolve_Phase_impl(int frame_length, int buffer_length)
     : gr::block("Resolve_Phase",
                 gr::io_signature::make(
                     1 /* min inputs */, 1 /* max inputs */, sizeof(input_type)),
                 gr::io_signature::make(
                     1 /* min outputs */, 1 /*max outputs */, sizeof(output_type))),
-        s{0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1},
-        s90{1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0}
-
-     {
-        set_output_multiple(120000); 
-     }
+      s{0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1},
+      s90{1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0},
+      d_frame_length(frame_length), // 4192 including ASM for 15 Mbps flowgraph and 2072 bits (255 bytes * 8 + 32 bit ASM) for CCSDS flowgraphs
+      d_buffer_length(buffer_length) // 60000 for 15 Mbps and 30000 for low rate CCSDS
+    {
+        set_output_multiple(d_buffer_length); 
+    }
 
 /*
  * Our virtual destructor.
@@ -720,8 +721,8 @@ int Resolve_Phase_impl::general_work(int noutput_items,
                                      gr_vector_const_void_star& input_items,
                                      gr_vector_void_star& output_items)
     {
-      uint64_t n_digested = 18*4192; // 6 frames for frame length 4192 including ASM for each WORK call
-      uint64_t n_produced = 18*4192; // 6 frames for frame length 4192 including ASM for each WORK call
+      uint64_t n_digested = 18*d_frame_length; // 18 frames for frame length 4192 including ASM for each WORK call
+      uint64_t n_produced = 18*d_frame_length; // 18 frames for frame length 4192 including ASM for each WORK call
       int d_phase = 0;
       int d_compare = 0;
       int d_compare90 = 0;
@@ -729,12 +730,12 @@ int Resolve_Phase_impl::general_work(int noutput_items,
       uint8_t* out = (uint8_t*)output_items[0];
       const uint8_t* in = (const uint8_t*)input_items[0];
 
-      // Do 6 frames per WORK call for now
+      // Do 10 frames per WORK call for now
       for(int i=0; i<18; i++) {
            
            // ASM determination of phase first as 45 deg or 225 deg OR used for BPSK 0 and 180 Degree Phase
            for(int j=0; j<32; j++) {
-              if(in[j+i*4192] == s[j]){d_compare += 1;}
+              if(in[j+i*d_frame_length] == s[j]){d_compare += 1;}
            } // End of j FOR loop
 
            if(d_compare == 32)
@@ -750,7 +751,7 @@ int Resolve_Phase_impl::general_work(int noutput_items,
            d_compare = 0;
            // ASM determination of phase next for 135 deg or 315 deg OR ignored for BPSK
            for(int k=0; k<32; k++) {
-              if(in[k+i*4192] == s90[k]){d_compare90 += 1;}
+              if(in[k+i*d_frame_length] == s90[k]){d_compare90 += 1;}
               //GR_LOG_DEBUG(d_logger, boost::format("S90_S90_S90 %llu") % (s90[k]));
            } // End of k FOR loop
 
@@ -769,78 +770,78 @@ int Resolve_Phase_impl::general_work(int noutput_items,
 
            d_compare = 0;
            d_compare90 = 0;
-           for(int m=0; m<4192; m++) {      // rotate frame and it ASM as needed and memcpy to output
+           for(int m=0; m<d_frame_length; m++) {      // rotate frame and it ASM as needed and memcpy to output
 
                 if(d_phase == 225)  // if d_flip 0 - from Previous WORK CALL then script flips bits
                 {
-                     if(in[m+i*4192] == 0)  //in[i] = 0 therefore
+                     if(in[m+i*d_frame_length] == 0)  //in[i] = 0 therefore
                      {
-                        out[m+i*4192] = 1;
+                        out[m+i*d_frame_length] = 1;
                      }
                      else
                      {
-                        out[m+i*4192] = 0;
+                        out[m+i*d_frame_length] = 0;
                      }
-                     if(in[m+1+i*4192] == 0)  //in[i] = 0 therefore
+                     if(in[m+1+i*d_frame_length] == 0)  //in[i] = 0 therefore
                      {
-                        out[m+1+i*4192] = 1;
+                        out[m+1+i*d_frame_length] = 1;
                      }
                      else
                      {
-                        out[m+1+i*4192] = 0;
+                        out[m+1+i*d_frame_length] = 0;
                      }
                 }
 
                 if(d_phase == 45)  // d_flip =1 in otherwords for conditional statement
                 {
-                     out[m+i*4192] = in[m+i*4192];
-                     out[m+1+i*4192] = in[m+1+i*4192];
+                     out[m+i*d_frame_length] = in[m+i*d_frame_length];
+                     out[m+1+i*d_frame_length] = in[m+1+i*d_frame_length];
                 }
 
                 if(d_phase == 135)  // if d_flip 0 - from Previous WORK CALL then script flips bits
                 {
-                     if(in[m+i*4192] == 1 && in[m+1+i*4192] == 1)
+                     if(in[m+i*d_frame_length] == 1 && in[m+1+i*d_frame_length] == 1)
                      {
-                          out[m+i*4192] = 1;
-                          out[m+1+i*4192] = 0;
+                          out[m+i*d_frame_length] = 1;
+                          out[m+1+i*d_frame_length] = 0;
                      }
-                     else if(in[m+i*4192] == 0 && in[m+1+i*4192] == 1)
+                     else if(in[m+i*d_frame_length] == 0 && in[m+1+i*d_frame_length] == 1)
                      {
-                          out[m+i*4192] = 1;
-                          out[m+1+i*4192] = 1;
+                          out[m+i*d_frame_length] = 1;
+                          out[m+1+i*d_frame_length] = 1;
                      }
-                     else if(in[m+i*4192] == 0 && in[m+1+i*4192] == 0)
+                     else if(in[m+i*d_frame_length] == 0 && in[m+1+i*d_frame_length] == 0)
                      {
-                          out[m+i*4192] = 0;
-                          out[m+1+i*4192] = 1;
+                          out[m+i*d_frame_length] = 0;
+                          out[m+1+i*d_frame_length] = 1;
                      }
                      else // must be (in[m+i*4192] == 1 && in[m+1+i*4192] == 0)
                      {
-                          out[m+i*4192] = 0;
-                          out[m+1+i*4192] = 0;
+                          out[m+i*d_frame_length] = 0;
+                          out[m+1+i*d_frame_length] = 0;
                      }
                 }
                 if(d_phase == 315)  // if d_flip 0 - from Previous WORK CALL then script flips bits
                 {
-                     if(in[m+i*4192] == 1 && in[m+1+i*4192] == 1)
+                     if(in[m+i*d_frame_length] == 1 && in[m+1+i*d_frame_length] == 1)
                      {
-                          out[m+i*4192] = 0;
-                          out[m+1+i*4192] = 1;
+                          out[m+i*d_frame_length] = 0;
+                          out[m+1+i*d_frame_length] = 1;
                      }
-                     else if(in[m+i*4192] == 0 && in[m+1+i*4192] == 1)
+                     else if(in[m+i*d_frame_length] == 0 && in[m+1+i*d_frame_length] == 1)
                      {
-                          out[m+i*4192] = 0;
-                          out[m+1+i*4192] = 0;
+                          out[m+i*d_frame_length] = 0;
+                          out[m+1+i*d_frame_length] = 0;
                      }
-                     else if(in[m+i*4192] == 0 && in[m+1+i*4192] == 0)
+                     else if(in[m+i*d_frame_length] == 0 && in[m+1+i*d_frame_length] == 0)
                      {
-                          out[m+i*4192] = 1;
-                          out[m+1+i*4192] = 0;
+                          out[m+i*d_frame_length] = 1;
+                          out[m+1+i*d_frame_length] = 0;
                      }
                      else  // must be (in[m+i*4192] == 1 && in[m+1+i*4192] == 0)
                      {
-                          out[m+i*4192] = 1;
-                          out[m+1+i*4192] = 1;
+                          out[m+i*d_frame_length] = 1;
+                          out[m+1+i*d_frame_length] = 1;
                      }
                 }
            m += 1;  // move in 2 bit increments for QPSK and even BPSK to keep this same block for QPSK & BPSK

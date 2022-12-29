@@ -5,12 +5,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-
 install(FILES
     HighDataRate_Modem_TAG_CHUNKpreamble.block.yml
     HighDataRate_Modem_Chunk_ExtractQPSK.block.yml
     HighDataRate_Modem_Tag_FrameASM.block.yml
-    HighDataRate_Modem_Extract_Frame.block.yml
+    HighDataRate_Modem_Chunk_ExtractBPSK.block.yml
+    HighDataRate_Modem_Frame_Extract.block.yml
     HighDataRate_Modem_Resolve_Phase.block.yml
-    HighDataRate_Modem_Chunk_ExtractBPSK.block.yml DESTINATION share/gnuradio/grc/blocks
+    HighDataRate_Modem_Encode_RS.block.yml
+    HighDataRate_Modem_Decode_RS.block.yml DESTINATION share/gnuradio/grc/blocks
 )

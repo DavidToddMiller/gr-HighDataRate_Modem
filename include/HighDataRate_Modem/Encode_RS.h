@@ -675,8 +675,8 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
-#define INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
+#ifndef INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_H
+#define INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_H
 
 #include <gnuradio/block.h>
 #include <HighDataRate_Modem/api.h>
@@ -689,23 +689,23 @@ namespace HighDataRate_Modem {
  * \ingroup HighDataRate_Modem
  *
  */
-class HIGHDATARATE_MODEM_API Resolve_Phase : virtual public gr::block
+class HIGHDATARATE_MODEM_API Encode_RS : virtual public gr::block
 {
 public:
-    typedef std::shared_ptr<Resolve_Phase> sptr;
+    typedef std::shared_ptr<Encode_RS> sptr;
 
     /*!
-     * \brief Return a shared_ptr to a new instance of HighDataRate_Modem::Resolve_Phase.
+     * \brief Return a shared_ptr to a new instance of HighDataRate_Modem::Encode_RS.
      *
-     * To avoid accidental use of raw pointers, HighDataRate_Modem::Resolve_Phase's
+     * To avoid accidental use of raw pointers, HighDataRate_Modem::Encode_RS's
      * constructor is in a private implementation
-     * class. HighDataRate_Modem::Resolve_Phase::make is the public interface for
+     * class. HighDataRate_Modem::Encode_RS::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int frame_length, int buffer_length);
+    static sptr make(int interleave, int dual_basis);
 };
 
 } // namespace HighDataRate_Modem
 } // namespace gr
 
-#endif /* INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H */
+#endif /* INCLUDED_HIGHDATARATE_MODEM_ENCODE_RS_H */

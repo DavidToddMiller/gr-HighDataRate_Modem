@@ -675,37 +675,116 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
-#define INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
+#include "Frame_Extract_impl.h"
+#include <gnuradio/io_signature.h>
 
-#include <gnuradio/block.h>
-#include <HighDataRate_Modem/api.h>
+#include <volk/volk.h>
+#include <boost/format.hpp>
+#include <cstdio>
+#include <iostream>
+#include <stdexcept>
 
 namespace gr {
 namespace HighDataRate_Modem {
 
-/*!
- * \brief <+description of block+>
- * \ingroup HighDataRate_Modem
- *
- */
-class HIGHDATARATE_MODEM_API Resolve_Phase : virtual public gr::block
+using input_type = char;
+using output_type = char;
+Frame_Extract::sptr Frame_Extract::make(int frame_length, int buffer_length)
 {
-public:
-    typedef std::shared_ptr<Resolve_Phase> sptr;
+    return gnuradio::make_block_sptr<Frame_Extract_impl>(frame_length, buffer_length);
+}
 
-    /*!
-     * \brief Return a shared_ptr to a new instance of HighDataRate_Modem::Resolve_Phase.
-     *
-     * To avoid accidental use of raw pointers, HighDataRate_Modem::Resolve_Phase's
-     * constructor is in a private implementation
-     * class. HighDataRate_Modem::Resolve_Phase::make is the public interface for
-     * creating new instances.
-     */
-    static sptr make(int frame_length, int buffer_length);
-};
 
-} // namespace HighDataRate_Modem
-} // namespace gr
+/*
+ * The private constructor
+ */
+Frame_Extract_impl::Frame_Extract_impl(int frame_length, int buffer_length)
+    : gr::block("Frame_Extract",
+                gr::io_signature::make(
+                    1 /* min inputs */, 1 /* max inputs */, sizeof(input_type)),
+                gr::io_signature::make(
+                    1 /* min outputs */, 1 /*max outputs */, sizeof(output_type))),
+      d_frame_length(frame_length), // 
+      d_buffer_length(buffer_length) // 30000 for 15 Mbps and 15000 for low rate CCSDS
+    {
+        set_tag_propagation_policy(TPP_DONT); 
+        set_output_multiple(d_buffer_length); 
+        n_dropped_times = 0;
+    }
 
-#endif /* INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H */
+/*
+ * Our virtual destructor.
+ */
+Frame_Extract_impl::~Frame_Extract_impl() {}
+
+void Frame_Extract_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
+{
+ ninput_items_required[0] = noutput_items;
+}
+
+int Frame_Extract_impl::general_work(int noutput_items,
+                                     gr_vector_int& ninput_items,
+                                     gr_vector_const_void_star& input_items,
+                                     gr_vector_void_star& output_items)
+    {
+      //Remove tags from frames not "d_frame_length" bits in length that come from chunk chain discontinuities or ccsds flowgraph frame length
+      uint64_t n_digested = 0; // set max for circular buffer to use
+      uint64_t n_produced = 0;  // set max for circular buffer to use
+      
+      uint8_t* out = (uint8_t*)output_items[0];
+      const uint8_t* in = (const uint8_t*)input_items[0];
+
+      std::vector<tag_t> tags;
+      get_tags_in_range(tags, 0, nitems_read(0), nitems_read(0) + noutput_items);
+      GR_LOG_DEBUG(d_logger, boost::format("writing tag size %llu") % (tags.size()));
+
+      if (int(tags.size())<3)  // STOP and move on to next 30000 bits in next WORK Call
+      {
+      n_digested = d_buffer_length/3;  // 10000 for hdr 15.0 Mbps flowgraph but only 5000 for CCSDS low rate flowgraph
+      n_produced = d_buffer_length/3;  // 10000 for hdr 15.0 Mbps flowgraph but only 5000 for CCSDS low rate flowgraph
+      }
+
+      if (int(tags.size())>2)  // Extract frames in WORK Call via ASM and maintain ASM
+      {
+
+      n_digested = tags[0].offset-nitems_read(0)-32;  // -32 for Extract Frame at beginning of ASM not at end of ASM where tag is from previous block (correlate accees code - tag)
+      int tags_length = int(tags.size()-2);  // -2 so no partial frames in WORK call extracted
+
+      for(int i=0; i<tags_length; i++) {
+         //int offset = int(tags[i].offset);
+         int offset_start = int(tags[i].offset);
+         int offset_end = int(tags[i+1].offset);
+         int delta = offset_end - offset_start;
+      
+         GR_LOG_DEBUG(d_logger, boost::format("DELTA %llu") % (delta));
+
+         if (delta == d_frame_length)  //4192 includes ASM for 15 Mbps flowgraph. For CCSDS flowgraphs with Reed-Solomon, frame length will be 2072 bits (255 bytes * 8 + 32 bit ASM)
+         {
+             memcpy((void*)(out+n_produced), (const void*)(in+n_digested), d_frame_length); // TBD Notes
+             n_digested += delta;  //4192 or CCSDS 2072; 
+             n_produced += delta; //4192 or CCSDS 2072; 
+         }  
+         if (delta != d_frame_length)
+         {
+             // Drop Duplicate chunk chain discontinuity bits
+             n_digested += delta;
+         }
+         if (delta < 90)
+         {
+                i = i + 1;
+                n_digested += d_frame_length;
+                n_dropped_times = n_dropped_times + 1;
+         }  
+
+      }  // End of FOR loop
+
+      }   // End of IF Statement
+
+      GR_LOG_DEBUG(d_logger, boost::format("DROPPED incrementer value %llu") % (n_dropped_times));
+
+      consume_each (n_digested);   //tell scheduler runtime the amount of input items consum     
+      return n_produced;    //tell scheduler runtime output items
+    }
+
+} /* namespace HighDataRate_Modem */
+} /* namespace gr */

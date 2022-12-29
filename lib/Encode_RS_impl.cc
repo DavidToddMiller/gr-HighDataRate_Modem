@@ -675,34 +675,99 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_HIGHDATARATE_MODEM_EXTRACT_FRAME_IMPL_H
-#define INCLUDED_HIGHDATARATE_MODEM_EXTRACT_FRAME_IMPL_H
+#include "Encode_RS_impl.h"
+#include <gnuradio/io_signature.h>
 
-#include <HighDataRate_Modem/Extract_Frame.h>
+#include <algorithm>
+#include <exception>
+
+extern "C" {
+#include "libfec/fec.h"
+}
+
+#include "rs.h"
 
 namespace gr {
 namespace HighDataRate_Modem {
 
-class Extract_Frame_impl : public Extract_Frame
+using input_type = char;
+using output_type = char;
+Encode_RS::sptr Encode_RS::make(int interleave, int dual_basis)
 {
-private:
-      int n_dropped_times;
-    // Nothing to declare in this block.
+    return gnuradio::make_block_sptr<Encode_RS_impl>(interleave, dual_basis);
+}
 
-public:
-    Extract_Frame_impl();
-    ~Extract_Frame_impl();
 
-    // Where all the action really happens
-    void forecast(int noutput_items, gr_vector_int& ninput_items_required);
+/*
+ * The private constructor
+ */
+Encode_RS_impl::Encode_RS_impl(int interleave, int dual_basis)
+    : gr::block("Encode_RS",
+                gr::io_signature::make(
+                    1 /* min inputs */, 1 /* max inputs */, sizeof(input_type) * 223),
+                gr::io_signature::make(
+                    1 /* min outputs */, 1 /*max outputs */, sizeof(output_type) * 255))
+{
+ // HOOKS for later upgrades of interleave and dual basis. For now just Conventional and (255,223)
+ // as default to demonstrate high speed with parallel decoders and vector in/out interface
+}
 
-    int general_work(int noutput_items,
-                     gr_vector_int& ninput_items,
-                     gr_vector_const_void_star& input_items,
-                     gr_vector_void_star& output_items);
-};
+/*
+ * Our virtual destructor.
+ */
+Encode_RS_impl::~Encode_RS_impl() {}
 
-} // namespace HighDataRate_Modem
-} // namespace gr
+void Encode_RS_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
+{
+ ninput_items_required[0] = noutput_items;
+}
 
-#endif /* INCLUDED_HIGHDATARATE_MODEM_EXTRACT_FRAME_IMPL_H */
+void Encode_RS_impl::encode(const unsigned char* in, unsigned char* out)
+{
+    unsigned char data[255];
+
+    // Shortened for later upgrades to this block
+    // Shortened Reed-Solomon: prepend zero bytes to message (discarded after encoding)
+    //std::memset(d_data, 0, d_s);
+    // This is the number of data bytes we need from the input stream.
+    //int shortened_k = d_k - d_s;
+    std::memcpy(data, in, 223);
+
+    // HOOKS for LATER upgrades  - Copy input message to output then append Reed-Solomon bits
+    //std::memcpy(out, in, 223);
+    //encode_rs_char(d_rs, d_data, &out[shortened_k]);
+
+    //  NOTE NOTE:  For now just encode_rs_8 Encode - Conventional (255,223)
+    encode_rs_8(data, &data[223], 0);
+    //d_encode_rs = [](unsigned char* data) {  };
+    std::memcpy(out, data, 255);
+}
+
+
+int Encode_RS_impl::general_work(int noutput_items,
+                                 gr_vector_int& ninput_items,
+                                 gr_vector_const_void_star& input_items,
+                                 gr_vector_void_star& output_items)
+{
+
+    const unsigned char* in = (const unsigned char*)input_items[0];
+    unsigned char* out = (unsigned char*)output_items[0];
+    int j = 0;
+    int k = 0;
+
+    for (int i = 0; i < noutput_items; i++) {
+        //encode(in + j, out + k);
+        encode(in + j, out + k);
+        //std::memcpy(out+j, in+j, 223);
+        j += 223;
+        k += 255;
+    }
+
+    consume_each(noutput_items);
+
+    // Tell runtime system how many output items we produced.
+    return noutput_items;
+}
+
+} /* namespace HighDataRate_Modem */
+} /* namespace gr */

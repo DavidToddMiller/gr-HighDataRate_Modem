@@ -33,25 +33,6 @@ options:
     state: enabled
 
 blocks:
-- name: cons
-  id: variable_constellation
-  parameters:
-    comment: ''
-    const_points: '[-1-1j, -1+1j, 1+1j, 1-1j]'
-    dims: '1'
-    normalization: digital.constellation.AMPLITUDE_NORMALIZATION
-    precision: '8'
-    rot_sym: '4'
-    soft_dec_lut: None
-    sym_map: '[0, 1, 3, 2]'
-    type: bpsk
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [304, 12.0]
-    rotation: 0
-    state: true
 - name: freq_update
   id: variable_function_probe
   parameters:
@@ -65,7 +46,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [776, 1628.0]
+    coordinate: [776, 1932.0]
     rotation: 0
     state: true
 - name: samp_rate
@@ -79,6 +60,29 @@ blocks:
     bus_structure: null
     coordinate: [184, 12]
     rotation: 0
+    state: enabled
+- name: variable_cc_decoder_def_0
+  id: variable_cc_decoder_def
+  parameters:
+    comment: ''
+    dim1: '1'
+    dim2: '1'
+    framebits: '2048'
+    k: '7'
+    mode: fec.CC_STREAMING
+    ndim: '0'
+    padding: 'False'
+    polys: '[79,-109]'
+    rate: '2'
+    state_end: '-1'
+    state_start: '0'
+    value: '"ok"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [944, 1164.0]
+    rotation: 180
     state: enabled
 - name: Doppler_Rotate_Correction_x_0_0
   id: analog_sig_source_x
@@ -99,7 +103,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [912, 388.0]
+    coordinate: [976, 396.0]
     rotation: 0
     state: enabled
 - name: Doppler_Start_blocks_keep_m_in_n_0
@@ -118,8 +122,94 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1032, 1404.0]
+    coordinate: [928, 1644.0]
     rotation: 180
+    state: true
+- name: HighDataRate_Modem_Decode_RS_0
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 1356.0]
+    rotation: 180
+    state: true
+- name: HighDataRate_Modem_Frame_Extract_0
+  id: HighDataRate_Modem_Frame_Extract
+  parameters:
+    affinity: ''
+    alias: ''
+    buffer_length: '15000'
+    comment: ''
+    frame_length: '2072'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1060.0]
+    rotation: 180
+    state: true
+- name: HighDataRate_Modem_Resolve_Phase_0
+  id: HighDataRate_Modem_Resolve_Phase
+  parameters:
+    affinity: ''
+    alias: ''
+    buffer_length: '30000'
+    comment: ''
+    frame_length: '2072'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [176, 1212.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Tag_FrameASM_1
+  id: HighDataRate_Modem_Tag_FrameASM
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 1076.0]
+    rotation: 180
+    state: enabled
+- name: analog_agc_xx_0
+  id: analog_agc_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    gain: '1.0'
+    max_gain: '65536'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    rate: 1e-4
+    reference: '1.0'
+    type: complex
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1096, 140.0]
+    rotation: 0
     state: true
 - name: analog_const_source_x_0
   id: analog_const_source_x
@@ -135,7 +225,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 1740.0]
+    coordinate: [520, 2012.0]
     rotation: 0
     state: true
 - name: analog_pll_carriertracking_cc_0
@@ -193,7 +283,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [296, 1668.0]
+    coordinate: [280, 1932.0]
     rotation: 180
     state: true
 - name: blocks_argmax_xx_0
@@ -211,7 +301,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 1544.0]
+    coordinate: [96, 1824.0]
     rotation: 0
     state: true
 - name: blocks_complex_to_float_0
@@ -243,7 +333,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [112, 1420.0]
+    coordinate: [128, 1660.0]
     rotation: 180
     state: true
 - name: blocks_complex_to_real_0
@@ -277,8 +367,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 1156.0]
-    rotation: 180
+    coordinate: [432, 1460.0]
+    rotation: 0
     state: enabled
 - name: blocks_keep_one_in_n_0
   id: blocks_keep_one_in_n
@@ -295,7 +385,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 172.0]
+    coordinate: [360, 172.0]
     rotation: 0
     state: true
 - name: blocks_multiply_const_vxx_0
@@ -331,27 +421,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [88, 908.0]
+    coordinate: [136, 908.0]
     rotation: 0
     state: true
-- name: blocks_multiply_const_vxx_0_1
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    const: '-1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [848, 1260.0]
-    rotation: 180
-    state: enabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -385,7 +457,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [888, 296.0]
+    coordinate: [976, 296.0]
     rotation: 180
     state: enabled
 - name: blocks_multiply_xx_1
@@ -403,7 +475,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [536, 1664.0]
+    coordinate: [536, 1928.0]
     rotation: 180
     state: true
 - name: blocks_null_sink_0
@@ -437,9 +509,42 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 1596.0]
+    coordinate: [480, 1852.0]
     rotation: 0
     state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [784, 1212.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [600, 1364.0]
+    rotation: 180
+    state: enabled
 - name: blocks_short_to_float_0
   id: blocks_short_to_float
   parameters:
@@ -454,9 +559,28 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 1532.0]
+    coordinate: [488, 1780.0]
     rotation: 0
     state: true
+- name: blocks_stream_demux_0
+  id: blocks_stream_demux
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    lengths: (32,2040)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '2'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 1216.0]
+    rotation: 0
+    state: enabled
 - name: blocks_stream_to_vector_0
   id: blocks_stream_to_vector
   parameters:
@@ -472,9 +596,64 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [736, 1428.0]
+    coordinate: [648, 1668.0]
     rotation: 180
     state: true
+- name: blocks_stream_to_vector_2_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 1372.0]
+    rotation: 180
+    state: enabled
+- name: blocks_tag_gate_0
+  id: blocks_tag_gate
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    propagate_tags: 'False'
+    single_key: '""'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 996.0]
+    rotation: 180
+    state: true
+- name: blocks_vector_to_stream_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 1484.0]
+    rotation: 0
+    state: enabled
 - name: digital_costas_loop_cc_0_0
   id: digital_costas_loop_cc
   parameters:
@@ -490,36 +669,32 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [728, 840.0]
+    coordinate: [712, 840.0]
     rotation: 0
     state: enabled
-- name: digital_symbol_sync_xx_0_0
-  id: digital_symbol_sync_xx
+- name: digital_pfb_clock_sync_xxx_0
+  id: digital_pfb_clock_sync_xxx
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    constellation: digital.constellation_bpsk().base()
-    damping: '0.7'
-    loop_bw: 300*2*3.14159/1024000
-    max_dev: '0.001'
+    filter_size: '32'
+    init_phase: '0'
+    loop_bw: 3.14159/100.0
+    max_dev: '1.5'
     maxoutbuf: '0'
     minoutbuf: '0'
-    nfilters: '128'
     osps: '1'
-    pfb_mf_taps: '[]'
-    resamp_type: digital.IR_PFB_NO_MF
-    sps: '16.0'
-    ted_gain: '1.0'
-    ted_type: digital.TED_GARDNER
-    type: cc
+    sps: '16'
+    taps: firdes.root_raised_cosine(32,512,1.0,0.5,704)
+    type: ccf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [328, 844.0]
+    coordinate: [392, 860.0]
     rotation: 0
-    state: enabled
+    state: true
 - name: doppler_bin
   id: blocks_probe_signal_x
   parameters:
@@ -531,9 +706,29 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [96, 1676.0]
+    coordinate: [112, 1940.0]
     rotation: 180
     state: true
+- name: fec_extended_decoder_0
+  id: fec_extended_decoder
+  parameters:
+    affinity: ''
+    alias: ''
+    ann: None
+    comment: ''
+    decoder_list: variable_cc_decoder_def_0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    puncpat: '''11'''
+    threadtype: capillary
+    value: fec_extended_decoder
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [944, 1044.0]
+    rotation: 180
+    state: enabled
 - name: fft_vxx_0
   id: fft_vxx
   parameters:
@@ -552,7 +747,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [432, 1388.0]
+    coordinate: [392, 1628.0]
     rotation: 180
     state: true
 - name: hilbert_fc_0
@@ -573,23 +768,6 @@ blocks:
     coordinate: [256, 612.0]
     rotation: 180
     state: true
-- name: pdu_pdu_to_tagged_stream_0
-  id: pdu_pdu_to_tagged_stream
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    tag: packet_len
-    type: byte
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [264, 1172.0]
-    rotation: 180
-    state: enabled
 - name: qtgui_const_sink_x_0_0
   id: qtgui_const_sink_x
   parameters:
@@ -841,7 +1019,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [960, 36.0]
+    coordinate: [960, 20.0]
     rotation: 180
     state: enabled
 - name: qtgui_number_sink_0
@@ -904,7 +1082,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 1516.0]
+    coordinate: [784, 1764.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_1
@@ -1004,52 +1182,6 @@ blocks:
     coordinate: [8, 428.0]
     rotation: 180
     state: enabled
-- name: satellites_ccsds_concatenated_deframer_0
-  id: satellites_ccsds_concatenated_deframer
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    convolutional: '"CCSDS"'
-    frame_size: '223'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    options: '""'
-    precoding: None
-    rs_basis: '"conventional"'
-    rs_interleaving: '1'
-    scrambler: '"CCSDS"'
-    threshold: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [560, 1052.0]
-    rotation: 180
-    state: true
-- name: satellites_ccsds_concatenated_deframer_0_0
-  id: satellites_ccsds_concatenated_deframer
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    convolutional: '"CCSDS"'
-    frame_size: '223'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    options: '""'
-    precoding: None
-    rs_basis: '"conventional"'
-    rs_interleaving: '1'
-    scrambler: '"CCSDS"'
-    threshold: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [560, 1212.0]
-    rotation: 180
-    state: true
 - name: satellites_rms_agc_0
   id: satellites_rms_agc
   parameters:
@@ -1064,9 +1196,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 156.0]
+    coordinate: [1264, 172.0]
     rotation: 0
-    state: true
+    state: disabled
 - name: soapy_rtlsdr_source_0
   id: soapy_rtlsdr_source
   parameters:
@@ -1086,13 +1218,20 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [40, 156.0]
+    coordinate: [80, 156.0]
     rotation: 0
     state: true
 
 connections:
 - [Doppler_Rotate_Correction_x_0_0, '0', blocks_multiply_xx_0_0, '1']
 - [Doppler_Start_blocks_keep_m_in_n_0, '0', blocks_stream_to_vector_0, '0']
+- [HighDataRate_Modem_Decode_RS_0, '0', blocks_vector_to_stream_0, '0']
+- [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
+- [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_stream_demux_0, '0']
+- [HighDataRate_Modem_Tag_FrameASM_1, '0', HighDataRate_Modem_Frame_Extract_0, '0']
+- [analog_agc_xx_0, '0', Doppler_Start_blocks_keep_m_in_n_0, '0']
+- [analog_agc_xx_0, '0', blocks_multiply_xx_0_0, '0']
+- [analog_agc_xx_0, '0', qtgui_freq_sink_x_0_1, '0']
 - [analog_const_source_x_0, '0', blocks_multiply_xx_1, '1']
 - [analog_pll_carriertracking_cc_0, '0', blocks_complex_to_float_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
@@ -1102,29 +1241,31 @@ connections:
 - [blocks_complex_to_float_0, '0', blocks_null_sink_0, '0']
 - [blocks_complex_to_float_0, '1', hilbert_fc_0, '0']
 - [blocks_complex_to_mag_squared_0, '0', blocks_argmax_xx_0, '0']
-- [blocks_complex_to_real_0, '0', blocks_multiply_const_vxx_0_1, '0']
-- [blocks_complex_to_real_0, '0', satellites_ccsds_concatenated_deframer_0, '0']
+- [blocks_complex_to_real_0, '0', fec_extended_decoder_0, '0']
 - [blocks_keep_one_in_n_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_multiply_const_vxx_0, '0', analog_agc_xx_0, '0']
 - [blocks_multiply_const_vxx_0, '0', satellites_rms_agc_0, '0']
-- [blocks_multiply_const_vxx_0_0, '0', digital_symbol_sync_xx_0_0, '0']
-- [blocks_multiply_const_vxx_0_1, '0', satellites_ccsds_concatenated_deframer_0_0,
-  '0']
+- [blocks_multiply_const_vxx_0_0, '0', digital_pfb_clock_sync_xxx_0, '0']
 - [blocks_multiply_xx_0, '0', blocks_multiply_const_vxx_0_0, '0']
 - [blocks_multiply_xx_0, '0', qtgui_time_sink_x_1, '0']
 - [blocks_multiply_xx_0_0, '0', analog_pll_carriertracking_cc_0, '0']
 - [blocks_multiply_xx_0_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_multiply_xx_1, '0', blocks_add_const_vxx_0, '0']
+- [blocks_pack_k_bits_bb_0_0, '0', blocks_stream_to_vector_2_0_0, '0']
 - [blocks_short_to_float_0, '0', blocks_multiply_xx_1, '0']
 - [blocks_short_to_float_0, '0', qtgui_number_sink_0, '0']
+- [blocks_stream_demux_0, '0', blocks_null_sink_1, '0']
+- [blocks_stream_demux_0, '1', blocks_pack_k_bits_bb_0_0, '0']
 - [blocks_stream_to_vector_0, '0', fft_vxx_0, '0']
+- [blocks_stream_to_vector_2_0_0, '0', HighDataRate_Modem_Decode_RS_0, '0']
+- [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_1, '0']
+- [blocks_vector_to_stream_0, '0', blocks_file_sink_0, '0']
 - [digital_costas_loop_cc_0_0, '0', blocks_complex_to_real_0, '0']
 - [digital_costas_loop_cc_0_0, '0', qtgui_const_sink_x_0_0, '0']
-- [digital_symbol_sync_xx_0_0, '0', digital_costas_loop_cc_0_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', digital_costas_loop_cc_0_0, '0']
+- [fec_extended_decoder_0, '0', blocks_tag_gate_0, '0']
 - [fft_vxx_0, '0', blocks_complex_to_mag_squared_0, '0']
 - [hilbert_fc_0, '0', blocks_multiply_xx_0, '0']
-- [pdu_pdu_to_tagged_stream_0, '0', blocks_file_sink_0, '0']
-- [satellites_ccsds_concatenated_deframer_0, out, pdu_pdu_to_tagged_stream_0, pdus]
-- [satellites_ccsds_concatenated_deframer_0_0, out, pdu_pdu_to_tagged_stream_0, pdus]
 - [satellites_rms_agc_0, '0', Doppler_Start_blocks_keep_m_in_n_0, '0']
 - [satellites_rms_agc_0, '0', blocks_multiply_xx_0_0, '0']
 - [satellites_rms_agc_0, '0', qtgui_freq_sink_x_0_1, '0']

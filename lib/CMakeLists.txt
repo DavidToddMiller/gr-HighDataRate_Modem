@@ -10,14 +10,24 @@
 # Setup library
 ########################################################################
 include(GrPlatform) #define LIB_SUFFIX
-
 list(APPEND HighDataRate_Modem_sources
     TAG_CHUNKpreamble_impl.cc
     Chunk_ExtractQPSK_impl.cc
     Tag_FrameASM_impl.cc
-    Extract_Frame_impl.cc
-    Resolve_Phase_impl.cc
     Chunk_ExtractBPSK_impl.cc
+    Frame_Extract_impl.cc
+    Resolve_Phase_impl.cc
+    Encode_RS_impl.cc
+    libfec/decode_rs_8.c
+    libfec/decode_rs_ccsds.c
+    libfec/decode_rs_char.c
+    libfec/encode_rs_8.c
+    libfec/encode_rs_ccsds.c
+    libfec/encode_rs_char.c
+    libfec/taltab.c
+    libfec/ccsds.c
+    libfec/init_rs_char.c
+    Decode_RS_impl.cc
 )
 
 set(HighDataRate_Modem_sources "${HighDataRate_Modem_sources}" PARENT_SCOPE)

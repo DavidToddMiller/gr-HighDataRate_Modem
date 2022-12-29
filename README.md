@@ -1,15 +1,20 @@
                                   gr-HighDataRate_Modem
 
-gr-HighDataRate_Modem is a GNU Radio Out-Of-Tree (OOT) High Data Rate (HDR)_Modem module that includes the blocks required to run GNU Radio at 15.0 Mbps with QPSK. This module is based on the approach that was introduced during a GNU Radio Conference 2022 Talk and in the associated paper in the GNU Radio Conference 2022 proceedings and Conference 2022 website:
+gr-HighDataRate_Modem is a GNU Radio Out-Of-Tree (OOT) High Data Rate (HDR)_Modem and Front End Processor (FEP)/Gateway module that includes:
+ 
+  - Blocks and flowgraphs required to run GNU Radio at 15.0 Mbps with QPSK with parallel CPU cores
+
+  - New as of December 2022: FEP/Gateway CCSDS encoding/decoding and also baseband processing and data transport IP data interface (ZeroMQ) blocks and flowgraphs for high data rate operation with parallel CPU cores. 
+  
+This module is based on the approach that was introduced during a GNU Radio Conference 2022 Talk and in the associated paper in the GNU Radio Conference 2022 proceedings and Conference 2022 website:
 
    - "Demonstration of GNU Radio High Data Rate QPSK Modem at 15.0 Mbps Real-Time with Multi-Core General Purpose Processor (GRCON 2022)"
 
-The 2022 conference paper is also provided in the “docs” folder of this github site and provides technical details on all the Out-Of-Tree (OOT) blocks. The gr-HighDataRate_Modem design document is also in the "docs" folder titled:
-"gr-HighDataRate_Modem Design Document (version #1 - DRAFT).odt"
+The 2022 conference paper is also provided in the “docs” folder of this github site and provides technical details on all the Out-Of-Tree (OOT) blocks for uncoded QPSK up to 15.0 Mbps. The gr-HighDataRate_Modem design document is also in the "docs" folder titled: "gr-HighDataRate_Modem Design Document (version #1 - DRAFT).odt"
 
 The approach with blocks in gr-HighDataRate_Modem does not require a frame counter that the 2021 Conference design required, just knowledge about the frame ASM and frame length. The details on the approach and blocks are provided in the design document in the "docs" folder.
 
-Also, example flowgraphs are provided in the “examples” folder of this github site:
+Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the “examples” folder of this github site:
 
   - Sample Modulator Files in .zip format are available in the folder also to quickly run the transmit Modulator in Flowgraphs (up to about 40000 frames for about a 10-12 second run at 15 Mbps).
 
@@ -21,13 +26,21 @@ Also, example flowgraphs are provided in the “examples” folder of this githu
 
   - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
    
-NOVEMBER 2022 NOTE on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding and frame scrambling (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+DECEMBER 2022 Update, FEP/Gateway blocks and flowgraphs including CCSDS Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
+
+  - Example Flowgraphs located in "examples/High Speed FEP-Gateway" folder of this site. 
+
+  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
+   
+  - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
+
+NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
   - Flowgraphs located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
 
   - Separate flowgraphs for Transmit and Receive when using dongles.
 
-  - A couple of the encoder and decoder blocks are OOT blocks from gr-satellites otherwise all blocks are in the standard GNU Radio In-Tree library. 
+  - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
 
   - Runs at 16 kilosymbols/second with the coding included. 64 kHz subcarrier used.
 
@@ -69,12 +82,13 @@ sudo ldconfig
 
                          RUNNING THE .grc FLOWGRAPHS
 
-The .py generated file in the GNU Radio Companion should be run from the Ubuntu terminal because the files run at 
-15.0 Megasamples/second with text printouts on display including the frame count up to about 40000 frames during about a 10-12 second run when using the included provided QPSK Modulator File in the “examples” folder of this github site. The provided QPSK Modulator File is provided for convenience, but a user can also generate their own modulator file with the provided QPSK Modulator .grc flowgraph files in the “examples/QPSK_Generate_Modulator_Files” folder of this site.
+The .py generated file in the GNU Radio Companion should be run from the Ubuntu terminal because the files run at 15.0 Megasamples/second with text printouts on display including the frame count up to about 40000 frames during about a 10-12 second run when using the included provided QPSK Modulator File in the “examples” folder of this github site. The provided QPSK Modulator File is provided for convenience, but a user can also generate their own modulator file with the provided QPSK Modulator .grc flowgraph files in the “examples/QPSK_Generate_Modulator_Files” folder of this site.
 
-                         FUTURE WORK
+    FUTURE WORK   (Expand Capabilities of Real-Time High Rate Modems and High Rate FEPs/Gateways)
 
-1. When a 16-24 core Personal Computer becomes available, incorporate higher data rates with Doppler removal/handling and coding.   
-2. Add support for more frame lengths beyond just 4192 bit length frames
+1. When a 16-24 core Personal Computer becomes available, incorporate all high data rate blocks including encoding/decoding and Doppler removal/handling into single flowgraph to run in real-time up to 30.0 Msps (and/or two flowgraphs in real-time: Uncoded Modem along with FEP/Gateway connected via ZeroMQ). 
+2. Expand CCSDS Reed-Solomon options for interleaving, Dual Basis, and shortened codes while keeping block vector in/out interfaces for speed. Also, include CCSDS Descramble block with vector in/out interfaces also.
+3. Add more documentation for OOT blocks.   
+
 
                                               

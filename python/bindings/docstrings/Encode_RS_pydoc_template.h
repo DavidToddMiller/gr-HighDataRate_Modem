@@ -16,12 +16,12 @@
 
 
 
- static const char *__doc_gr_HighDataRate_Modem_Resolve_Phase = R"doc()doc";
+ static const char *__doc_gr_HighDataRate_Modem_Encode_RS = R"doc()doc";
 
 
- static const char *__doc_gr_HighDataRate_Modem_Resolve_Phase_Resolve_Phase = R"doc()doc";
+ static const char *__doc_gr_HighDataRate_Modem_Encode_RS_Encode_RS = R"doc()doc";
 
 
- static const char *__doc_gr_HighDataRate_Modem_Resolve_Phase_make = R"doc()doc";
+ static const char *__doc_gr_HighDataRate_Modem_Encode_RS_make = R"doc()doc";
 
   

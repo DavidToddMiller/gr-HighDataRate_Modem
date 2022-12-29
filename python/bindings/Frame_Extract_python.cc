@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(Extract_Frame.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ea7b2b03ee604c8d4071dad477ab89ae)                     */
+/* BINDTOOL_HEADER_FILE(Frame_Extract.h)                                        */
+/* BINDTOOL_HEADER_FILE_HASH(a46ea14cfb7dfd35fa286ef6ced7cc6f)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -23,21 +23,21 @@
 
 namespace py = pybind11;
 
-#include <HighDataRate_Modem/Extract_Frame.h>
+#include <HighDataRate_Modem/Frame_Extract.h>
 // pydoc.h is automatically generated in the build directory
-#include <Extract_Frame_pydoc.h>
+#include <Frame_Extract_pydoc.h>
 
-void bind_Extract_Frame(py::module& m)
+void bind_Frame_Extract(py::module& m)
 {
 
-    using Extract_Frame    = gr::HighDataRate_Modem::Extract_Frame;
+    using Frame_Extract    = gr::HighDataRate_Modem::Frame_Extract;
 
 
-    py::class_<Extract_Frame, gr::block, gr::basic_block,
-        std::shared_ptr<Extract_Frame>>(m, "Extract_Frame", D(Extract_Frame))
+    py::class_<Frame_Extract, gr::block, gr::basic_block,
+        std::shared_ptr<Frame_Extract>>(m, "Frame_Extract", D(Frame_Extract))
 
-        .def(py::init(&Extract_Frame::make),
-           D(Extract_Frame,make)
+        .def(py::init(&Frame_Extract::make),
+           D(Frame_Extract,make)
         )
         
 

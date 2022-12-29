@@ -7,7 +7,7 @@
  *
  */
 #include "pydoc_macros.h"
-#define D(...) DOC(gr,HighDataRate_Modem, __VA_ARGS__ )
+#define D(...) DOC(gr, HighDataRate_Modem, __VA_ARGS__)
 /*
   This file contains placeholders for docstrings for the Python bindings.
   Do not edit! These were automatically extracted during the binding process
@@ -15,13 +15,13 @@
  */
 
 
- 
- static const char *__doc_gr_HighDataRate_Modem_Extract_Frame = R"doc()doc";
+
+ static const char *__doc_gr_HighDataRate_Modem_Frame_Extract = R"doc()doc";
 
 
- static const char *__doc_gr_HighDataRate_Modem_Extract_Frame_Extract_Frame = R"doc()doc";
+ static const char *__doc_gr_HighDataRate_Modem_Frame_Extract_Frame_Extract = R"doc()doc";
 
 
- static const char *__doc_gr_HighDataRate_Modem_Extract_Frame_make = R"doc()doc";
+ static const char *__doc_gr_HighDataRate_Modem_Frame_Extract_make = R"doc()doc";
 
   

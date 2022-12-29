@@ -686,11 +686,14 @@ namespace HighDataRate_Modem {
 class Resolve_Phase_impl : public Resolve_Phase
 {
 private:
-      int s[32];
-      int s90[32];     
+    // Nothing to declare in this block.
+    int s[32];
+    int s90[32];     
+    int d_frame_length;
+    int d_buffer_length;
 
 public:
-    Resolve_Phase_impl();
+    Resolve_Phase_impl(int frame_length, int buffer_length);
     ~Resolve_Phase_impl();
 
     // Where all the action really happens

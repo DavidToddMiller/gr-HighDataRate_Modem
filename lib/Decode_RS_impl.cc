@@ -675,37 +675,104 @@
  * <https://www.gnu.org/licenses/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
-#define INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H
+#include "Decode_RS_impl.h"
+#include <gnuradio/io_signature.h>
 
-#include <gnuradio/block.h>
-#include <HighDataRate_Modem/api.h>
+#include <algorithm>
+#include <exception>
+
+extern "C" {
+#include "libfec/fec.h"
+}
+
+#include "rs.h"
 
 namespace gr {
 namespace HighDataRate_Modem {
 
-/*!
- * \brief <+description of block+>
- * \ingroup HighDataRate_Modem
- *
- */
-class HIGHDATARATE_MODEM_API Resolve_Phase : virtual public gr::block
+using input_type = char;
+using output_type = char;
+Decode_RS::sptr Decode_RS::make(int dual_basis, int interleave)
 {
-public:
-    typedef std::shared_ptr<Resolve_Phase> sptr;
+    return gnuradio::make_block_sptr<Decode_RS_impl>(dual_basis, interleave);
+}
 
-    /*!
-     * \brief Return a shared_ptr to a new instance of HighDataRate_Modem::Resolve_Phase.
-     *
-     * To avoid accidental use of raw pointers, HighDataRate_Modem::Resolve_Phase's
-     * constructor is in a private implementation
-     * class. HighDataRate_Modem::Resolve_Phase::make is the public interface for
-     * creating new instances.
-     */
-    static sptr make(int frame_length, int buffer_length);
-};
 
-} // namespace HighDataRate_Modem
-} // namespace gr
+/*
+ * The private constructor
+ */
+Decode_RS_impl::Decode_RS_impl(int dual_basis, int interleave)
+    : gr::block("Decode_RS",
+                gr::io_signature::make(
+                    1 /* min inputs */, 1 /* max inputs */, sizeof(input_type) * 255),
+                gr::io_signature::make(
+                    1 /* min outputs */, 1 /*max outputs */, sizeof(output_type) * 223))
+{
+}
 
-#endif /* INCLUDED_HIGHDATARATE_MODEM_RESOLVE_PHASE_H */
+/*
+ * Our virtual destructor.
+ */
+Decode_RS_impl::~Decode_RS_impl() {}
+
+void Decode_RS_impl::forecast(int noutput_items, gr_vector_int& ninput_items_required)
+{
+ ninput_items_required[0] = noutput_items;
+}
+
+int Decode_RS_impl::decode(const unsigned char* in, unsigned char* out)
+{
+    unsigned char data[255];
+// Future upgrades for shortened and dual basis - For now Conventional and (255,223)
+// and future interleaving
+
+    // Shortened Reed-Solomon: prepend zero bytes to message (discarded after encoding)
+    //std::memset(d_data, 0, d_s);
+    // This is the number of data bytes we need from the input stream.
+    //int shortened_k = d_k - d_s;
+    int ncorrections;
+    std::memcpy(data, in, 255);
+
+    // Copy input message to output then append Reed-Solomon bits
+    //std::memcpy(out, in, 223);
+    //encode_rs_char(d_rs, d_data, &out[shortened_k]);
+
+    ncorrections = decode_rs_8(data, NULL, 0, 0);
+    //d_encode_rs = [](unsigned char* data) {  };
+    std::memcpy(out, data, 223);
+    return ncorrections;
+}
+
+int Decode_RS_impl::general_work(int noutput_items,
+                                 gr_vector_int& ninput_items,
+                                 gr_vector_const_void_star& input_items,
+                                 gr_vector_void_star& output_items)
+{
+// Conventional and (255, 233) for now.  Future is dual basis and shorthened codes and interleaving
+
+    const unsigned char* in = (const unsigned char*)input_items[0];
+    unsigned char* out = (unsigned char*)output_items[0];
+    int j = 0;
+    int k = 0;
+
+    for (int i = 0; i < (noutput_items); i++) {
+        int nerrors_corrected = decode(in + j,out + k);
+
+        GR_LOG_DEBUG(d_logger, boost::format("Reed-Solomon decode corrected bytes %llu") % (nerrors_corrected));
+
+        //d_logger->debug(
+            //"Reed-Solomon decode corrected {:d} bytes (interleaver path {:d})",
+            //nerrors_corrected);
+            //j);
+        j += 255;
+        k += 223;
+    }
+
+    consume_each(noutput_items);
+
+    // Tell runtime system how many output items we produced.
+    return noutput_items;
+}
+
+} /* namespace HighDataRate_Modem */
+} /* namespace gr */

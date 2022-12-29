@@ -1,10 +1,10 @@
-id: HighDataRate_Modem_Extract_Frame
-label: Extract_Frame
+id: HighDataRate_Modem_Frame_Extract
+label: Frame_Extract
 category: '[HighDataRate_Modem]'
 
 templates:
   imports: import HighDataRate_Modem
-  make: HighDataRate_Modem.Extract_Frame()
+  make: HighDataRate_Modem.Frame_Extract(${frame_length}, ${buffer_length})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -12,11 +12,15 @@ templates:
 #     * label (label shown in the GUI)
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 #     * default
-#parameters:
-#- id: parametername_replace_me
-#  label: FIX ME:
-#  dtype: string
-#  default: You need to fill in your grc/HighDataRate_Modem_Extract_Frame.block.yaml
+parameters:
+-   id: frame_length
+    label: Frame Length Bits (4192 or 2072)
+    default: 4192
+    dtype: int
+-   id: buffer_length
+    label: Buffer Size (15000 or 30000)
+    default: 30000
+    dtype: int
 #- id: ...
 #  label: ...
 #  dtype: ...
@@ -29,16 +33,16 @@ templates:
 #      * vlen (optional - data stream vector length. Default is 1)
 #      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
- - label: in
+- label: in
 #  domain: ...
-   dtype: byte
+  dtype: byte
 #  vlen: ...
 #  optional: ...
 
 outputs:
- - label: out
+- label: out
 #  domain: ...
-   dtype: byte
+  dtype: byte
 #  vlen: ...
 #  optional: ...
 
