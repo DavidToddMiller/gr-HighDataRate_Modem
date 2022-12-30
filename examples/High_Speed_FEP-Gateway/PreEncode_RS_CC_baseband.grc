@@ -1,0 +1,327 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: Pre_encode_baseband_TX
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Not titled yet
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '2000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: variable_cc_encoder_def_0
+  id: variable_cc_encoder_def
+  parameters:
+    comment: ''
+    dim1: '1'
+    dim2: '1'
+    framebits: '2048'
+    k: '7'
+    mode: fec.CC_STREAMING
+    ndim: '0'
+    padding: 'False'
+    polys: '[79,-109]'
+    rate: '2'
+    state_start: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 340.0]
+    rotation: 0
+    state: enabled
+- name: HighDataRate_Modem_Encode_RS_0
+  id: HighDataRate_Modem_Encode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [904, 164.0]
+    rotation: 0
+    state: true
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '0'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/Documents/CCSDS_TTC_Flowgraphs/Pre_RS_CC_encoded
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [848, 516.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '1'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/Documents/CCSDS_TTC_Flowgraphs/32bitASM_CCSDS_only
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 380.0]
+    rotation: 180
+    state: enabled
+- name: blocks_file_source_0_0_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '1'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/Just_CCSDS_Frame_counter
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 140.0]
+    rotation: 0
+    state: enabled
+- name: blocks_pack_k_bits_bb_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [624, 532.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    lengths: (32, 2040)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [104, 528.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_tagged_stream_0_0_0
+  id: blocks_stream_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_tag_key: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [352, 164.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_tagged_stream_0_0_1
+  id: blocks_stream_to_tagged_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    len_tag_key: '"packet_len"'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    packet_len: '2040'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 268.0]
+    rotation: 180
+    state: true
+- name: blocks_stream_to_vector_2_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 180.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [360, 276.0]
+    rotation: 180
+    state: true
+- name: blocks_unpack_k_bits_bb_0_0_0_0_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 276.0]
+    rotation: 180
+    state: true
+- name: blocks_vector_to_stream_0_1
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 284.0]
+    rotation: 180
+    state: enabled
+- name: fec_extended_encoder_0
+  id: fec_extended_encoder
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    encoder_list: variable_cc_encoder_def_0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    puncpat: '''11'''
+    threadtype: capillary
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 516.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [HighDataRate_Modem_Encode_RS_0, '0', blocks_vector_to_stream_0_1, '0']
+- [blocks_file_source_0_0_0_0_0, '0', blocks_stream_mux_0, '0']
+- [blocks_file_source_0_0_0_0_0_0, '0', blocks_stream_to_tagged_stream_0_0_0, '0']
+- [blocks_pack_k_bits_bb_0, '0', blocks_file_sink_0, '0']
+- [blocks_stream_mux_0, '0', fec_extended_encoder_0, '0']
+- [blocks_stream_to_tagged_stream_0_0_0, '0', blocks_stream_to_vector_2_0, '0']
+- [blocks_stream_to_tagged_stream_0_0_1, '0', blocks_stream_mux_0, '1']
+- [blocks_stream_to_vector_2_0, '0', HighDataRate_Modem_Encode_RS_0, '0']
+- [blocks_throttle_0, '0', blocks_stream_to_tagged_stream_0_0_1, '0']
+- [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_throttle_0, '0']
+- [blocks_vector_to_stream_0_1, '0', blocks_unpack_k_bits_bb_0_0_0_0_0, '0']
+- [fec_extended_encoder_0, '0', blocks_pack_k_bits_bb_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.5.0

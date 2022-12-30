@@ -527,7 +527,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/Documents/CCSDS_TTC_Flowgraphs/Just_CCSDS_Frame_counter
+    file: /home/davem/gr-HighDataRate_Modem/examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate/Just_CCSDS_Frame_counter
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -1896,4 +1896,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.5.0
