@@ -90,7 +90,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/davem/Documents/CCSDS_TTC_Flowgraphs/Pre_RS_CC_encoded
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/Pre_RS_CC_encoded
     type: byte
     unbuffered: 'False'
     vlen: '1'

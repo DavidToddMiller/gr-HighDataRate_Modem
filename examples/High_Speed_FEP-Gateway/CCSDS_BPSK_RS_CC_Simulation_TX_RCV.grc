@@ -234,7 +234,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/davem/Documents/CCSDS_TTC_Flowgraphs/CCSDS_TTC_SINK
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/CCSDS_TTC_SINK
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -902,4 +902,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.5.0
