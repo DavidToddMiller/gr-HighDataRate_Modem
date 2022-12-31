@@ -1,0 +1,782 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: RS_CC_FEP_Gateway
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Not titled yet
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '24000000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+- name: variable_cc_decoder_def_0
+  id: variable_cc_decoder_def
+  parameters:
+    comment: ''
+    dim1: '1'
+    dim2: '1'
+    framebits: '2048'
+    k: '7'
+    mode: fec.CC_STREAMING
+    ndim: '0'
+    padding: 'False'
+    polys: '[79,-109]'
+    rate: '2'
+    state_end: '-1'
+    state_start: '0'
+    value: '"ok"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 244.0]
+    rotation: 180
+    state: enabled
+- name: HighDataRate_Modem_Frame_Extract_0
+  id: HighDataRate_Modem_Frame_Extract
+  parameters:
+    affinity: '2'
+    alias: ''
+    buffer_length: '15000'
+    comment: ''
+    frame_length: '2072'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [144, 604.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Resolve_Phase_0
+  id: HighDataRate_Modem_Resolve_Phase
+  parameters:
+    affinity: '2'
+    alias: ''
+    buffer_length: '60000'
+    comment: ''
+    frame_length: '2072'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 604.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Tag_FrameASM_0
+  id: HighDataRate_Modem_Tag_FrameASM
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 468.0]
+    rotation: 180
+    state: true
+- name: blocks_add_const_vxx_0
+  id: blocks_add_const_vxx
+  parameters:
+    affinity: '1'
+    alias: ''
+    comment: ''
+    const: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 460.0]
+    rotation: 180
+    state: true
+- name: blocks_char_to_float_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [656, 164.0]
+    rotation: 0
+    state: true
+- name: blocks_char_to_float_0_0_0
+  id: blocks_char_to_float
+  parameters:
+    affinity: '0'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1336, 988.0]
+    rotation: 0
+    state: true
+- name: blocks_file_sink_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '0'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/CCSDS_HighSpeed_RS_SINK
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1288, 1348.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0_0_0_0_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '0'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/Pre_RS_CC_encoded
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'True'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 132.0]
+    rotation: 0
+    state: enabled
+- name: blocks_multiply_const_vxx_0
+  id: blocks_multiply_const_vxx
+  parameters:
+    affinity: '1'
+    alias: ''
+    comment: ''
+    const: '2'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 164.0]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_1
+  id: blocks_null_sink
+  parameters:
+    affinity: '1'
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 772.0]
+    rotation: 180
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [136, 860.0]
+    rotation: 180
+    state: enabled
+- name: blocks_stream_demux_0
+  id: blocks_stream_demux
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    lengths: (255,255,255,255)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '4'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 1096.0]
+    rotation: 0
+    state: true
+- name: blocks_stream_demux_0_0
+  id: blocks_stream_demux
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    lengths: (32,2040)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '2'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 840.0]
+    rotation: 180
+    state: enabled
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: '0'
+    alias: ''
+    comment: ''
+    lengths: (223, 223, 223, 223)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '4'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1088, 1080.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_2_0_0_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [320, 1028.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_2_0_0_1
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 1108.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_2_0_0_2
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 1188.0]
+    rotation: 0
+    state: enabled
+- name: blocks_stream_to_vector_2_0_0_2_0
+  id: blocks_stream_to_vector
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '255'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 1268.0]
+    rotation: 0
+    state: enabled
+- name: blocks_tag_gate_0
+  id: blocks_tag_gate
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    propagate_tags: 'False'
+    single_key: '""'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [432, 444.0]
+    rotation: 180
+    state: true
+- name: blocks_throttle_0_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: '0'
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 164.0]
+    rotation: 0
+    state: enabled
+- name: blocks_unpack_k_bits_bb_0_0_0_0_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: '0'
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 164.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_to_stream_0_1_0_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 1028.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_0_1_0_1
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 1108.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_0_1_0_2
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 1188.0]
+    rotation: 0
+    state: enabled
+- name: blocks_vector_to_stream_0_1_0_2_0
+  id: blocks_vector_to_stream
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_items: '223'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [808, 1268.0]
+    rotation: 0
+    state: enabled
+- name: ccsds_rs_decode_rs_test_0_0
+  id: ccsds_rs_decode_rs_test
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 1012.0]
+    rotation: 0
+    state: true
+- name: ccsds_rs_decode_rs_test_0_0_0
+  id: ccsds_rs_decode_rs_test
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 1172.0]
+    rotation: 0
+    state: true
+- name: ccsds_rs_decode_rs_test_0_0_0_0
+  id: ccsds_rs_decode_rs_test
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 1252.0]
+    rotation: 0
+    state: enabled
+- name: ccsds_rs_decode_rs_test_0_0_1
+  id: ccsds_rs_decode_rs_test
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [568, 1092.0]
+    rotation: 0
+    state: true
+- name: fec_extended_decoder_0
+  id: fec_extended_decoder
+  parameters:
+    affinity: '3'
+    alias: ''
+    ann: None
+    comment: ''
+    decoder_list: variable_cc_decoder_def_0
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    puncpat: '''11'''
+    threadtype: capillary
+    value: fec_extended_decoder
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [648, 436.0]
+    rotation: 180
+    state: enabled
+- name: qtgui_time_sink_x_0_0_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: '0'
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: Signal 1
+    label10: Signal 10
+    label2: Signal 2
+    label3: Signal 3
+    label4: Signal 4
+    label5: Signal 5
+    label6: Signal 6
+    label7: Signal 7
+    label8: Signal 8
+    label9: Signal 9
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: My Decode Block Output
+    nconnections: '1'
+    size: '128'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '""'
+    type: float
+    update_time: '1.0'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '2'
+    ymin: '-1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1456, 1060.0]
+    rotation: 0
+    state: true
+- name: zeromq_pull_source_0
+  id: zeromq_pull_source
+  parameters:
+    address: tcp://127.0.0.1:5555
+    affinity: '0'
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 1348.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_push_sink_0
+  id: zeromq_push_sink
+  parameters:
+    address: tcp://127.0.0.1:5555
+    affinity: '0'
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1296, 1196.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
+- [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_stream_demux_0_0, '0']
+- [HighDataRate_Modem_Tag_FrameASM_0, '0', HighDataRate_Modem_Frame_Extract_0, '0']
+- [blocks_add_const_vxx_0, '0', fec_extended_decoder_0, '0']
+- [blocks_char_to_float_0, '0', blocks_multiply_const_vxx_0, '0']
+- [blocks_char_to_float_0_0_0, '0', qtgui_time_sink_x_0_0_0, '0']
+- [blocks_file_source_0_0_0_0_0_0, '0', blocks_unpack_k_bits_bb_0_0_0_0_0, '0']
+- [blocks_multiply_const_vxx_0, '0', blocks_add_const_vxx_0, '0']
+- [blocks_pack_k_bits_bb_0_0, '0', blocks_stream_demux_0, '0']
+- [blocks_stream_demux_0, '0', blocks_stream_to_vector_2_0_0_0, '0']
+- [blocks_stream_demux_0, '1', blocks_stream_to_vector_2_0_0_1, '0']
+- [blocks_stream_demux_0, '2', blocks_stream_to_vector_2_0_0_2, '0']
+- [blocks_stream_demux_0, '3', blocks_stream_to_vector_2_0_0_2_0, '0']
+- [blocks_stream_demux_0_0, '0', blocks_null_sink_1, '0']
+- [blocks_stream_demux_0_0, '1', blocks_pack_k_bits_bb_0_0, '0']
+- [blocks_stream_mux_0, '0', blocks_char_to_float_0_0_0, '0']
+- [blocks_stream_mux_0, '0', zeromq_push_sink_0, '0']
+- [blocks_stream_to_vector_2_0_0_0, '0', ccsds_rs_decode_rs_test_0_0, '0']
+- [blocks_stream_to_vector_2_0_0_1, '0', ccsds_rs_decode_rs_test_0_0_1, '0']
+- [blocks_stream_to_vector_2_0_0_2, '0', ccsds_rs_decode_rs_test_0_0_0, '0']
+- [blocks_stream_to_vector_2_0_0_2_0, '0', ccsds_rs_decode_rs_test_0_0_0_0, '0']
+- [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_0, '0']
+- [blocks_throttle_0_0_0, '0', blocks_char_to_float_0, '0']
+- [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_throttle_0_0_0, '0']
+- [blocks_vector_to_stream_0_1_0_0, '0', blocks_stream_mux_0, '0']
+- [blocks_vector_to_stream_0_1_0_1, '0', blocks_stream_mux_0, '1']
+- [blocks_vector_to_stream_0_1_0_2, '0', blocks_stream_mux_0, '2']
+- [blocks_vector_to_stream_0_1_0_2_0, '0', blocks_stream_mux_0, '3']
+- [ccsds_rs_decode_rs_test_0_0, '0', blocks_vector_to_stream_0_1_0_0, '0']
+- [ccsds_rs_decode_rs_test_0_0_0, '0', blocks_vector_to_stream_0_1_0_2, '0']
+- [ccsds_rs_decode_rs_test_0_0_0_0, '0', blocks_vector_to_stream_0_1_0_2_0, '0']
+- [ccsds_rs_decode_rs_test_0_0_1, '0', blocks_vector_to_stream_0_1_0_1, '0']
+- [fec_extended_decoder_0, '0', blocks_tag_gate_0, '0']
+- [zeromq_pull_source_0, '0', blocks_file_sink_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.5.0
