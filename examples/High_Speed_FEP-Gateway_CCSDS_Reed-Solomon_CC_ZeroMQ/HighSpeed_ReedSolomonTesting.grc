@@ -176,7 +176,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/CCSDS_HighSpeed_RS_SINK
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_DVBS2_LDPC_BCH_ZeroMQ/CCSDS_HighSpeed_RS_SINK
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -194,7 +194,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway/Pre_RS_CC_encoded
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_DVBS2_LDPC_BCH_ZeroMQ/Pre_RS_CC_encoded
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
