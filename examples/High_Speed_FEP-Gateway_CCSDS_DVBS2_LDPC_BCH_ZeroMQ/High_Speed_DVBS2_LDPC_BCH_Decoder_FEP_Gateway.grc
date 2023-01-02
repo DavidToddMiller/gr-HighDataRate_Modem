@@ -1,0 +1,778 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: DVB-S2 Physical Layer (PL) Synchronization
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: dvbs2_pl_sync
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: DVB-S2 PL Sync
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: Es
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [768, 236.0]
+    rotation: 0
+    state: enabled
+- name: EsN0
+  id: variable
+  parameters:
+    comment: ''
+    value: 10 ** (snr / 10)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 236.0]
+    rotation: 0
+    state: enabled
+- name: N0
+  id: variable
+  parameters:
+    comment: ''
+    value: Es / EsN0
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 236.0]
+    rotation: 0
+    state: enabled
+- name: code_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: modcod.upper().replace("8PSK", "").replace("QPSK", "")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 148.0]
+    rotation: 0
+    state: enabled
+- name: constellation
+  id: variable
+  parameters:
+    comment: ''
+    value: modcod.replace(code_rate, "")
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1200, 212.0]
+    rotation: 0
+    state: true
+- name: freq_offset
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: Frequency Offset (Hz)
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: -sym_rate/4
+    step: 1e3
+    stop: sym_rate/4
+    value: '10000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 4.0]
+    rotation: 0
+    state: true
+- name: n_rrc_taps
+  id: variable
+  parameters:
+    comment: ''
+    value: int(2*rrc_delay*sps) + 1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 236.0]
+    rotation: 0
+    state: enabled
+- name: pilot_len
+  id: variable
+  parameters:
+    comment: ''
+    value: int((360-1)/16)*36
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [424, 236.0]
+    rotation: 0
+    state: true
+- name: plframe_len
+  id: variable
+  parameters:
+    comment: ''
+    value: '33282'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 236.0]
+    rotation: 0
+    state: true
+- name: plheader_len
+  id: variable
+  parameters:
+    comment: ''
+    value: '90'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [504, 236.0]
+    rotation: 0
+    state: true
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: sps*sym_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 236.0]
+    rotation: 0
+    state: enabled
+- name: snr
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: SNR (dB)
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '0.1'
+    stop: '20'
+    value: '10'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 4.0]
+    rotation: 0
+    state: true
+- name: sps
+  id: variable
+  parameters:
+    comment: ''
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 236.0]
+    rotation: 0
+    state: true
+- name: sym_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: 1e6*6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [80, 236.0]
+    rotation: 0
+    state: true
+- name: agc_gain
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: AGC gain
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 4.0]
+    rotation: 0
+    state: true
+- name: agc_rate
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: AGC update rate
+    short_id: ''
+    type: eng_float
+    value: 1e-5
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [304, 4.0]
+    rotation: 0
+    state: true
+- name: agc_ref
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: AGC's reference value
+    short_id: ''
+    type: eng_float
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [552, 4.0]
+    rotation: 0
+    state: true
+- name: blocks_file_sink_0_0
+  id: blocks_file_sink
+  parameters:
+    affinity: '0'
+    alias: ''
+    append: 'False'
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_DVBS2_LDPC_BCH_ZeroMQ/HighSpeed_FEP_Gateway_SINK
+    type: byte
+    unbuffered: 'False'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1152, 1076.0]
+    rotation: 0
+    state: enabled
+- name: blocks_file_source_0_0
+  id: blocks_file_source
+  parameters:
+    affinity: '1'
+    alias: ''
+    begin_tag: pmt.PMT_NIL
+    comment: ''
+    file: /home/davem/gr-HighDataRate_Modem/examples/DVB_QPSK_test1
+    length: '0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    repeat: 'False'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [104, 380.0]
+    rotation: 180
+    state: enabled
+- name: blocks_pack_k_bits_bb_0_0
+  id: blocks_pack_k_bits_bb
+  parameters:
+    affinity: '7'
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 868.0]
+    rotation: 180
+    state: true
+- name: blocks_stream_demux_0
+  id: blocks_stream_demux
+  parameters:
+    affinity: '1'
+    alias: ''
+    comment: ''
+    lengths: (32400,32400,32400,32400)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '4'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 720.0]
+    rotation: 0
+    state: true
+- name: blocks_stream_mux_0
+  id: blocks_stream_mux
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    lengths: (32208, 32208, 32208, 32208)
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '4'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 720.0]
+    rotation: 0
+    state: enabled
+- name: blocks_throttle_0_0
+  id: blocks_throttle
+  parameters:
+    affinity: '6'
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: '9941000'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1136, 756.0]
+    rotation: 0
+    state: true
+- name: debug
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: Debug Level
+    short_id: d
+    type: intx
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 4.0]
+    rotation: 0
+    state: true
+- name: dvbs2rx_bch_decoder_bb_0_0
+  id: dvbs2rx_bch_decoder_bb
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    framesize: frame_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 540.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_bch_decoder_bb_0_0_0
+  id: dvbs2rx_bch_decoder_bb
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    framesize: frame_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 716.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_bch_decoder_bb_0_0_0_0
+  id: dvbs2rx_bch_decoder_bb
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    framesize: frame_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 884.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_bch_decoder_bb_0_0_0_0_0
+  id: dvbs2rx_bch_decoder_bb
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    framesize: frame_size
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [592, 1052.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_ldpc_decoder_cb_0_0
+  id: dvbs2rx_ldpc_decoder_cb
+  parameters:
+    affinity: '2'
+    alias: ''
+    comment: ''
+    constellation: constellation
+    framesize: frame_size
+    infomode: INFO_OFF
+    max_trials: '25'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 516.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_ldpc_decoder_cb_0_1
+  id: dvbs2rx_ldpc_decoder_cb
+  parameters:
+    affinity: '5'
+    alias: ''
+    comment: ''
+    constellation: constellation
+    framesize: frame_size
+    infomode: INFO_OFF
+    max_trials: '25'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 1028.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_ldpc_decoder_cb_0_2
+  id: dvbs2rx_ldpc_decoder_cb
+  parameters:
+    affinity: '4'
+    alias: ''
+    comment: ''
+    constellation: constellation
+    framesize: frame_size
+    infomode: INFO_OFF
+    max_trials: '25'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 860.0]
+    rotation: 0
+    state: enabled
+- name: dvbs2rx_ldpc_decoder_cb_0_3
+  id: dvbs2rx_ldpc_decoder_cb
+  parameters:
+    affinity: '3'
+    alias: ''
+    comment: ''
+    constellation: constellation
+    framesize: frame_size
+    infomode: INFO_OFF
+    max_trials: '25'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    outputmode: OM_MESSAGE
+    rate: code_rate
+    standard: DVB-S2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [368, 692.0]
+    rotation: 0
+    state: enabled
+- name: frame_size
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: FECFRAME size
+    short_id: f
+    type: str
+    value: normal
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [976, 148.0]
+    rotation: 0
+    state: true
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: from math import pi, sqrt
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 108.0]
+    rotation: 0
+    state: true
+- name: in_file
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: path to input file containing an MPEG TS stream
+    short_id: ''
+    type: str
+    value: ../data/example.ts
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [776, 132.0]
+    rotation: 0
+    state: true
+- name: modcod
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: MODCOD
+    short_id: m
+    type: str
+    value: QPSK1/2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1104, 148.0]
+    rotation: 0
+    state: true
+- name: rolloff
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: rolloff factor
+    short_id: r
+    type: eng_float
+    value: '0.2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 4.0]
+    rotation: 0
+    state: true
+- name: rrc_delay
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: RRC filter delay in symbol periods
+    short_id: ''
+    type: intx
+    value: '25'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 132.0]
+    rotation: 0
+    state: true
+- name: rrc_nfilts
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: number of branches on the polyphase RRC filter
+    short_id: ''
+    type: intx
+    value: '128'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [272, 132.0]
+    rotation: 0
+    state: true
+- name: sym_sync_damping
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: symbol synchronizer's damping factor
+    short_id: ''
+    type: eng_float
+    value: '1.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [608, 132.0]
+    rotation: 0
+    state: true
+- name: sym_sync_loop_bw
+  id: parameter
+  parameters:
+    alias: ''
+    comment: ''
+    hide: none
+    label: symbol synchronizer's loop bandwidth
+    short_id: ''
+    type: eng_float
+    value: '0.0045'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 132.0]
+    rotation: 0
+    state: true
+- name: zeromq_pull_source_0
+  id: zeromq_pull_source
+  parameters:
+    address: tcp://127.0.0.1:5555
+    affinity: '0'
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 1076.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_push_sink_0
+  id: zeromq_push_sink
+  parameters:
+    address: tcp://127.0.0.1:5555
+    affinity: '7'
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1168, 956.0]
+    rotation: 0
+    state: enabled
+
+connections:
+- [blocks_file_source_0_0, '0', blocks_stream_demux_0, '0']
+- [blocks_pack_k_bits_bb_0_0, '0', zeromq_push_sink_0, '0']
+- [blocks_stream_demux_0, '0', dvbs2rx_ldpc_decoder_cb_0_0, '0']
+- [blocks_stream_demux_0, '1', dvbs2rx_ldpc_decoder_cb_0_3, '0']
+- [blocks_stream_demux_0, '2', dvbs2rx_ldpc_decoder_cb_0_2, '0']
+- [blocks_stream_demux_0, '3', dvbs2rx_ldpc_decoder_cb_0_1, '0']
+- [blocks_stream_mux_0, '0', blocks_throttle_0_0, '0']
+- [blocks_throttle_0_0, '0', blocks_pack_k_bits_bb_0_0, '0']
+- [dvbs2rx_bch_decoder_bb_0_0, '0', blocks_stream_mux_0, '0']
+- [dvbs2rx_bch_decoder_bb_0_0_0, '0', blocks_stream_mux_0, '1']
+- [dvbs2rx_bch_decoder_bb_0_0_0_0, '0', blocks_stream_mux_0, '2']
+- [dvbs2rx_bch_decoder_bb_0_0_0_0_0, '0', blocks_stream_mux_0, '3']
+- [dvbs2rx_ldpc_decoder_cb_0_0, '0', dvbs2rx_bch_decoder_bb_0_0, '0']
+- [dvbs2rx_ldpc_decoder_cb_0_1, '0', dvbs2rx_bch_decoder_bb_0_0_0_0_0, '0']
+- [dvbs2rx_ldpc_decoder_cb_0_2, '0', dvbs2rx_bch_decoder_bb_0_0_0_0, '0']
+- [dvbs2rx_ldpc_decoder_cb_0_3, '0', dvbs2rx_bch_decoder_bb_0_0_0, '0']
+- [zeromq_pull_source_0, '0', blocks_file_sink_0_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.5.0

@@ -26,13 +26,20 @@ Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the
 
   - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
    
-DECEMBER 2022 Update, FEP/Gateway blocks and flowgraphs including CCSDS Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
+JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS Reed-Solomon & Convolutional Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
 
-  - Example Flowgraphs located in "examples/High Speed FEP-Gateway" folder of this site. 
+  - Example Flowgraphs located in "examples/High Speed FEP-Gateway" folder on this site/repository. 
 
   - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
    
   - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
+
+JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS DVBS2 LDPC & BCH Encoding/Decoding: DVB-S2 Transmit/Encode blocks are In-Tree. However, DVB-S2 Receive/Decode blocks are OOT (Build Receive blocks from github repository fork located at "https://github.com/marcusmueller/gr-dvbs2rx.git". Flowgraphs with DVBS2 LDPC and BCH coding and ZeroMQ data transport interfaces are provided at following folder location:
+
+  - Example Flowgraphs located in "/examples/High_Speed_FEP-Gateway_CCSDS_DVBS2_LDPC_BCH_ZeroMQ" folder on this site/repository. 
+
+  - FEP/Gateway processing example with CCSDS DVB-S2 LDPC/BCH (64800 bit Frame Size) as example up to 20.0 Msps (about 9.941 Mbps after decoding) with ZeroMQ data transport interfaces. Flowgraph uses 4 Parallel Decoder chains with multi-cores "High_Speed_DVBS2_LDPC_BCH_Decoder_FEP_Gateway.grc".  
+Before running parallel decoder flowgraph, generate File Source block file for flowgraph with other flowgraph running at slower speed: "PreEncode_PreDeModulate_QPSK_RATE_0.5_LDPC_BCH.grc" to generate File Sink block file "DVB_QPSK_test1.
 
 NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
