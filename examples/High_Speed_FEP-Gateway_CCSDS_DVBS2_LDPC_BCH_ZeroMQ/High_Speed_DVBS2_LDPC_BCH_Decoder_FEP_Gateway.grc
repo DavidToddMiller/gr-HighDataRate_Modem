@@ -295,7 +295,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/DVB_QPSK_test1
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_DVBS2_LDPC_BCH_ZeroMQ/DVB_QPSK_test1
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
