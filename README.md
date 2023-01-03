@@ -28,7 +28,7 @@ Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the
    
 JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS Reed-Solomon & Convolutional Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
 
-  - Example Flowgraphs located in "examples/High Speed FEP-Gateway" folder on this site/repository. 
+  - Example Flowgraphs located in "examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ" folder on this site/repository. 
 
   - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
    
