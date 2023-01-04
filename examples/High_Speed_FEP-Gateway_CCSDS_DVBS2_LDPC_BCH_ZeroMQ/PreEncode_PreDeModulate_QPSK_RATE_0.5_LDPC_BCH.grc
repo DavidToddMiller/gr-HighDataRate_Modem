@@ -417,23 +417,6 @@ blocks:
     coordinate: [984, 348.0]
     rotation: 0
     state: enabled
-- name: blocks_rotator_cc_0_0_0
-  id: blocks_rotator_cc
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: Simulate frequency offset
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    phase_inc: -2 * pi * (freq_offset / samp_rate)/2
-    tag_inc_update: 'False'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [200, 600.0]
-    rotation: 0
-    state: disabled
 - name: blocks_throttle_0_0
   id: blocks_throttle
   parameters:
@@ -1172,7 +1155,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 588.0]
+    coordinate: [40, 588.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0_0
@@ -1196,7 +1179,6 @@ connections:
 - [blocks_file_source_0_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [blocks_pack_k_bits_bb_0, '0', blocks_file_sink_0, '0']
 - [blocks_pack_k_bits_bb_0_0, '0', dtv_dvbs2_modulator_bc_0, '0']
-- [blocks_rotator_cc_0_0_0, '0', blocks_add_xx_0, '0']
 - [blocks_throttle_0_0, '0', virtual_sink_1_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', dtv_dvb_bch_bb_0, '0']
 - [digital_costas_loop_cc_0_0, '0', dvbs2rx_plsync_cc_0, '0']
@@ -1214,7 +1196,6 @@ connections:
 - [dvbs2rx_plsync_cc_0, '0', qtgui_time_sink_x_1, '0']
 - [fft_filter_xxx_0, '0', blocks_throttle_0_0, '0']
 - [virtual_source_0, '0', blocks_add_xx_0, '0']
-- [virtual_source_0, '0', blocks_rotator_cc_0_0_0, '0']
 - [virtual_source_0_0, '0', analog_agc_xx_0, '0']
 
 metadata:

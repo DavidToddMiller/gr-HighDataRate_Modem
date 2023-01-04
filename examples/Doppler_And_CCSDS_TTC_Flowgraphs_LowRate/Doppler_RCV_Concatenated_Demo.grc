@@ -164,7 +164,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    buffer_length: '30000'
+    buffer_length: '60000'
     comment: ''
     frame_length: '2072'
     maxoutbuf: '0'

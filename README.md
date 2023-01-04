@@ -16,7 +16,7 @@ The approach with blocks in gr-HighDataRate_Modem does not require a frame count
 
 Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the “examples” folder of this github site:
 
-  - Sample Modulator Files in .zip format are available in the folder also to quickly run the transmit Modulator in Flowgraphs (up to about 40000 frames for about a 10-12 second run at 15 Mbps).
+  - Sample Modulator Files in .zip format are available in the folder ("examples/QPSK_Generate_Modulator_Files") also to quickly run the transmit Modulator in Flowgraphs (up to about 40000 frames for about a 10-12 second run at 15 Mbps). (Unzip files before running flowgraph)
 
   - The original frame stream in baseband real bits before modulation is provided that can be compared to the received stream for verification that no bits or frames had errors or were lost. The first 2 frames are deleted for comparison to the received frame stream that may have the first 0-2 frames missing when running the flowgraph.
 
@@ -30,7 +30,7 @@ JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSD
 
   - Example Flowgraphs located in "examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ" folder on this site/repository. 
 
-  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
+  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
    
   - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
 
@@ -40,6 +40,8 @@ JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSD
 
   - FEP/Gateway processing example with CCSDS DVB-S2 LDPC/BCH (64800 bit Frame Size) as example up to 20.0 Msps (about 9.941 Mbps after decoding) with ZeroMQ data transport interfaces. Flowgraph uses 4 Parallel Decoder chains with multi-cores "High_Speed_DVBS2_LDPC_BCH_Decoder_FEP_Gateway.grc".  
 Before running parallel decoder flowgraph, generate File Source block file for flowgraph with other flowgraph running at slower speed: "PreEncode_PreDeModulate_QPSK_RATE_0.5_LDPC_BCH.grc" to generate File Sink block file "DVB_QPSK_test1.
+
+  - Stream of continuous CCSDS frames are run asynchronously in DVB-S2 code block data fields as stated in "CCSDS SPACE LINK PROTOCOLS OVER ETSI DVB-S2 STANDARD", Blue Book, CCSDS 131.3-B-2.  
 
 NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 

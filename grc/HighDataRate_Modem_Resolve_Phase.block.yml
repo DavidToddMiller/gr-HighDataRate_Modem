@@ -43,6 +43,21 @@ outputs:
 #  vlen: ...
 #  optional: ...
 
+documentation: |-
+    This block examines resolve the phase ambiguity for the BPSK or QPSK stream depending on the bit pattern of the ASM.
+       - All 4 possible phases are supported simultaneously
+       - This block annotates the input stream with tags.
+       - Threshold value of 1 bit to allow for 1 bit error in ASM when noise present.
+ 
+    Input:
+        A vector stream of "char" (bytes) items.
+    Output:
+        A vector stream of "char" (bytes) items.
+    Parameters:
+        Frame Length Bits: Select 2072 or 4192 
+        Buffer Size: Select 120000 when using High Rate 15.0 Mbps QPSK Flowgraph. Otherwise select 60000 for CCSDS flowgraphs with 2072 bit frame length.
+
+
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.
 file_format: 1

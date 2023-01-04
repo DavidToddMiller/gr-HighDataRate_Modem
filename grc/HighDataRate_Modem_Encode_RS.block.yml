@@ -44,6 +44,24 @@ outputs:
   domain: stream
   dtype: byte
   vlen: 255
+
+documentation: |-
+    This block provides a Reed-Solomon Encoder Block:
+       - Consultative Committee for Space Data Systems (CCSDS) Standard (255,223) frame format
+       - Conventional 
+       - Vector input size 223
+       - Vector output size 255
+       - Decoding algorthim via Phil Karn "libfec" library
+       - Future updates will be Dual Basis, Shortened frame format, and Interleaving 
+
+    Input:
+        A vector stream of "char" (bytes) items. Vector Length = 223.
+    Output:
+        A vector stream of "char" (bytes) items. Vector Length = 255.
+    Parameters:
+        Interleave Depth (Future Upgrade): Selects the interleave depth 
+        Dual Basis (Future Upgrade): Current implementation is "Conventional" only
+
 #  optional: ...
 
 #  'file_format' specifies the version of the GRC yml format used in the file

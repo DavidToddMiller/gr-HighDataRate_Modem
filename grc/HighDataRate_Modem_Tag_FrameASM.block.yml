@@ -42,6 +42,19 @@ outputs:
 #  vlen: ...
 #  optional: ...
 
+documentation: |-
+    This block examines input for specific CCSDS 32 bit ASM, one bit at a time.
+       - All 4 possible phases of ASM for BPSK and QPSK are examined simultaneously
+       - This block annotates the input stream with tags.
+       - Threshold value of 1 bit to allow for 1 bit error in ASM when noise present.
+ 
+    Input:
+        A vector stream of "char" (bytes) items.
+    Output:
+        A vector stream of "char" (bytes) items.
+    Parameters:
+        Future: Add support for variable ASM patterns and variable threshold values.
+
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.
 file_format: 1
