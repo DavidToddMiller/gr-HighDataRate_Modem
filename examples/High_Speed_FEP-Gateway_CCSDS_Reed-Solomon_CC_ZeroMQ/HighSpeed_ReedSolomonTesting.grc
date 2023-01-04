@@ -68,6 +68,74 @@ blocks:
     coordinate: [640, 244.0]
     rotation: 180
     state: enabled
+- name: HighDataRate_Modem_Decode_RS_0
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 1004.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Decode_RS_1
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 1084.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Decode_RS_2
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 1172.0]
+    rotation: 0
+    state: true
+- name: HighDataRate_Modem_Decode_RS_3
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 1260.0]
+    rotation: 0
+    state: true
 - name: HighDataRate_Modem_Frame_Extract_0
   id: HighDataRate_Modem_Frame_Extract
   parameters:
@@ -515,74 +583,6 @@ blocks:
     coordinate: [808, 1268.0]
     rotation: 0
     state: enabled
-- name: ccsds_rs_decode_rs_test_0_0
-  id: ccsds_rs_decode_rs_test
-  parameters:
-    affinity: '4'
-    alias: ''
-    comment: ''
-    dual_basis: '1'
-    interleave: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [568, 1012.0]
-    rotation: 0
-    state: true
-- name: ccsds_rs_decode_rs_test_0_0_0
-  id: ccsds_rs_decode_rs_test
-  parameters:
-    affinity: '6'
-    alias: ''
-    comment: ''
-    dual_basis: '1'
-    interleave: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [568, 1172.0]
-    rotation: 0
-    state: true
-- name: ccsds_rs_decode_rs_test_0_0_0_0
-  id: ccsds_rs_decode_rs_test
-  parameters:
-    affinity: '7'
-    alias: ''
-    comment: ''
-    dual_basis: '1'
-    interleave: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [568, 1252.0]
-    rotation: 0
-    state: enabled
-- name: ccsds_rs_decode_rs_test_0_0_1
-  id: ccsds_rs_decode_rs_test
-  parameters:
-    affinity: '5'
-    alias: ''
-    comment: ''
-    dual_basis: '1'
-    interleave: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [568, 1092.0]
-    rotation: 0
-    state: true
 - name: fec_extended_decoder_0
   id: fec_extended_decoder
   parameters:
@@ -742,6 +742,10 @@ blocks:
     state: enabled
 
 connections:
+- [HighDataRate_Modem_Decode_RS_0, '0', blocks_vector_to_stream_0_1_0_0, '0']
+- [HighDataRate_Modem_Decode_RS_1, '0', blocks_vector_to_stream_0_1_0_1, '0']
+- [HighDataRate_Modem_Decode_RS_2, '0', blocks_vector_to_stream_0_1_0_2, '0']
+- [HighDataRate_Modem_Decode_RS_3, '0', blocks_vector_to_stream_0_1_0_2_0, '0']
 - [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
 - [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_stream_demux_0_0, '0']
 - [HighDataRate_Modem_Tag_FrameASM_0, '0', HighDataRate_Modem_Frame_Extract_0, '0']
@@ -759,10 +763,10 @@ connections:
 - [blocks_stream_demux_0_0, '1', blocks_pack_k_bits_bb_0_0, '0']
 - [blocks_stream_mux_0, '0', blocks_char_to_float_0_0_0, '0']
 - [blocks_stream_mux_0, '0', zeromq_push_sink_0, '0']
-- [blocks_stream_to_vector_2_0_0_0, '0', ccsds_rs_decode_rs_test_0_0, '0']
-- [blocks_stream_to_vector_2_0_0_1, '0', ccsds_rs_decode_rs_test_0_0_1, '0']
-- [blocks_stream_to_vector_2_0_0_2, '0', ccsds_rs_decode_rs_test_0_0_0, '0']
-- [blocks_stream_to_vector_2_0_0_2_0, '0', ccsds_rs_decode_rs_test_0_0_0_0, '0']
+- [blocks_stream_to_vector_2_0_0_0, '0', HighDataRate_Modem_Decode_RS_0, '0']
+- [blocks_stream_to_vector_2_0_0_1, '0', HighDataRate_Modem_Decode_RS_1, '0']
+- [blocks_stream_to_vector_2_0_0_2, '0', HighDataRate_Modem_Decode_RS_2, '0']
+- [blocks_stream_to_vector_2_0_0_2_0, '0', HighDataRate_Modem_Decode_RS_3, '0']
 - [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_0, '0']
 - [blocks_throttle_0_0_0, '0', blocks_char_to_float_0, '0']
 - [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_throttle_0_0_0, '0']
@@ -770,10 +774,6 @@ connections:
 - [blocks_vector_to_stream_0_1_0_1, '0', blocks_stream_mux_0, '1']
 - [blocks_vector_to_stream_0_1_0_2, '0', blocks_stream_mux_0, '2']
 - [blocks_vector_to_stream_0_1_0_2_0, '0', blocks_stream_mux_0, '3']
-- [ccsds_rs_decode_rs_test_0_0, '0', blocks_vector_to_stream_0_1_0_0, '0']
-- [ccsds_rs_decode_rs_test_0_0_0, '0', blocks_vector_to_stream_0_1_0_2, '0']
-- [ccsds_rs_decode_rs_test_0_0_0_0, '0', blocks_vector_to_stream_0_1_0_2_0, '0']
-- [ccsds_rs_decode_rs_test_0_0_1, '0', blocks_vector_to_stream_0_1_0_1, '0']
 - [fec_extended_decoder_0, '0', blocks_tag_gate_0, '0']
 - [zeromq_pull_source_0, '0', blocks_file_sink_0, '0']
 

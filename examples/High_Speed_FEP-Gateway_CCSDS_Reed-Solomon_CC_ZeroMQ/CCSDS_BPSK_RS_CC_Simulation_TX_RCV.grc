@@ -108,6 +108,23 @@ blocks:
     coordinate: [736, 516.0]
     rotation: 0
     state: enabled
+- name: HighDataRate_Modem_Decode_RS_0
+  id: HighDataRate_Modem_Decode_RS
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    dual_basis: '1'
+    interleave: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [152, 1612.0]
+    rotation: 180
+    state: true
 - name: HighDataRate_Modem_Encode_RS_0
   id: HighDataRate_Modem_Encode_RS
   parameters:
@@ -558,23 +575,6 @@ blocks:
     coordinate: [920, 284.0]
     rotation: 180
     state: enabled
-- name: ccsds_rs_decode_rs_test_0
-  id: ccsds_rs_decode_rs_test
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    dual_basis: '1'
-    interleave: '1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [120, 1612.0]
-    rotation: 180
-    state: enabled
 - name: digital_constellation_modulator_0_0
   id: digital_constellation_modulator
   parameters:
@@ -867,6 +867,7 @@ blocks:
     state: enabled
 
 connections:
+- [HighDataRate_Modem_Decode_RS_0, '0', blocks_vector_to_stream_0, '0']
 - [HighDataRate_Modem_Encode_RS_0, '0', blocks_vector_to_stream_0_1, '0']
 - [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
 - [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_stream_demux_0, '0']
@@ -886,13 +887,12 @@ connections:
 - [blocks_stream_to_tagged_stream_0_0_0, '0', blocks_stream_to_vector_2_0, '0']
 - [blocks_stream_to_tagged_stream_0_0_1, '0', blocks_stream_mux_0, '1']
 - [blocks_stream_to_vector_2_0, '0', HighDataRate_Modem_Encode_RS_0, '0']
-- [blocks_stream_to_vector_2_0_0, '0', ccsds_rs_decode_rs_test_0, '0']
+- [blocks_stream_to_vector_2_0_0, '0', HighDataRate_Modem_Decode_RS_0, '0']
 - [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_1, '0']
 - [blocks_throttle_0_0, '0', blocks_multiply_const_vxx_2, '0']
 - [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_stream_to_tagged_stream_0_0_1, '0']
 - [blocks_vector_to_stream_0, '0', blocks_file_sink_0, '0']
 - [blocks_vector_to_stream_0_1, '0', blocks_unpack_k_bits_bb_0_0_0_0_0, '0']
-- [ccsds_rs_decode_rs_test_0, '0', blocks_vector_to_stream_0, '0']
 - [digital_constellation_modulator_0_0, '0', blocks_add_xx_0, '0']
 - [digital_costas_loop_cc_0_0, '0', blocks_complex_to_real_0, '0']
 - [digital_costas_loop_cc_0_0, '0', qtgui_const_sink_x_0_0, '0']
