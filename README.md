@@ -30,7 +30,7 @@ JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSD
 
   - Example Flowgraphs located in "examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ" folder on this site/repository. 
 
-  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces.
+  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding and CCSDS scrambling with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces. Block Framing, ASMs, Coding, and scrambling in accordance with CCSDS Blue Book, 131.0-B-4, "TM Synchronization and Channel Coding". Each CCSDS frame in frame stream file (file name: "Just_CCSDS_Frame_counter") starts with "7D41" (hexidecimal).
    
   - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
 
@@ -96,8 +96,8 @@ The .py generated file in the GNU Radio Companion should be run from the Ubuntu 
     FUTURE WORK   (Expand Capabilities of Real-Time High Rate Modems and High Rate FEPs/Gateways)
 
 1. When a 16-24 core Personal Computer becomes available, incorporate all high data rate blocks including encoding/decoding and Doppler removal/handling into single flowgraph to run in real-time up to 30.0 Msps (and/or two flowgraphs in real-time: Uncoded Modem along with FEP/Gateway connected via ZeroMQ). 
-2. Expand CCSDS Reed-Solomon options for interleaving, Dual Basis, and shortened codes while keeping block vector in/out interfaces for speed. Also, include CCSDS Descramble block with vector in/out interfaces also.
-3. Add more documentation for OOT blocks.   
+2. Expand CCSDS Reed-Solomon options for interleaving, Dual Basis, and shortened codes while keeping block vector in/out interfaces for speed. 
+3. Add additional documentation for OOT blocks.   
 
 
                                               

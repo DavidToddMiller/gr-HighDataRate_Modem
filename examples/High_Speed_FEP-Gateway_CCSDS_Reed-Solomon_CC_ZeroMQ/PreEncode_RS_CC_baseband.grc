@@ -63,7 +63,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 340.0]
+    coordinate: [528, 340.0]
     rotation: 0
     state: enabled
 - name: HighDataRate_Modem_Encode_RS_0
@@ -98,7 +98,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [848, 516.0]
+    coordinate: [1008, 516.0]
     rotation: 0
     state: enabled
 - name: blocks_file_source_0_0_0_0_0
@@ -120,7 +120,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 380.0]
+    coordinate: [304, 380.0]
     rotation: 180
     state: enabled
 - name: blocks_file_source_0_0_0_0_0_0
@@ -158,7 +158,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [624, 532.0]
+    coordinate: [792, 532.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_mux_0
@@ -177,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [104, 528.0]
+    coordinate: [320, 528.0]
     rotation: 0
     state: enabled
 - name: blocks_stream_to_tagged_stream_0_0_0
@@ -289,6 +289,27 @@ blocks:
     coordinate: [920, 284.0]
     rotation: 180
     state: enabled
+- name: digital_additive_scrambler_bb_0
+  id: digital_additive_scrambler_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_byte: '1'
+    comment: ''
+    count: '0'
+    len: '7'
+    mask: '0xA9'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    reset_tag_key: '"packet_len"'
+    seed: '0xFF'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [72, 508.0]
+    rotation: 0
+    state: enabled
 - name: fec_extended_encoder_0
   id: fec_extended_encoder
   parameters:
@@ -304,7 +325,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 516.0]
+    coordinate: [536, 516.0]
     rotation: 0
     state: enabled
 
@@ -315,11 +336,12 @@ connections:
 - [blocks_pack_k_bits_bb_0, '0', blocks_file_sink_0, '0']
 - [blocks_stream_mux_0, '0', fec_extended_encoder_0, '0']
 - [blocks_stream_to_tagged_stream_0_0_0, '0', blocks_stream_to_vector_2_0, '0']
-- [blocks_stream_to_tagged_stream_0_0_1, '0', blocks_stream_mux_0, '1']
+- [blocks_stream_to_tagged_stream_0_0_1, '0', digital_additive_scrambler_bb_0, '0']
 - [blocks_stream_to_vector_2_0, '0', HighDataRate_Modem_Encode_RS_0, '0']
 - [blocks_throttle_0, '0', blocks_stream_to_tagged_stream_0_0_1, '0']
 - [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_throttle_0, '0']
 - [blocks_vector_to_stream_0_1, '0', blocks_unpack_k_bits_bb_0_0_0_0_0, '0']
+- [digital_additive_scrambler_bb_0, '0', blocks_stream_mux_0, '1']
 - [fec_extended_encoder_0, '0', blocks_pack_k_bits_bb_0, '0']
 
 metadata:
