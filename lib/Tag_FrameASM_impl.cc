@@ -825,7 +825,7 @@ int Tag_FrameASM_impl::work(int noutput_items,
         //i = i + 1;  // ?? increment it by 2 samples rather than 1 
       }   // end of  FOR  I loop
 
-      GR_LOG_DEBUG(d_logger, boost::format("END of ROTATION THRU THE TagASM QPSK Block %llu") % (abs_out_sample_cnt));
+      //GR_LOG_DEBUG(d_logger, boost::format("END of ROTATION THRU THE TagASM QPSK Block %llu") % (abs_out_sample_cnt));
       return noutput_items;
     }
 

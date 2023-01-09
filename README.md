@@ -43,17 +43,17 @@ Before running parallel decoder flowgraph, generate File Source block file for f
 
   - Stream of continuous CCSDS frames are run asynchronously in DVB-S2 code block data fields as stated in "CCSDS SPACE LINK PROTOCOLS OVER ETSI DVB-S2 STANDARD", Blue Book, CCSDS 131.3-B-2.  
 
-NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included CCSDS TT&C Flowgraphs at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
-  - Flowgraphs located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
+  - Simulation Flowgraph located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
 
-  - Separate flowgraphs for Transmit and Receive when using dongles.
+  - Future: Provide separate flowgraphs for Transmit and Receive when using dongles.
 
-  - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
+  - A few of the blocks are OOT blocks like CCSDS Reed-Solomon Encode/Decode in this gr-HighDataRate_Modem module and also gr-satellites for receive "Sync and create PDU" Frame extraction block with message interfaces otherwise all blocks are in the standard GNU Radio In-Tree library. 
 
-  - Runs at 16 kilosymbols/second with the coding included. 64 kHz subcarrier used.
+  - Runs at 16 kilosymbols/second with the coding included. 50 kHz subcarrier used.
 
-  - With the Doppler FFT functions included, the flowgraphs could be used operationally in real-time for an actual Low Earth Orbit (LEO) spacecraft link that uses typical CCSDS low rate TT&C links at S-band.
+  - With the Doppler FFT functions included, the flowgraph transmit and receive parts could be used operationally in real-time with a transmit/receive dongle for an actual Low Earth Orbit (LEO) spacecraft link that uses typical CCSDS low rate TT&C links at S-band.
 
   - A detailed paper on the TT&C flowgraphs design with Doppler will be provided soon in the "docs" folder (expect early 2023).
  
