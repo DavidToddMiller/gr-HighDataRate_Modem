@@ -379,7 +379,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    m: '1024'
+    m: '2048'
     maxoutbuf: '0'
     minoutbuf: '0'
     n: '64000'
