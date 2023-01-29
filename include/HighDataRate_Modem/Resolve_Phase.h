@@ -702,7 +702,7 @@ public:
      * class. HighDataRate_Modem::Resolve_Phase::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int frame_length, int buffer_length);
+    static sptr make(int waveform, int frame_length, int buffer_length, int threshold);
 };
 
 } // namespace HighDataRate_Modem

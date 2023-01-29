@@ -13,10 +13,7 @@ include(GrPlatform) #define LIB_SUFFIX
 list(APPEND HighDataRate_Modem_sources
     TAG_CHUNKpreamble_impl.cc
     Chunk_ExtractQPSK_impl.cc
-    Tag_FrameASM_impl.cc
     Chunk_ExtractBPSK_impl.cc
-    Frame_Extract_impl.cc
-    Resolve_Phase_impl.cc
     Encode_RS_impl.cc
     libfec/decode_rs_8.c
     libfec/decode_rs_ccsds.c
@@ -28,6 +25,11 @@ list(APPEND HighDataRate_Modem_sources
     libfec/ccsds.c
     libfec/init_rs_char.c
     Decode_RS_impl.cc
+    Frame_Extract_ff_impl.cc
+    Frame_Extract_bb_impl.cc
+    Tag_FrameASM_ff_impl.cc
+    Tag_FrameASM_bb_impl.cc
+    Resolve_Phase_impl.cc
 )
 
 set(HighDataRate_Modem_sources "${HighDataRate_Modem_sources}" PARENT_SCOPE)

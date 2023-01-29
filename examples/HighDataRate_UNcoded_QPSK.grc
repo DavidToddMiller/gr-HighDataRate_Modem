@@ -102,9 +102,10 @@ blocks:
     coordinate: [432, 1460.0]
     rotation: 0
     state: enabled
-- name: HighDataRate_Modem_Frame_Extract_0
-  id: HighDataRate_Modem_Frame_Extract
+- name: HighDataRate_Modem_Frame_Extract_xx_0
+  id: HighDataRate_Modem_Frame_Extract_xx
   parameters:
+    ASM_length: '32'
     affinity: '3'
     alias: ''
     buffer_length: '30000'
@@ -112,28 +113,31 @@ blocks:
     frame_length: '4192'
     maxoutbuf: '0'
     minoutbuf: '0'
+    type: byte
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 1556.0]
+    coordinate: [680, 1564.0]
     rotation: 180
     state: true
-- name: HighDataRate_Modem_Resolve_Phase_1
+- name: HighDataRate_Modem_Resolve_Phase_0
   id: HighDataRate_Modem_Resolve_Phase
   parameters:
     affinity: '3'
     alias: ''
-    buffer_length: '1200000'
+    buffer_length: '120000'
     comment: ''
     frame_length: '4192'
     maxoutbuf: '0'
     minoutbuf: '0'
+    threshold: '1'
+    waveform: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [312, 1556.0]
+    coordinate: [328, 1564.0]
     rotation: 180
     state: true
 - name: HighDataRate_Modem_TAG_CHUNKpreamble_0
@@ -181,19 +185,23 @@ blocks:
     coordinate: [176, 1460.0]
     rotation: 0
     state: true
-- name: HighDataRate_Modem_Tag_FrameASM_1
-  id: HighDataRate_Modem_Tag_FrameASM
+- name: HighDataRate_Modem_Tag_FrameASM_xx_1
+  id: HighDataRate_Modem_Tag_FrameASM_xx
   parameters:
+    ASM_length: '32'
     affinity: '3'
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    threshold: '1'
+    type: byte
+    waveform: '2'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 1572.0]
+    coordinate: [992, 1564.0]
     rotation: 180
     state: true
 - name: blocks_complex_to_float_0
@@ -436,7 +444,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1008, 1364.0]
+    coordinate: [1008, 1380.0]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -566,7 +574,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [768, 1360.0]
+    coordinate: [768, 1376.0]
     rotation: 0
     state: enabled
 - name: digital_binary_slicer_fb_0_0
@@ -915,15 +923,17 @@ connections:
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0, '0', blocks_stream_mux_2, '0']
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0_0, '0', blocks_stream_mux_2, '1']
 - [HighDataRate_Modem_Chunk_ExtractQPSK_0_1, '0', blocks_stream_mux_2, '2']
-- [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_1, '0']
-- [HighDataRate_Modem_Resolve_Phase_1, '0', blocks_file_sink_0_0, '0']
+- [HighDataRate_Modem_Frame_Extract_xx_0, '0', HighDataRate_Modem_Resolve_Phase_0,
+  '0']
+- [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_file_sink_0_0, '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0,
   '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0_0, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_0,
   '0']
 - [HighDataRate_Modem_TAG_CHUNKpreamble_0_1, '0', HighDataRate_Modem_Chunk_ExtractQPSK_0_1,
   '0']
-- [HighDataRate_Modem_Tag_FrameASM_1, '0', HighDataRate_Modem_Frame_Extract_0, '0']
+- [HighDataRate_Modem_Tag_FrameASM_xx_1, '0', HighDataRate_Modem_Frame_Extract_xx_0,
+  '0']
 - [blocks_complex_to_float_0, '0', blocks_interleave_0, '0']
 - [blocks_complex_to_float_0, '1', blocks_interleave_0, '1']
 - [blocks_complex_to_float_0_0, '0', blocks_interleave_0_0, '0']
@@ -940,7 +950,7 @@ connections:
 - [blocks_keep_m_in_n_0, '0', blocks_stream_mux_0_0, '1']
 - [blocks_keep_m_in_n_0_0, '0', blocks_stream_mux_0, '1']
 - [blocks_keep_m_in_n_0_0_0, '0', blocks_stream_mux_0_1, '1']
-- [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_1, '0']
+- [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_xx_1, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_keep_m_in_n_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0, '0']
 - [blocks_multiply_const_vxx_0, '0', blocks_skiphead_0_0, '0']
@@ -966,4 +976,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.5.0

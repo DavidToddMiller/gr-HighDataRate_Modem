@@ -8,10 +8,10 @@
 install(FILES
     HighDataRate_Modem_TAG_CHUNKpreamble.block.yml
     HighDataRate_Modem_Chunk_ExtractQPSK.block.yml
-    HighDataRate_Modem_Tag_FrameASM.block.yml
     HighDataRate_Modem_Chunk_ExtractBPSK.block.yml
-    HighDataRate_Modem_Frame_Extract.block.yml
-    HighDataRate_Modem_Resolve_Phase.block.yml
     HighDataRate_Modem_Encode_RS.block.yml
-    HighDataRate_Modem_Decode_RS.block.yml DESTINATION share/gnuradio/grc/blocks
+    HighDataRate_Modem_Decode_RS.block.yml
+    HighDataRate_Modem_Frame_Extract_xx.block.yml
+    HighDataRate_Modem_Tag_FrameASM_xx.block.yml
+    HighDataRate_Modem_Resolve_Phase.block.yml DESTINATION share/gnuradio/grc/blocks
 )

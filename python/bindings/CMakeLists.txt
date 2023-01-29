@@ -30,12 +30,14 @@ include(GrPybind)
 list(APPEND HighDataRate_Modem_python_files
     TAG_CHUNKpreamble_python.cc
     Chunk_ExtractQPSK_python.cc
-    Tag_FrameASM_python.cc
     Chunk_ExtractBPSK_python.cc
-    Frame_Extract_python.cc
-    Resolve_Phase_python.cc
     Encode_RS_python.cc
-    Decode_RS_python.cc python_bindings.cc)
+    Decode_RS_python.cc
+    Frame_Extract_ff_python.cc
+    Frame_Extract_bb_python.cc
+    Tag_FrameASM_ff_python.cc
+    Tag_FrameASM_bb_python.cc
+    Resolve_Phase_python.cc python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(HighDataRate_Modem
    ../..

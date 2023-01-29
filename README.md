@@ -2,9 +2,13 @@
 
 gr-HighDataRate_Modem is a GNU Radio Out-Of-Tree (OOT) High Data Rate (HDR)_Modem and Front End Processor (FEP)/Gateway module that includes:
  
-  - Blocks and flowgraphs required to run GNU Radio at 15.0 Mbps with QPSK with parallel CPU cores
+  1) Blocks and flowgraphs required to run GNU Radio at 15.0 Mbps with QPSK with parallel CPU cores
 
-  - New as of December 2022: FEP/Gateway CCSDS encoding/decoding and also baseband processing and data transport IP data interface (ZeroMQ) blocks and flowgraphs for high data rate operation with parallel CPU cores. 
+  2) New as of December 2022: FEP/Gateway CCSDS encoding/decoding and also baseband processing and data transport IP data interface (ZeroMQ) blocks and flowgraphs for high data rate operation with parallel CPU cores. (Includes CCSDS DVB-S2)
+  
+  3) New as of January 2023: Updated CCSDS Phase Modulation (PM) with a subcarrier and Concatenated Coding flowgraphs with streaming blocks for processing efficiency and stability (No message blocks) (includes processing Doppler removal also via FFTs for flowgraphs to support actual LEO spacecraft links)
+  
+
   
 This module is based on the approach that was introduced during a GNU Radio Conference 2022 Talk and in the associated paper in the GNU Radio Conference 2022 proceedings and Conference 2022 website:
 
@@ -25,6 +29,9 @@ Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the
   - For simulation, a separate "simulation" .grc file for QPSK is in the "examples" folder and has a "throttle" block available for those that do not have a LimeSDR-Mini in order to try out gr-HighDataRate_Modem without the LimeSDR-Mini with QPSK.
 
   - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
+
+
+                     CCSDS High Speed FEP/Gateway Flowgraghs/Products
    
 JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS Reed-Solomon & Convolutional Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
 
@@ -33,6 +40,9 @@ JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSD
   - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding and CCSDS scrambling with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces. Block Framing, ASMs, Coding, and scrambling in accordance with CCSDS Blue Book, 131.0-B-4, "TM Synchronization and Channel Coding". Each CCSDS frame in frame stream file (file name: "Just_CCSDS_Frame_counter") starts with "7D41" (hexidecimal).
    
   - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
+
+
+                     CCSDS High Speed DVB-S2 Flowgraghs/Products
 
 JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS DVBS2 LDPC & BCH Encoding/Decoding: DVB-S2 Transmit/Encode blocks are In-Tree. However, DVB-S2 Receive/Decode blocks are OOT (Build Receive blocks from github repository fork located at "https://github.com/marcusmueller/gr-dvbs2rx.git". Flowgraphs with DVBS2 LDPC and BCH coding and ZeroMQ data transport interfaces are provided at following folder location:
 
@@ -43,29 +53,33 @@ Before running parallel decoder flowgraph, generate File Source block file for f
 
   - Stream of continuous CCSDS frames are run asynchronously in DVB-S2 code block data fields as stated in "CCSDS SPACE LINK PROTOCOLS OVER ETSI DVB-S2 STANDARD", Blue Book, CCSDS 131.3-B-2.  
 
-NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+
+                     CCSDS TT&C/Doppler Flowgraghs/Products
+
+JANUARY 2023 and NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
   - Simulation Flowgraph located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
 
   - Future: Provide separate flowgraphs for Transmit and Receive when using dongles.
 
-  - A few of the blocks are OOT blocks like CCSDS Reed-Solomon Encode/Decode in this gr-HighDataRate_Modem module and also gr-satellites for receive "Sync and create PDU" Frame extraction block with message interfaces otherwise all blocks are in the standard GNU Radio In-Tree library. 
+  - A few of the blocks are OOT blocks like CCSDS Reed-Solomon Encode/Decode in this gr-HighDataRate_Modem module (All blocks have stream interfaces (No message Blocks) for processing efficiency and stability). 
 
-  - Runs at 16 kilosymbols/second with the coding included. 50 kHz subcarrier used.
+  - Runs at 16 kilosymbols/second with the coding included. 50 kHz subcarrier used. Each CCSDS Frame starts with "7D41" (hexidecimal).
 
   - With the Doppler FFT functions included, the flowgraph transmit and receive parts could be used operationally in real-time with a transmit/receive dongle for an actual Low Earth Orbit (LEO) spacecraft link that uses typical CCSDS low rate TT&C links at S-band.
 
-  - A detailed paper on the TT&C flowgraphs design with Doppler will be provided soon in the "docs" folder (expect early 2023).
  
                                INSTALLATION FROM SOURCE
 
-The installation procedure of gr-HighDataRate_Modem source code is the usual procedure for a GNU Radio out-of-tree (OOT) module. The detailed instructions are as follows for building from source in a system where GNU Radio 3.10 (should work with GNU Radio version 3.9 also) has already been installed with Ubuntu 20.04 or Ubuntu 22.04:
+The installation procedure of gr-HighDataRate_Modem source code is the usual procedure for a GNU Radio out-of-tree (OOT) module. The detailed instructions are as follows for building from source in a system where GNU Radio 3.10 (should work with GNU Radio version 3.9 also) has already been installed with Ubuntu 22.04:
+
 
                                 DEPENDENCIES
 
 There are some build dependencies for GNU Radio out-of-tree modules that are not required to run GNU Radio, so some distributions might not install them by default when GNU Radio is installed.
 
-VERY IMPORTANT:  A Personal Computer with a CPU containing at least 8 Cores is required to use these blocks at the full 15.0 Mbps QPSK.  See the Conference Paper for details on the Parallel Core Approach used to greatly increase the Real-Time Data Rate capability of GNU Radio. 
+VERY IMPORTANT:  A Personal Computer with a CPU containing at least 8 Cores is required to use many of these flowgraphs at full rates.  See the Conference Paper for details on the Parallel Core Approach used to greatly increase the Real-Time Data Rate capability of GNU Radio. 
+
 
                                  DOWNLOADING
 
@@ -97,7 +111,7 @@ The .py generated file in the GNU Radio Companion should be run from the Ubuntu 
 
 1. When a 16-24 core Personal Computer becomes available, incorporate all high data rate blocks including encoding/decoding and Doppler removal/handling into single flowgraph to run in real-time up to 30.0 Msps (and/or two flowgraphs in real-time: Uncoded Modem along with FEP/Gateway connected via ZeroMQ). 
 2. Expand CCSDS Reed-Solomon options for interleaving, Dual Basis, and shortened codes while keeping block vector in/out interfaces for speed. 
-3. Add additional documentation for OOT blocks.   
+
 
 
                                               

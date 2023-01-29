@@ -688,12 +688,14 @@ class Resolve_Phase_impl : public Resolve_Phase
 private:
     // Nothing to declare in this block.
     int s[32];
-    int s90[32];     
+    int s90[32];
+    int d_waveform;
     int d_frame_length;
     int d_buffer_length;
+    int d_threshold;
 
 public:
-    Resolve_Phase_impl(int frame_length, int buffer_length);
+    Resolve_Phase_impl(int waveform, int frame_length, int buffer_length, int threshold);
     ~Resolve_Phase_impl();
 
     // Where all the action really happens

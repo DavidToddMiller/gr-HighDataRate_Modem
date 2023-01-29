@@ -1,0 +1,97 @@
+id: HighDataRate_Modem_Frame_Extract_xx
+label: Frame_Extract_xx
+category: '[HighDataRate_Modem]'
+
+
+templates:
+  imports: import HighDataRate_Modem
+  make: HighDataRate_Modem.Frame_Extract_ff(${frame_length}, ${buffer_length}, ${ASM_length})
+
+#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
+#     Keys include:
+#     * id (makes the value accessible as keyname, e.g. in the make entry)
+#     * label (label shown in the GUI)
+#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#     * default
+parameters:
+-   id: type
+    label: IO Type
+    dtype: enum
+    options: [float, byte]
+    option_attributes:
+       fcn: [ff, bb]
+    hide: part
+-   id: frame_length
+    label: Frame Length
+    dtype: int
+    default: 2072
+    options: [2072, 4144, 4192]
+    option_labels: [2072 Bits (CCSDS), 4144 Bits (CCSDS Node Sync), 4192 Bits (15 Mbps Demo)]
+    hide: part
+-   id: buffer_length
+    label: Buffer Length
+    dtype: int
+    default: 30000
+    options: [15000, 30000, 44000]
+    option_labels: [15000: CCSDS, 30000: 15 Mbps Demo, 44000: CCSDS Viterbi Node Sync]
+    hide: part
+-   id: ASM_length
+    label: ASM Length
+    dtype: int
+    default: 32
+    options: [32, 48]
+    option_labels: [32 Bits (CCSDS and 15 Mbps Demo), 48 Bits (Convoluted CCSDS)]
+    hide: part    
+#- id: ...
+#  label: ...
+#  dtype: ...
+
+#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
+#  Keys include:
+#      * label (an identifier for the GUI)
+#      * domain (optional - stream or message. Default is stream)
+#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#      * vlen (optional - data stream vector length. Default is 1)
+#      * optional (optional - set to 1 for optional inputs. Default is 0)
+inputs:
+- label: in
+#  domain: ...
+  dtype: ${ type }
+#  vlen: ...
+#  optional: ...
+
+outputs:
+- label: out
+#  domain: ...
+  dtype: ${ type }
+  
+templates:
+  imports: import HighDataRate_Modem
+  make: HighDataRate_Modem.Frame_Extract_${type.fcn}(${frame_length}, ${buffer_length}, ${ASM_length})
+
+documentation: |-
+    This block extracts frames based on frame length of frames in the frame stream:
+       - Currently, 3 frame size options in bits are 2072 (CCSDS), 4144 (CCSDS Convolutional Encoded), and 4192 (High Rate 15.0 Mbps Demo).
+       - Frame Length includes 32 Bit CCSDS ASM or 48 bits of fixed repeating part of rate 1/2 Convolutional Encoded CCSDS 32 bit ASM.
+       - For "Float" option, use only 4144 Bit length ("Float" option code optimized for very noisy pre-decoded environment).  
+
+    Input:
+        A stream of Float" or "char" (byte) items.
+    Output:
+        A stream of "Float" or "char" (byte) items.
+    Parameters:
+        I/O Type: Float or Byte.
+        Frame Length: Select Frame Length.
+           - Select 2072 Bits for CCSDS 255 byte frame length including 32 bit ASM.
+           - Select 4144 Bits with "Float" only for Viterbi Node Synchronization when this block used before Viterbi decoder block (For rate 1/2 convolutional code, 1 bit delay ambiguity needs to be resolved).
+           - Select 4192 Bits for 15.0 Mbps Demo Frame length including 32 Bit CCSDS ASM.
+       - Buffer Length: Select minimum size of input/output circular buffers of this block.
+           - Optimized for the flowgraphs in gr-HighDataRate_Modem repository.
+           - See included flowgraphs for recommended example settings for different types of flowgraphs for additional guidance beyond information in block parameter selection drop down menu.
+       - ASM Length: Select ASM Length.
+           - 32 Bits for CCSDS ASM.
+           - 48 Bits for fixed repeating part of rate 1/2 Convolutional Encoded CCSDS 32 bit ASM.
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

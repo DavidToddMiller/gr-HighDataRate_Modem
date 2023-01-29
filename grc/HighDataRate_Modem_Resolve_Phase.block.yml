@@ -4,7 +4,7 @@ category: '[HighDataRate_Modem]'
 
 templates:
   imports: import HighDataRate_Modem
-  make: HighDataRate_Modem.Resolve_Phase(${frame_length}, ${buffer_length})
+  make: HighDataRate_Modem.Resolve_Phase(${waveform}, ${frame_length}, ${buffer_length}, ${threshold})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -13,14 +13,37 @@ templates:
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 #     * default
 parameters:
+-   id: waveform
+    label: BPSK or QPSK
+    dtype: int
+    default: 1
+    options: [1, 2]
+    option_labels: [1 = BPSK, 2 = QPSK]
+    hide: part
 -   id: frame_length
-    label: Frame Length Bits (4192 or 2072)
-    default: 4192
+    label: Frame Length
     dtype: int
+    default: 2072
+    options: [2072, 4192]
+    option_labels: [2072 (CCSDS Frame), 4192 Bits (15 Mbps Demo)]
+    hide: part   
 -   id: buffer_length
-    label: Buffer Size (60000 or 120000)
-    default: 120000
+    label: Buffer Length
     dtype: int
+    default: 120000
+    options: [30000, 120000]
+    option_labels: [30000: CCSDS, 120000: 15 Mbps Demo]
+    hide: part
+-   id: threshold
+    label: Allowed ASM Bit Errors
+    dtype: int
+    default: 1
+    options: [0, 1, 2]
+    option_labels: [0, 1, 2]
+    hide: part
+#- id: ...
+#  label: ...
+#  dtype: ...
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
 #  Keys include:
@@ -30,33 +53,39 @@ parameters:
 #      * vlen (optional - data stream vector length. Default is 1)
 #      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: in
+ - label: in
 #  domain: ...
-  dtype: byte
+   dtype: byte
 #  vlen: ...
 #  optional: ...
 
 outputs:
-- label: out
+ - label: out
 #  domain: ...
-  dtype: byte
+   dtype: byte
 #  vlen: ...
 #  optional: ...
 
 documentation: |-
-    This block examines resolve the phase ambiguity for the BPSK or QPSK stream depending on the bit pattern of the ASM.
-       - All 4 possible phases are supported simultaneously
-       - This block annotates the input stream with tags.
-       - Threshold value of 1 bit to allow for 1 bit error in ASM when noise present.
- 
+    This block resolves the phase ambiguity for the BPSK or QPSK frame stream depending on the bit pattern rotation of the ASM in the frame.
+       - CCSDS 32 bit ASM pattern is fixed for this block 
+
     Input:
         A vector stream of "char" (bytes) items.
     Output:
         A vector stream of "char" (bytes) items.
     Parameters:
-        Frame Length Bits: Select 2072 or 4192 
-        Buffer Size: Select 120000 when using High Rate 15.0 Mbps QPSK Flowgraph. Otherwise select 60000 for CCSDS flowgraphs with 2072 bit frame length.
-
+        BPSK or QPSK: Select BPSK or QPSK waveform.
+           - Select BPSK for 0/180 degree phase resolution
+           - Select QPSK for 45/135/225/315 degree phase resolution
+        Frame Length: Select Frame Length of 2072 bits or 4192 bits.
+           - Select 2072 for CCSDS 255 byte frame length plus 32 bit ASM
+           - Select 4192 Bits for 15.0 Mbps Demo Frame length including 32 Bit CCSDS ASM
+       - Buffer Length: Select minimum size of input/output circular buffers of this block.
+           - High 120000 value for High Rate 15.0 Mbps Demo for processing efficiency
+           - Low 30000 value for lower rate CCSDS flowgraphs when latency is to be minimized
+       - Allowed ASM Bit Errors: Select threshold value for allowed bit errors in ASM.
+           - Selection based on noise environment.
 
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.

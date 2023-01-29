@@ -42,6 +42,9 @@ outputs:
 #  vlen: ...
 #  optional: ...
 
+documentation: |-
+    See GNU Radio Conference 2022 paper and "Design Document" on the "docs" folder of gr-HighDataRate_Modem repository for detailed explanation and discussion on "Chunks".
+
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.
 file_format: 1
