@@ -142,9 +142,10 @@ blocks:
     coordinate: [936, 164.0]
     rotation: 0
     state: true
-- name: HighDataRate_Modem_Frame_Extract_0
-  id: HighDataRate_Modem_Frame_Extract
+- name: HighDataRate_Modem_Frame_Extract_xx_0
+  id: HighDataRate_Modem_Frame_Extract_xx
   parameters:
+    ASM_length: '32'
     affinity: ''
     alias: ''
     buffer_length: '15000'
@@ -152,11 +153,12 @@ blocks:
     frame_length: '2072'
     maxoutbuf: '0'
     minoutbuf: '0'
+    type: byte
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 1532.0]
+    coordinate: [104, 1532.0]
     rotation: 0
     state: true
 - name: HighDataRate_Modem_Resolve_Phase_0
@@ -164,33 +166,39 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    buffer_length: '60000'
+    buffer_length: '120000'
     comment: ''
     frame_length: '2072'
     maxoutbuf: '0'
     minoutbuf: '0'
+    threshold: '1'
+    waveform: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 1532.0]
+    coordinate: [408, 1532.0]
     rotation: 0
     state: true
-- name: HighDataRate_Modem_Tag_FrameASM_1
-  id: HighDataRate_Modem_Tag_FrameASM
+- name: HighDataRate_Modem_Tag_FrameASM_xx_0
+  id: HighDataRate_Modem_Tag_FrameASM_xx
   parameters:
+    ASM_length: '32'
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    threshold: '1'
+    type: byte
+    waveform: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 1444.0]
+    coordinate: [72, 1444.0]
     rotation: 180
-    state: enabled
+    state: true
 - name: analog_noise_source_x_0
   id: analog_noise_source_x
   parameters:
@@ -869,9 +877,11 @@ blocks:
 connections:
 - [HighDataRate_Modem_Decode_RS_0, '0', blocks_vector_to_stream_0, '0']
 - [HighDataRate_Modem_Encode_RS_0, '0', blocks_vector_to_stream_0_1, '0']
-- [HighDataRate_Modem_Frame_Extract_0, '0', HighDataRate_Modem_Resolve_Phase_0, '0']
+- [HighDataRate_Modem_Frame_Extract_xx_0, '0', HighDataRate_Modem_Resolve_Phase_0,
+  '0']
 - [HighDataRate_Modem_Resolve_Phase_0, '0', blocks_stream_demux_0, '0']
-- [HighDataRate_Modem_Tag_FrameASM_1, '0', HighDataRate_Modem_Frame_Extract_0, '0']
+- [HighDataRate_Modem_Tag_FrameASM_xx_0, '0', HighDataRate_Modem_Frame_Extract_xx_0,
+  '0']
 - [analog_noise_source_x_0, '0', blocks_add_xx_0, '1']
 - [analog_noise_source_x_0, '0', qtgui_time_sink_x_1_0_0, '0']
 - [blocks_add_xx_0, '0', blocks_throttle_0_0, '0']
@@ -888,7 +898,7 @@ connections:
 - [blocks_stream_to_tagged_stream_0_0_1, '0', blocks_stream_mux_0, '1']
 - [blocks_stream_to_vector_2_0, '0', HighDataRate_Modem_Encode_RS_0, '0']
 - [blocks_stream_to_vector_2_0_0, '0', HighDataRate_Modem_Decode_RS_0, '0']
-- [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_1, '0']
+- [blocks_tag_gate_0, '0', HighDataRate_Modem_Tag_FrameASM_xx_0, '0']
 - [blocks_throttle_0_0, '0', blocks_multiply_const_vxx_2, '0']
 - [blocks_unpack_k_bits_bb_0_0_0_0_0, '0', blocks_stream_to_tagged_stream_0_0_1, '0']
 - [blocks_vector_to_stream_0, '0', blocks_file_sink_0, '0']
