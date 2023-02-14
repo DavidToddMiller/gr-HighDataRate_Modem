@@ -238,52 +238,6 @@ blocks:
     coordinate: [768, 12.0]
     rotation: 0
     state: enabled
-- name: variable_cc_decoder_def_0
-  id: variable_cc_decoder_def
-  parameters:
-    comment: ''
-    dim1: '1'
-    dim2: '1'
-    framebits: '2072'
-    k: '7'
-    mode: fec.CC_STREAMING
-    ndim: '0'
-    padding: 'False'
-    polys: '[79,-109]'
-    rate: '2'
-    state_end: '-1'
-    state_start: '0'
-    value: '"ok"'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [0, 2572.0]
-    rotation: 0
-    state: enabled
-- name: variable_cc_decoder_def_1
-  id: variable_cc_decoder_def
-  parameters:
-    comment: ''
-    dim1: '1'
-    dim2: '1'
-    framebits: '2072'
-    k: '7'
-    mode: fec.CC_STREAMING
-    ndim: '0'
-    padding: 'False'
-    polys: '[79,-109]'
-    rate: '2'
-    state_end: '-1'
-    state_start: '0'
-    value: '"ok"'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [0, 2764.0]
-    rotation: 0
-    state: enabled
 - name: variable_cc_decoder_def_2
   id: variable_cc_decoder_def
   parameters:
@@ -304,30 +258,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [0, 2956.0]
-    rotation: 0
-    state: enabled
-- name: variable_cc_decoder_def_3
-  id: variable_cc_decoder_def
-  parameters:
-    comment: ''
-    dim1: '1'
-    dim2: '1'
-    framebits: '2072'
-    k: '7'
-    mode: fec.CC_STREAMING
-    ndim: '0'
-    padding: 'False'
-    polys: '[79,-109]'
-    rate: '2'
-    state_end: '-1'
-    state_start: '0'
-    value: '"ok"'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [0, 3148.0]
+    coordinate: [16, 2580.0]
     rotation: 0
     state: enabled
 - name: variable_cc_encoder_def_0
@@ -406,7 +337,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [856, 3028.0]
+    coordinate: [856, 3012.0]
     rotation: 0
     state: enabled
 - name: HighDataRate_Modem_Encode_RS_0
@@ -657,28 +588,6 @@ blocks:
     coordinate: [72, 996.0]
     rotation: 0
     state: enabled
-- name: analog_sig_source_x_0_2_0
-  id: analog_sig_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '1'
-    comment: ''
-    freq: '1000'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    offset: '0'
-    phase: '0'
-    samp_rate: samp_rate
-    type: complex
-    waveform: analog.GR_COS_WAVE
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [848, 1100.0]
-    rotation: 180
-    state: disabled
 - name: blocks_add_const_vxx_0
   id: blocks_add_const_vxx
   parameters:
@@ -822,7 +731,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/32bitASMonly
+    file: /home/davem/gr-HighDataRate_Modem/examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate/32bitASM_CCSDS_only
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -1036,23 +945,6 @@ blocks:
     coordinate: [560, 2868.0]
     rotation: 180
     state: true
-- name: blocks_null_sink_2
-  id: blocks_null_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    bus_structure_sink: '[[0,],]'
-    comment: ''
-    num_inputs: '1'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [864, 996.0]
-    rotation: 0
-    state: disabled
 - name: blocks_pack_k_bits_bb_0
   id: blocks_pack_k_bits_bb
   parameters:
@@ -2138,7 +2030,6 @@ connections:
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0_0, '1']
 - [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0_1, '0']
 - [analog_sig_source_x_0_2, '0', blocks_vco_c_0, '0']
-- [analog_sig_source_x_0_2_0, '0', blocks_add_xx_0, '0']
 - [blocks_add_const_vxx_0, '0', doppler_bin, '0']
 - [blocks_add_xx_0, '0', blocks_throttle_0_0, '0']
 - [blocks_add_xx_0, '0', qtgui_freq_sink_x_0_0, '0']
@@ -2155,7 +2046,6 @@ connections:
 - [blocks_multiply_const_vxx_0_1, '0', Doppler_Start_blocks_keep_m_in_n_0, '0']
 - [blocks_multiply_const_vxx_0_1, '0', blocks_multiply_xx_0_0_0, '0']
 - [blocks_multiply_xx_0, '0', blocks_add_xx_0, '0']
-- [blocks_multiply_xx_0, '0', blocks_null_sink_2, '0']
 - [blocks_multiply_xx_0_0, '0', lp_filter_0, '0']
 - [blocks_multiply_xx_0_0_0, '0', analog_pll_carriertracking_cc_0, '0']
 - [blocks_multiply_xx_0_0_0, '0', qtgui_freq_sink_x_0_0_0, '0']
@@ -2196,4 +2086,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.5.0
+  grc_version: 3.10.5.1

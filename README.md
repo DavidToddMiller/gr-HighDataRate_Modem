@@ -56,11 +56,11 @@ Before running parallel decoder flowgraph, generate File Source block file for f
 
                      CCSDS TT&C/Doppler Flowgraghs/Products
 
-JANUARY 2023 and NOVEMBER 2022 Update on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+JANUARY-FEBRUARY 2023 Updates on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
-  - Simulation Flowgraph located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
+  - "Simulation" Flowgraph located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
 
-  - Future: Provide separate flowgraphs for Transmit and Receive when using dongles.
+  - New February 2023: Pluto/RTLSDR Dongle Pair (Actual Full Transmit/Receive RF Loop): Provided a single flowgraph for Transmit and Receive RF loop when using dongles. Transmit with Pluto Dongle and Receive with RTLSDR Dongle. Same as simulation flowgraph above except "Throttle" block replaced by "Pluto Sink" and "RTLSDR Source" blocks.
 
   - A few of the blocks are OOT blocks like CCSDS Reed-Solomon Encode/Decode in this gr-HighDataRate_Modem module (All blocks have stream interfaces (No message Blocks) for processing efficiency and stability). 
 

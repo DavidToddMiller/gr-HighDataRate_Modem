@@ -447,24 +447,6 @@ blocks:
     coordinate: [1008, 1364.0]
     rotation: 0
     state: enabled
-- name: blocks_multiply_const_vxx_0
-  id: blocks_multiply_const_vxx
-  parameters:
-    affinity: '4'
-    alias: ''
-    comment: ''
-    const: 1j
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [464, 1252.0]
-    rotation: 180
-    state: true
 - name: blocks_multiply_const_vxx_0_0
   id: blocks_multiply_const_vxx
   parameters:
@@ -919,7 +901,6 @@ connections:
 - [blocks_keep_m_in_n_0_0, '0', blocks_stream_mux_0, '1']
 - [blocks_keep_m_in_n_0_0_0, '0', blocks_stream_mux_0_1, '1']
 - [blocks_keep_m_in_n_0_1, '0', HighDataRate_Modem_Tag_FrameASM_xx_1, '0']
-- [blocks_multiply_const_vxx_0, '0', blocks_complex_to_float_0_0_0, '0']
 - [blocks_multiply_const_vxx_0_0, '0', blocks_complex_to_float_0_0, '0']
 - [blocks_skiphead_0, '0', blocks_keep_m_in_n_0_0, '0']
 - [blocks_skiphead_0_0, '0', blocks_keep_m_in_n_0_0_0, '0']
@@ -938,11 +919,11 @@ connections:
 - [digital_costas_loop_cc_0, '0', blocks_complex_to_float_0, '0']
 - [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_0, '0']
 - [digital_costas_loop_cc_0_0, '0', blocks_multiply_const_vxx_0_0, '0']
-- [digital_costas_loop_cc_0_0_0, '0', blocks_multiply_const_vxx_0, '0']
+- [digital_costas_loop_cc_0_0_0, '0', blocks_complex_to_float_0_0_0, '0']
 - [digital_symbol_sync_xx_0, '0', digital_costas_loop_cc_0, '0']
 - [digital_symbol_sync_xx_0_0, '0', digital_costas_loop_cc_0_0, '0']
 - [digital_symbol_sync_xx_0_0_0, '0', digital_costas_loop_cc_0_0_0, '0']
 
 metadata:
   file_format: 1
-  grc_version: 3.10.5.0
+  grc_version: 3.10.5.1
