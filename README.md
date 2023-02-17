@@ -31,18 +31,18 @@ Also, example flowgraphs for uncoded operations at 15.0 Mbps are provided in the
   - For the Full RF Transmit/Receive Loop, the .grc file with the LimeSDR-Mini is used and is in the "examples" folder.
 
 
-                     CCSDS High Speed FEP/Gateway Flowgraghs/Products
+                     CCSDS High Speed FEP/Gateway Flowgraphs/Products
    
 JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS Reed-Solomon & Convolutional Encoding/Decoding: Decode_RS and Encode_RS OOT blocks added for high rate CCSDS Reed-Solomon encoding/decoding with block vector interfaces for high speed operations (CCSDS convolutional coding from In-tree blocks included). Flowgraphs with Reed-Solomon and Convolutional Coding and ZeroMQ data transport are provided at following folder location:
 
   - Example Flowgraphs located in "examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ" folder on this site/repository. 
 
-  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding and CCSDS scrambling with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces. Block Framing, ASMs, Coding, and scrambling in accordance with CCSDS Blue Book, 131.0-B-4, "TM Synchronization and Channel Coding". Each CCSDS frame in frame stream file (file name: "Just_CCSDS_Frame_counter") starts with "7D41" (hexidecimal).
+  - FEP/Gateway processing examples with CCSDS Reed-Solomon (Conventional & (255,223)) and CCSDS Convolutional coding and CCSDS scrambling with multicores used as example up to 24.0 Msps with ZeroMQ data transport interfaces. Block Framing, ASMs, Coding, and scrambling in accordance with CCSDS Blue Book, 131.0-B-4, "TM Synchronization and Channel Coding". Each CCSDS frame in frame stream file (file name: "Just_CCSDS_Frame_counter") starts with "7D41" (hexadecimal).
    
   - A few of the blocks are OOT blocks (CCSDS Reed-Solomon Encode/Decode and Frame_Extract and Resolve_Phase) in gr-HighDataRate_Modem module otherwise all blocks are in the standard GNU Radio In-Tree library. 
 
 
-                     CCSDS High Speed DVB-S2 Flowgraghs/Products
+                     CCSDS High Speed DVB-S2 Flowgraphs/Products
 
 JANUARY 2023 Update, High Speed FEP/Gateway blocks and flowgraphs including CCSDS DVBS2 LDPC & BCH Encoding/Decoding: DVB-S2 Transmit/Encode blocks are In-Tree. However, DVB-S2 Receive/Decode blocks are OOT (Build Receive blocks from github repository fork located at "https://github.com/marcusmueller/gr-dvbs2rx.git". Flowgraphs with DVBS2 LDPC and BCH coding and ZeroMQ data transport interfaces are provided at following folder location:
 
@@ -54,7 +54,7 @@ Before running parallel decoder flowgraph, generate File Source block file for f
   - Stream of continuous CCSDS frames are run asynchronously in DVB-S2 code block data fields as stated in "CCSDS SPACE LINK PROTOCOLS OVER ETSI DVB-S2 STANDARD", Blue Book, CCSDS 131.3-B-2.  
 
 
-                     CCSDS TT&C/Doppler Flowgraghs/Products
+                     CCSDS TT&C/Doppler Flowgraphs/Products
 
 JANUARY-FEBRUARY 2023 Updates on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
@@ -64,7 +64,7 @@ JANUARY-FEBRUARY 2023 Updates on CCSDS/TT&C/Doppler: Based on questions received
 
   - A few of the blocks are OOT blocks like CCSDS Reed-Solomon Encode/Decode in this gr-HighDataRate_Modem module (All blocks have stream interfaces (No message Blocks) for processing efficiency and stability). 
 
-  - Runs at 16 kilosymbols/second with the coding included. 50 kHz subcarrier used. Each CCSDS Frame starts with "7D41" (hexidecimal).
+  - Runs at 16 kilosymbols/second with the coding included. 50 kHz subcarrier used. Each CCSDS Frame starts with "7D41" (hexadecimal).
 
   - With the Doppler FFT functions included, the flowgraph transmit and receive parts could be used operationally in real-time with a transmit/receive dongle for an actual Low Earth Orbit (LEO) spacecraft link that uses typical CCSDS low rate TT&C links at S-band.
 
