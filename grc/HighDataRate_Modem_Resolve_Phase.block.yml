@@ -24,8 +24,8 @@ parameters:
     label: Frame Length
     dtype: int
     default: 2072
-    options: [2072, 4192]
-    option_labels: [2072 (CCSDS Frame), 4192 Bits (15 Mbps Demo)]
+    options: [2072, 2048, 4192]
+    option_labels: [2072 (CCSDS Frame), 2048 (CCSDS Shortened), 4192 Bits (15 Mbps Demo)]
     hide: part   
 -   id: buffer_length
     label: Buffer Length
@@ -80,6 +80,7 @@ documentation: |-
            - Select QPSK for 45/135/225/315 degree phase resolution
         Frame Length: Select Frame Length of 2072 bits or 4192 bits.
            - Select 2072 for CCSDS 255 byte frame length plus 32 bit ASM
+           - Select 2048 for CCSDS 252 byte frame length plus 32 bit ASM
            - Select 4192 Bits for 15.0 Mbps Demo Frame length including 32 Bit CCSDS ASM
        - Buffer Length: Select minimum size of input/output circular buffers of this block.
            - High 120000 value for High Rate 15.0 Mbps Demo for processing efficiency

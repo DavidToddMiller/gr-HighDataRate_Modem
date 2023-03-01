@@ -25,8 +25,8 @@ parameters:
     label: Frame Length
     dtype: int
     default: 2072
-    options: [2072, 4144, 4192]
-    option_labels: [2072 Bits (CCSDS), 4144 Bits (CCSDS Node Sync), 4192 Bits (15 Mbps Demo)]
+    options: [2072, 2048, 4096, 4144, 4192]
+    option_labels: [2072 Bits (255-223 Frame), 2048 (252-220 Frame), 4096 Bits (CCSDS Node Sync), 4144 Bits (CCSDS Node Sync), 4192 Bits (15 Mbps Demo)]
     hide: part
 -   id: buffer_length
     label: Buffer Length
@@ -40,7 +40,7 @@ parameters:
     dtype: int
     default: 32
     options: [32, 48]
-    option_labels: [32 Bits (CCSDS and 15 Mbps Demo), 48 Bits (Convoluted CCSDS)]
+    option_labels: [32 Bits (CCSDS and 15 Mbps Demo), 48 Bits (Convolution CCSDS)]
     hide: part    
 #- id: ...
 #  label: ...
@@ -71,9 +71,9 @@ templates:
 
 documentation: |-
     This block extracts frames based on frame length of frames in the frame stream:
-       - Currently, 3 frame size options in bits are 2072 (CCSDS), 4144 (CCSDS Convolutional Encoded), and 4192 (High Rate 15.0 Mbps Demo).
+       - Currently, 5 frame size options in bits (including ASM) are 2048 (CCSDS for (252,220) Frame Size), 2072 (CCSDS for (255,223) Frame Size), 4096 (CCSDS Convolutional Encoded with shortened Frame Size), 4144 (CCSDS Convolutional Encoded), and 4192 (High Rate 15.0 Mbps Demo).
        - Frame Length includes 32 Bit CCSDS ASM or 48 bits of fixed repeating part of rate 1/2 Convolutional Encoded CCSDS 32 bit ASM.
-       - For "Float" option, use only 4144 Bit length ("Float" option code optimized for very noisy pre-decoded environment).  
+       - For "Float" option, use only 4096 or 4144 Bit length depending on Frame Size ("Float" option code optimized for very noisy pre-decoded environment).  
 
     Input:
         A stream of Float" or "char" (byte) items.
@@ -82,8 +82,10 @@ documentation: |-
     Parameters:
         I/O Type: Float or Byte.
         Frame Length: Select Frame Length.
+           - Select 2048 Bits for CCSDS 252 byte frame length including 32 bit ASM.
            - Select 2072 Bits for CCSDS 255 byte frame length including 32 bit ASM.
-           - Select 4144 Bits with "Float" only for Viterbi Node Synchronization when this block used before Viterbi decoder block (For rate 1/2 convolutional code, 1 bit delay ambiguity needs to be resolved).
+           - Select 4096 Bits with "Float" only for Viterbi Node Synchronization with Shortened Frame Size when this block used before Viterbi decoder block (For rate 1/2 convolutional code, 1 bit delay ambiguity needs to be resolved).
+           - Select 4144 Bits with "Float" only for Viterbi Node Synchronization (normal Frame Size unshortened) when this block used before Viterbi decoder block (For rate 1/2 convolutional code, 1 bit delay ambiguity needs to be resolved).
            - Select 4192 Bits for 15.0 Mbps Demo Frame length including 32 Bit CCSDS ASM.
        - Buffer Length: Select minimum size of input/output circular buffers of this block.
            - Optimized for the flowgraphs in gr-HighDataRate_Modem repository.

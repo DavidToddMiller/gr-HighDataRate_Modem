@@ -702,7 +702,7 @@ public:
      * class. HighDataRate_Modem::Encode_RS::make is the public interface for
      * creating new instances.
      */
-    static sptr make(int interleave, int dual_basis);
+    static sptr make(bool dual_basis, int pad, int interleave);
 };
 
 } // namespace HighDataRate_Modem

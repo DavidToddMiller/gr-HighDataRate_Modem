@@ -118,6 +118,7 @@ blocks:
     interleave: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
+    pad: '0'
   states:
     bus_sink: false
     bus_source: false
@@ -135,6 +136,7 @@ blocks:
     interleave: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
+    pad: '0'
   states:
     bus_sink: false
     bus_source: false
@@ -277,7 +279,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/QPSK_Generate_Modulator_Files/32bitASMonly
+    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/32bitASM_CCSDS_only
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -912,4 +914,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.5.0
+  grc_version: 3.10.5.1

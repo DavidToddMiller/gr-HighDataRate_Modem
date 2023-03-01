@@ -56,9 +56,9 @@ Before running parallel decoder flowgraph, generate File Source block file for f
 
                      CCSDS TT&C/Doppler Flowgraphs/Products
 
-JANUARY-FEBRUARY 2023 Updates on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
+JANUARY-March 2023 Updates on CCSDS/TT&C/Doppler: Based on questions received at the 2022 GNU Radio Conference from the audience at the end of my talk, I have now included a CCSDS TT&C Flowgraph at low data rates for Phase Modulation (PM) with a subcarrier and Concatenated Coding (includes processing Doppler removal also via FFTs) that is used extensively by many space agencies:
 
-  - "Simulation" Flowgraph located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site.
+  - Two "Simulation" Flowgraphs located in "examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate" Folder on this site. (March 2023 Update: Added Dual Basis/Conventional Option in Properties/Parameter Settings for Reed Solomon Blocks. Also added option for Normal (255,223) and Shortened (252,220) in Reed Solomon Blocks for Frame Sizes). One flowgraph for (255,223) and another flowgraph for Shortened (252,220).
 
   - New February 2023: Pluto/RTLSDR Dongle Pair (Actual Full Transmit/Receive RF Loop): Provided a single flowgraph for Transmit and Receive RF loop when using dongles. Transmit with Pluto Dongle and Receive with RTLSDR Dongle. Same as simulation flowgraph above except "Throttle" block replaced by "Pluto Sink" and "RTLSDR Source" blocks.
 
@@ -109,8 +109,8 @@ The .py generated file in the GNU Radio Companion should be run from the Ubuntu 
 
     FUTURE WORK   (Expand Capabilities of Real-Time High Rate Modems and High Rate FEPs/Gateways)
 
-1. When a 16-24 core Personal Computer becomes available, incorporate all high data rate blocks including encoding/decoding and Doppler removal/handling into single flowgraph to run in real-time up to 30.0 Msps (and/or two flowgraphs in real-time: Uncoded Modem along with FEP/Gateway connected via ZeroMQ). 
-2. Expand CCSDS Reed-Solomon options for interleaving, Dual Basis, and shortened codes while keeping block vector in/out interfaces for speed. 
+1. When a 16-24 core Personal Computer becomes available, incorporate all high data rate blocks including encoding/decoding and Doppler removal/handling into single flowgraph to run in real-time up to 30.0 Msps (and/or two flowgraphs (Transmit/Receive) in real-time with coding or without. Also, use FEP/Gateway connected via ZeroMQ. 
+2. Expand CCSDS Reed-Solomon options for interleaving. (March 2023 Update: Completed adding CCSDS Dual Basis and a common (252,220) CCSDS shortened code to Reed Solomon Blocks while keeping block vector in/out interfaces for speed and stability.) 
 
 
 

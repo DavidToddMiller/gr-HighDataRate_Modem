@@ -755,7 +755,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate/Just_CCSDS_Frame_counter
+    file: /home/davem/gr-HighDataRate_Modem/examples/Doppler_And_CCSDS_TTC_Flowgraphs_LowRate/Just_CCSDS_Shortened_Frame_counter
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'

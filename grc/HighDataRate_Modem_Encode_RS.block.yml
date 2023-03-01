@@ -4,7 +4,27 @@ category: '[HighDataRate_Modem]'
 
 templates:
   imports: import HighDataRate_Modem
-  make: HighDataRate_Modem.Encode_RS(${interleave}, ${dual_basis})
+  make: HighDataRate_Modem.Encode_RS(${dual_basis}, ${pad}, ${interleave})
+
+parameters:
+-   id: dual_basis
+    label: Dual Basis
+    dtype: bool
+    default: true
+    options: [true, false]
+    option_labels: [True = Dual Basis, False = Conventional]
+    hide: part
+-   id: pad 
+    label: Pad-Shorten Frame Size
+    dtype: int
+    default: 0
+    options: [0, 3]
+    option_labels: [0 = (255;223), 3 = (252;220)]
+    hide: part
+-   id: interleave 
+    label: interleave depth (Future)
+    dtype: int
+    default: 1
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -12,15 +32,6 @@ templates:
 #     * label (label shown in the GUI)
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 #     * default
-parameters:
-- id: interleave 
-  label: interleave depth (Future)
-  dtype: int
-  default: 1
-- id: dual_basis 
-  label: Dual Basis (Future)
-  dtype: int
-  default: 1
 #- id: ...
 #  label: ...
 #  dtype: ...
@@ -36,34 +47,34 @@ inputs:
 - label: in
   domain: stream
   dtype: byte
-  vlen: 223
-#  optional: ...
+  vlen: ${ (223 - pad) }
 
 outputs:
 - label: out
   domain: stream
   dtype: byte
-  vlen: 255
-
-documentation: |-
-    This block provides a Reed-Solomon Encoder Block:
-       - Consultative Committee for Space Data Systems (CCSDS) Standard (255,223) frame format
-       - Conventional 
-       - Vector input size 223
-       - Vector output size 255
-       - Decoding algorthim via Phil Karn "libfec" library
-       - Future updates will be Dual Basis, Shortened frame format, and Interleaving 
-
-    Input:
-        A vector stream of "char" (bytes) items. Vector Length = 223.
-    Output:
-        A vector stream of "char" (bytes) items. Vector Length = 255.
-    Parameters:
-        Interleave Depth (Future Upgrade): Selects the interleave depth 
-        Dual Basis (Future Upgrade): Current implementation is "Conventional" only
-
-#  optional: ...
+  vlen: ${ (255 - pad) }
 
 #  'file_format' specifies the version of the GRC yml format used in the file
 #  and should usually not be changed.
+
+documentation: |-
+    This block provides a Reed-Solomon Encoder Block:
+       - Pad=0: Consultative Committee for Space Data Systems (CCSDS) Standard (255,223) frame format option
+       - Pad=3: Consultative Committee for Space Data Systems (CCSDS) Standard (252,220) frame format option
+       - "Dual Basis" and "Conventional" are both options
+       - Vector input size 223 or 220
+       - Vector output size 255 or 252
+       - Encoding algorthim via Phil Karn "libfec" library
+       - Future update will be "Interleaving" feature
+
+    Input:
+        A vector stream of "char" (bytes) items. Vector Length = 220 or 223 depending on pad selection.
+    Output:
+        A vector stream of "char" (bytes) items. Vector Length = 252 or 255 depending on pad selection.
+    Parameters:
+        Dual Basis: Select "True" for Dual Basis. If False selected, then defaults to "Conventional"
+        Pad: If 0, then (255,223) Frame Size.  If 3, then shortened (252,220) Frame Size
+        Interleave Depth (Future Upgrade): Selects the interleave depth 
+
 file_format: 1
