@@ -114,7 +114,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dual_basis: '1'
+    dual_basis: 'False'
     interleave: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -132,7 +132,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    dual_basis: '1'
+    dual_basis: 'False'
     interleave: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -261,7 +261,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/CCSDS_TTC_SINK
+    file: /home/davem/Github_Test/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/CCSDS_TTC_SINK
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -279,7 +279,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/32bitASM_CCSDS_only
+    file: /home/davem/Github_Test/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/32bitASM_CCSDS_only
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -301,7 +301,7 @@ blocks:
     alias: ''
     begin_tag: pmt.PMT_NIL
     comment: ''
-    file: /home/davem/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/Just_CCSDS_Frame_counter
+    file: /home/davem/Github_Test/gr-HighDataRate_Modem/examples/High_Speed_FEP-Gateway_CCSDS_Reed-Solomon_CC_ZeroMQ/Just_CCSDS_Frame_counter
     length: '0'
     maxoutbuf: '0'
     minoutbuf: '0'

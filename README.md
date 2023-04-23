@@ -8,6 +8,7 @@ gr-HighDataRate_Modem is a GNU Radio Out-Of-Tree (OOT) High Data Rate (HDR)_Mode
   
   3) New as of January 2023: Updated CCSDS Phase Modulation (PM) with a subcarrier and Concatenated Coding flowgraphs with streaming blocks for processing efficiency and stability (No message blocks) (includes processing Doppler removal also via FFTs for flowgraphs to support actual LEO spacecraft links)
   
+  4) New as of April 2023: New Repository "gr-aff3ct_codes" adds a GNU Radio module set of blocks that incorporates codes from the Massachusetts Institute of Technology (MIT) "A Fast Forward Error Correction Toolbox" (AFF3CT) library. The "gr-aff3ct_codes" repository currently contains a CCSDS Rate 1/2 LDPC Decoder OOT Block and associated flowgraph. A repository with an external library like the AFF3CT library requires extra steps for building, therefore the repository is being kept separate from this repository.  
 
   
 This module is based on the approach that was introduced during a GNU Radio Conference 2022 Talk and in the associated paper in the GNU Radio Conference 2022 proceedings and Conference 2022 website:
